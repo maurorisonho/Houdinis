@@ -38,7 +38,7 @@
 #10 1.412 Requirement already satisfied: pip in /usr/lib/python3/dist-packages (22.0.2)
 #10 1.681 Collecting pip
 #10 1.789   Downloading pip-25.3-py3-none-any.whl (1.8 MB)
-#10 1.962      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.8/1.8 MB 10.6 MB/s eta 0:00:00
+#10 1.962       1.8/1.8 MB 10.6 MB/s eta 0:00:00
 #10 2.006 Installing collected packages: pip
 #10 2.007   Attempting uninstall: pip
 #10 2.008     Found existing installation: pip 22.0.2
