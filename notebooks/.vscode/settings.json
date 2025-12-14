@@ -1,0 +1,16 @@
+{
+  "python.analysis.diagnosticSeverityOverrides": {
+    "reportMissingImports": "none",
+    "reportAttributeAccessIssue": "none"
+  },
+  "python.analysis.extraPaths": [
+    "${workspaceFolder}",
+    "${workspaceFolder}/quantum",
+    "${workspaceFolder}/exploits"
+  ],
+  "jupyter.notebookFileRoot": "${workspaceFolder}",
+  "python.analysis.ignore": [
+    "**/node_modules",
+    "**/__pycache__"
+  ]
+}

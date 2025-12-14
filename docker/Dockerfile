@@ -34,6 +34,13 @@ COPY . /app
 RUN pip3 install --no-cache-dir --upgrade pip
 RUN pip3 install --no-cache-dir -r requirements.txt
 
+# Install cuQuantum SDK (for quantum circuit simulation on GPU)
+RUN pip3 install --no-cache-dir cuquantum-python-cu12
+
+# Set CUDA environment variables
+ENV PATH=/usr/local/cuda/bin:${PATH}
+ENV LD_LIBRARY_PATH=/usr/local/cuda/lib64:${LD_LIBRARY_PATH}
+
 # Expose web terminal port
 EXPOSE 7681
 

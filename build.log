@@ -1,0 +1,184 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.38kB done
+#1 DONE 0.1s
+
+#2 [internal] load metadata for docker.io/nvidia/cuda:12.4.1-devel-ubuntu22.04
+#2 DONE 0.6s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.1s
+
+#4 [internal] load build context
+#4 DONE 0.0s
+
+#5 [ 1/10] FROM docker.io/nvidia/cuda:12.4.1-devel-ubuntu22.04@sha256:da6791294b0b04d7e65d87b7451d6f2390b4d36225ab0701ee7dfec5769829f5
+#5 resolve docker.io/nvidia/cuda:12.4.1-devel-ubuntu22.04@sha256:da6791294b0b04d7e65d87b7451d6f2390b4d36225ab0701ee7dfec5769829f5 0.1s done
+#5 DONE 0.2s
+
+#4 [internal] load build context
+#4 transferring context: 10.31kB 0.0s done
+#4 DONE 0.1s
+
+#6 [ 3/10] RUN wget https://github.com/tsl0922/ttyd/releases/download/1.7.4/ttyd.x86_64 -O /usr/bin/ttyd &&     chmod +x /usr/bin/ttyd
+#6 CACHED
+
+#7 [ 2/10] RUN apt-get update && apt-get install -y     python3     python3-pip     python3-dev     git     wget     build-essential     libssl-dev     libffi-dev     cmake     tshark     libxml2-dev     libxslt-dev     && rm -rf /var/lib/apt/lists/*
+#7 CACHED
+
+#8 [ 4/10] WORKDIR /app
+#8 CACHED
+
+#9 [ 5/10] COPY . /app
+#9 DONE 1.5s
+
+#10 [ 6/10] RUN pip3 install --no-cache-dir --upgrade pip
+#10 1.412 Requirement already satisfied: pip in /usr/lib/python3/dist-packages (22.0.2)
+#10 1.681 Collecting pip
+#10 1.789   Downloading pip-25.3-py3-none-any.whl (1.8 MB)
+#10 1.962      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.8/1.8 MB 10.6 MB/s eta 0:00:00
+#10 2.006 Installing collected packages: pip
+#10 2.007   Attempting uninstall: pip
+#10 2.008     Found existing installation: pip 22.0.2
+#10 2.010     Not uninstalling pip at /usr/lib/python3/dist-packages, outside environment /usr
+#10 2.011     Can't uninstall 'pip'. No files were found to uninstall.
+#10 3.375 Successfully installed pip-25.3
+#10 3.376 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+#10 DONE 5.1s
+
+#11 [ 7/10] RUN pip3 install --no-cache-dir -r requirements.txt
+#11 1.401 Collecting cryptography>=41.0.0 (from -r requirements.txt (line 8))
+#11 1.548   Downloading cryptography-46.0.3-cp38-abi3-manylinux_2_34_x86_64.whl.metadata (5.7 kB)
+#11 1.726 Collecting pycryptodome>=3.19.0 (from -r requirements.txt (line 9))
+#11 1.736   Downloading pycryptodome-3.23.0-cp37-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (3.4 kB)
+#11 1.763 Collecting validators>=0.22.0 (from -r requirements.txt (line 13))
+#11 1.780   Downloading validators-0.35.0-py3-none-any.whl.metadata (3.9 kB)
+#11 1.803 Collecting bleach>=6.0.0 (from -r requirements.txt (line 14))
+#11 1.818   Downloading bleach-6.3.0-py3-none-any.whl.metadata (31 kB)
+#11 1.905 Collecting qiskit>=0.45.0 (from -r requirements.txt (line 18))
+#11 1.958   Downloading qiskit-2.2.3-cp39-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (12 kB)
+#11 2.160 Collecting qiskit-aer>=0.13.0 (from -r requirements.txt (line 19))
+#11 2.182   Downloading qiskit_aer-0.17.2-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (8.3 kB)
+#11 2.219 Collecting qiskit-ibm-runtime>=0.15.0 (from -r requirements.txt (line 20))
+#11 2.232   Downloading qiskit_ibm_runtime-0.43.1-py3-none-any.whl.metadata (21 kB)
+#11 2.256 Collecting qiskit-algorithms>=0.2.0 (from -r requirements.txt (line 21))
+#11 2.267   Downloading qiskit_algorithms-0.4.0-py3-none-any.whl.metadata (4.7 kB)
+#11 2.285 Collecting cuquantum-python>=23.10.0 (from -r requirements.txt (line 24))
+#11 2.295   Downloading cuquantum_python-25.11.1.tar.gz (6.9 kB)
+#11 2.306   Installing build dependencies: started
+#11 3.840   Installing build dependencies: finished with status 'done'
+#11 3.841   Getting requirements to build wheel: started
+#11 4.410   Getting requirements to build wheel: finished with status 'done'
+#11 4.412   Installing backend dependencies: started
+#11 5.324   Installing backend dependencies: finished with status 'done'
+#11 5.325   Preparing metadata (pyproject.toml): started
+#11 5.616   Preparing metadata (pyproject.toml): finished with status 'done'
+#11 5.655 Collecting cupy-cuda12x>=12.0.0 (from -r requirements.txt (line 26))
+#11 5.668   Downloading cupy_cuda12x-13.6.0-cp310-cp310-manylinux2014_x86_64.whl.metadata (2.4 kB)
+#11 5.820 Collecting amazon-braket-sdk>=1.65.0 (from -r requirements.txt (line 30))
+#11 5.833   Downloading amazon_braket_sdk-1.106.5-py3-none-any.whl.metadata (14 kB)
+#11 6.501 Collecting boto3>=1.34.0 (from -r requirements.txt (line 31))
+#11 6.510   Downloading boto3-1.42.9-py3-none-any.whl.metadata (6.8 kB)
+#11 7.230 Collecting botocore>=1.34.0 (from -r requirements.txt (line 32))
+#11 7.238   Downloading botocore-1.42.9-py3-none-any.whl.metadata (5.9 kB)
+#11 7.301 Collecting azure-quantum>=0.28.0 (from -r requirements.txt (line 35))
+#11 7.311   Downloading azure_quantum-3.5.0-py3-none-any.whl.metadata (6.8 kB)
+#11 7.355 Collecting azure-identity>=1.14.0 (from -r requirements.txt (line 36))
+#11 7.366   Downloading azure_identity-1.25.1-py3-none-any.whl.metadata (88 kB)
+#11 7.821 Collecting cirq>=1.2.0 (from -r requirements.txt (line 39))
+#11 7.830   Downloading cirq-1.5.0-py3-none-any.whl.metadata (15 kB)
+#11 7.868 Collecting pennylane>=0.33.0 (from -r requirements.txt (line 43))
+#11 7.878   Downloading pennylane-0.42.3-py3-none-any.whl.metadata (11 kB)
+#11 7.895 Collecting scapy>=2.5.0 (from -r requirements.txt (line 47))
+#11 7.904   Downloading scapy-2.6.1-py3-none-any.whl.metadata (5.6 kB)
+#11 7.928 Collecting pyshark>=0.6 (from -r requirements.txt (line 48))
+#11 7.940   Downloading pyshark-0.6-py3-none-any.whl.metadata (806 bytes)
+#11 7.983 Collecting requests>=2.31.0 (from -r requirements.txt (line 49))
+#11 7.992   Downloading requests-2.32.5-py3-none-any.whl.metadata (4.9 kB)
+#11 8.043 Collecting urllib3>=2.0.0 (from -r requirements.txt (line 50))
+#11 8.052   Downloading urllib3-2.6.2-py3-none-any.whl.metadata (6.6 kB)
+#11 8.157 Collecting gmpy2>=2.1.5 (from -r requirements.txt (line 55))
+#11 8.169   Downloading gmpy2-2.2.2-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (3.3 kB)
+#11 8.197 Collecting sympy>=1.12 (from -r requirements.txt (line 56))
+#11 8.208   Downloading sympy-1.14.0-py3-none-any.whl.metadata (12 kB)
+#11 8.252 Collecting paramiko>=3.3.1 (from -r requirements.txt (line 59))
+#11 8.260   Downloading paramiko-4.0.0-py3-none-any.whl.metadata (3.9 kB)
+#11 8.274 Collecting python-nmap>=0.7.1 (from -r requirements.txt (line 60))
+#11 8.286   Downloading python-nmap-0.7.1.tar.gz (44 kB)
+#11 8.299   Installing build dependencies: started
+#11 9.353   Installing build dependencies: finished with status 'done'
+#11 9.354   Getting requirements to build wheel: started
+#11 9.823   Getting requirements to build wheel: finished with status 'done'
+#11 9.825   Preparing metadata (pyproject.toml): started
+#11 10.11   Preparing metadata (pyproject.toml): finished with status 'done'
+#11 10.58 Collecting numpy>=1.24.0 (from -r requirements.txt (line 63))
+#11 10.59   Downloading numpy-2.2.6-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (62 kB)
+#11 10.83 Collecting scipy>=1.11.0 (from -r requirements.txt (line 64))
+#11 10.84   Downloading scipy-1.15.3-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (61 kB)
+#11 10.92 Collecting rich>=13.5.0 (from -r requirements.txt (line 67))
+#11 10.93   Downloading rich-14.2.0-py3-none-any.whl.metadata (18 kB)
+#11 10.97 Collecting click>=8.1.0 (from -r requirements.txt (line 68))
+#11 10.98   Downloading click-8.3.1-py3-none-any.whl.metadata (2.6 kB)
+#11 11.03 Collecting prompt-toolkit>=3.0.0 (from -r requirements.txt (line 69))
+#11 11.04   Downloading prompt_toolkit-3.0.52-py3-none-any.whl.metadata (6.4 kB)
+#11 11.06 Collecting colorama>=0.4.6 (from -r requirements.txt (line 70))
+#11 11.07   Downloading colorama-0.4.6-py2.py3-none-any.whl.metadata (17 kB)
+#11 11.28 Collecting pandas>=2.0.0 (from -r requirements.txt (line 73))
+#11 11.30   Downloading pandas-2.3.3-cp310-cp310-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (91 kB)
+#11 11.39 Collecting tabulate>=0.9.0 (from -r requirements.txt (line 74))
+#11 11.40   Downloading tabulate-0.9.0-py3-none-any.whl.metadata (34 kB)
+#11 11.48 Collecting pyyaml>=6.0 (from -r requirements.txt (line 77))
+#11 11.49   Downloading pyyaml-6.0.3-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+#11 11.51 Collecting python-dotenv>=1.0.0 (from -r requirements.txt (line 78))
+#11 11.52   Downloading python_dotenv-1.2.1-py3-none-any.whl.metadata (25 kB)
+#11 11.57 Collecting pytest>=7.4.0 (from -r requirements.txt (line 81))
+#11 11.58   Downloading pytest-9.0.2-py3-none-any.whl.metadata (7.6 kB)
+#11 11.61 Collecting pytest-cov>=4.1.0 (from -r requirements.txt (line 82))
+#11 11.63   Downloading pytest_cov-7.0.0-py3-none-any.whl.metadata (31 kB)
+#11 11.80 Collecting black>=23.0.0 (from -r requirements.txt (line 83))
+#11 11.82   Downloading black-25.12.0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (86 kB)
+#11 11.87 Collecting flake8>=6.0.0 (from -r requirements.txt (line 84))
+#11 11.88   Downloading flake8-7.3.0-py2.py3-none-any.whl.metadata (3.8 kB)
+#11 12.14 Collecting cffi>=2.0.0 (from cryptography>=41.0.0->-r requirements.txt (line 8))
+#11 12.15   Downloading cffi-2.0.0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (2.6 kB)
+#11 12.20 Collecting typing-extensions>=4.13.2 (from cryptography>=41.0.0->-r requirements.txt (line 8))
+#11 12.20   Downloading typing_extensions-4.15.0-py3-none-any.whl.metadata (3.3 kB)
+#11 12.22 Collecting webencodings (from bleach>=6.0.0->-r requirements.txt (line 14))
+#11 12.23   Downloading webencodings-0.5.1-py2.py3-none-any.whl.metadata (2.1 kB)
+#11 12.30 Collecting rustworkx>=0.15.0 (from qiskit>=0.45.0->-r requirements.txt (line 18))
+#11 12.31   Downloading rustworkx-0.17.1-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (10 kB)
+#11 12.36 Collecting dill>=0.3 (from qiskit>=0.45.0->-r requirements.txt (line 18))
+#11 12.38   Downloading dill-0.4.0-py3-none-any.whl.metadata (10 kB)
+#11 12.41 Collecting stevedore>=3.0.0 (from qiskit>=0.45.0->-r requirements.txt (line 18))
+#11 12.42   Downloading stevedore-5.6.0-py3-none-any.whl.metadata (2.3 kB)
+#11 12.65 Collecting psutil>=5 (from qiskit-aer>=0.13.0->-r requirements.txt (line 19))
+#11 12.66   Downloading psutil-7.1.3-cp36-abi3-manylinux2010_x86_64.manylinux_2_12_x86_64.manylinux_2_28_x86_64.whl.metadata (23 kB)
+#11 12.70 Collecting python-dateutil>=2.8.0 (from qiskit-aer>=0.13.0->-r requirements.txt (line 19))
+#11 12.71   Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
+#11 12.75 Collecting requests-ntlm>=1.1.0 (from qiskit-ibm-runtime>=0.15.0->-r requirements.txt (line 20))
+#11 12.77   Downloading requests_ntlm-1.3.0-py3-none-any.whl.metadata (2.4 kB)
+#11 12.86 Collecting ibm-platform-services>=0.22.6 (from qiskit-ibm-runtime>=0.15.0->-r requirements.txt (line 20))
+#11 12.87   Downloading ibm_platform_services-0.72.0-py3-none-any.whl.metadata (9.0 kB)
+#11 13.12 Collecting pydantic>=2.5.0 (from qiskit-ibm-runtime>=0.15.0->-r requirements.txt (line 20))
+#11 13.13   Downloading pydantic-2.12.5-py3-none-any.whl.metadata (90 kB)
+#11 13.19 Collecting packaging (from qiskit-ibm-runtime>=0.15.0->-r requirements.txt (line 20))
+#11 13.22   Downloading packaging-25.0-py3-none-any.whl.metadata (3.3 kB)
+#11 13.28 INFO: pip is looking at multiple versions of cuquantum-python to determine which version is compatible with other requirements. This could take a while.
+#11 13.28 Collecting cuquantum-python>=23.10.0 (from -r requirements.txt (line 24))
+#11 13.29   Downloading cuquantum_python-25.11.0.tar.gz (6.9 kB)
+#11 13.31   Installing build dependencies: started
+#11 14.60   Installing build dependencies: finished with status 'done'
+#11 14.60   Getting requirements to build wheel: started
+#11 15.40   Getting requirements to build wheel: finished with status 'done'
+#11 15.41   Installing backend dependencies: started
+#11 16.24   Installing backend dependencies: finished with status 'done'
+#11 16.24   Preparing metadata (pyproject.toml): started
+#11 16.58   Preparing metadata (pyproject.toml): finished with status 'done'
+#11 16.59   Downloading cuquantum_python-25.9.1.tar.gz (6.9 kB)
+#11 16.60   Installing build dependencies: started
+#11 17.95   Installing build dependencies: finished with status 'done'
+#11 17.95   Getting requirements to build wheel: started
+#11 18.61   Getting requirements to build wheel: finished with status 'done'
+#11 18.61   Installing backend dependencies: started

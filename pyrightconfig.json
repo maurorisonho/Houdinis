@@ -1,0 +1,34 @@
+{
+  "include": [
+    "."
+  ],
+  "exclude": [
+    "**/node_modules",
+    "**/__pycache__",
+    ".git"
+  ],
+  "extraPaths": [
+    ".",
+    "quantum",
+    "exploits",
+    "core",
+    "scanners",
+    "utils"
+  ],
+  "pythonVersion": "3.10",
+  "pythonPlatform": "Linux",
+  "typeCheckingMode": "basic",
+  "reportMissingImports": false,
+  "reportMissingTypeStubs": false,
+  "reportAttributeAccessIssue": false,
+  "reportUnknownMemberType": false,
+  "reportUnknownParameterType": false,
+  "reportUnknownArgumentType": false,
+  "reportUnknownVariableType": false,
+  "reportUnknownLambdaType": false,
+  "reportImportCycles": false,
+  "reportGeneralTypeIssues": false,
+  "stubPath": "",
+  "venvPath": ".",
+  "venv": ""
+}
