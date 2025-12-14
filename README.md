@@ -359,6 +359,35 @@ The above copyright notice and this permission notice shall be included in all c
 - **Quantum Computing Community** - Research and collaboration
 - **Claude Code** for AI-assisted development and code optimization
 
+##  CI/CD & Infrastructure
+
+### Automated Testing (GitHub Actions)
+[![CI/CD Pipeline](https://img.shields.io/badge/CI%2FCD-GitHub%20Actions-2088FF?logo=github-actions)](https://github.com/firebitsbr/Houdinis/actions)
+
+** O que funciona automaticamente:**
+- Lint & Code Quality (Black, flake8, Pyright)
+- Security Scanning (Bandit, Safety, Trivy)
+- Automated Tests (pytest em 3 versões Python, 3 SOs)
+- Docker Builds
+- Package Building
+- Coverage Reports (Codecov)
+
+** Requer configuração simples (5 minutos):**
+- PyPI Publishing: Requer `PYPI_API_TOKEN` secret
+- [Ver guia completo de configuração](.github/README.md)
+
+** Documentação:**
+- [GitHub Actions Pipeline](.github/README.md) - Detalhes do CI/CD
+- [Infrastructure Guide](docs/INFRASTRUCTURE_GUIDE.md) - Deploy em cloud e custos
+
+### Status Atual
+```
+Desenvolvimento:   FUNCIONAL (sem configuração)
+PyPI Publishing:    OPCIONAL (requer token)
+Cloud Deploy:      NÃO CONFIGURADO (requer infraestrutura paga)
+Quantum Hardware:  NÃO CONFIGURADO (requer acesso)
+```
+
 ##  Support
 
 - **GitHub Issues**: [Report bugs and feature requests](https://github.com/firebitsbr/Houdinis/issues)
