@@ -1,8 +1,10 @@
 """Type stubs for Houdinis quantum module"""
+
 from typing import Any, Dict, Optional
 
 class QuantumBackendManager:
     """Manages quantum computing backends"""
+
     def __init__(self) -> None: ...
     def get_backend(self, backend_name: str) -> Any: ...
     def select_backend(self, backend_name: str) -> Any: ...

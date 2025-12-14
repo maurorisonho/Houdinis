@@ -59,19 +59,24 @@ Examples:
   python main.py                    # Start interactive console
   python main.py --resource init.rc # Run resource script
   python main.py --quiet            # Start without banner
-        """
+        """,
     )
-    
-    parser.add_argument('--resource', '-r',
-                       help='Resource script file to execute on startup')
-    parser.add_argument('--console', '-c', action='store_true',
-                       help='Force console mode (default)')
-    parser.add_argument('--quiet', '-q', action='store_true',
-                       help='Suppress banner and startup messages')
-    parser.add_argument('--debug', action='store_true',
-                       help='Enable debug mode')
-    parser.add_argument('--version', action='version', version='Houdinis 1.0.0')
-    
+
+    parser.add_argument(
+        "--resource", "-r", help="Resource script file to execute on startup"
+    )
+    parser.add_argument(
+        "--console", "-c", action="store_true", help="Force console mode (default)"
+    )
+    parser.add_argument(
+        "--quiet",
+        "-q",
+        action="store_true",
+        help="Suppress banner and startup messages",
+    )
+    parser.add_argument("--debug", action="store_true", help="Enable debug mode")
+    parser.add_argument("--version", action="version", version="Houdinis 1.0.0")
+
     return parser.parse_args()
 
 
@@ -79,10 +84,10 @@ def main():
     """Main entry point for Houdinis framework."""
     # Setup security logging
     security_logger = SecurityConfig.setup_secure_logging()
-    
+
     try:
         args = parse_arguments()
-        
+
         # Validate resource file path if provided
         if args.resource:
             if not SecurityConfig.validate_filename(os.path.basename(args.resource)):
@@ -90,56 +95,53 @@ def main():
                 SecurityConfig.log_security_event(
                     "invalid_resource_file",
                     {"filename": args.resource},
-                    security_logger
+                    security_logger,
                 )
                 sys.exit(1)
-            
+
             if not os.path.exists(args.resource):
                 print(f"[!] Resource file not found: {args.resource}")
                 sys.exit(1)
-        
+
         # Display banner unless quiet mode
         if not args.quiet:
             print_banner()
-        
+
         # Log startup event
         SecurityConfig.log_security_event(
             "framework_startup",
             {
                 "debug_mode": args.debug,
                 "resource_file": args.resource or "none",
-                "quiet_mode": args.quiet
+                "quiet_mode": args.quiet,
             },
-            security_logger
+            security_logger,
         )
-        
+
         # Initialize console with security configuration
         console = HoudinisConsole(debug=args.debug)
-        
+
         # Execute resource script if provided
         if args.resource:
             console.execute_resource_script(args.resource)
-        
+
         # Start interactive console
         console.cmdloop()
-        
+
     except KeyboardInterrupt:
         print("\n[*] Houdinis terminated by user")
         SecurityConfig.log_security_event(
-            "framework_shutdown",
-            {"reason": "user_interrupt"},
-            security_logger
+            "framework_shutdown", {"reason": "user_interrupt"}, security_logger
         )
         sys.exit(0)
     except Exception as e:
         print(f"[!] Critical error: {e}")
         SecurityConfig.log_security_event(
-            "critical_error",
-            {"error": str(e)},
-            security_logger
+            "critical_error", {"error": str(e)}, security_logger
         )
         if args.debug:
             import traceback
+
             traceback.print_exc()
         sys.exit(1)
 

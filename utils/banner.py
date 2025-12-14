@@ -13,7 +13,7 @@ from datetime import datetime
 def get_banner() -> str:
     """
     Get the Houdinis framework banner.
-    
+
     Returns:
         ASCII art banner string
     """
@@ -54,16 +54,16 @@ Professional Security Testing and Assessment
 
 Build: Corporate Edition
 Support: Enterprise Level
-"""
+""",
     ]
-    
+
     return random.choice(banners)
 
 
 def get_version_info() -> str:
     """
     Get version and build information.
-    
+
     Returns:
         Version information string
     """
@@ -83,7 +83,7 @@ def get_version_info() -> str:
 def get_disclaimer() -> str:
     """
     Get legal disclaimer.
-    
+
     Returns:
         Disclaimer text
     """
@@ -108,7 +108,7 @@ have explicit written permission to test.
 def get_startup_info() -> str:
     """
     Get startup information including tips.
-    
+
     Returns:
         Startup information string
     """
@@ -118,9 +118,9 @@ def get_startup_info() -> str:
         "Tip: Try 'use exploit/rsa_shor' to demonstrate quantum RSA factorization",
         "Tip: Use 'help' command to see all available console commands",
         "Tip: Set 'VERBOSE true' for detailed output in scanner modules",
-        "Tip: Check 'show sessions' to manage active exploit sessions"
+        "Tip: Check 'show sessions' to manage active exploit sessions",
     ]
-    
+
     info = f"""
 Active modules:
   - Scanners: SSL/TLS quantum vulnerability detection
@@ -137,27 +137,27 @@ Ready for quantum cryptography security assessment.
 def print_banner(show_disclaimer: bool = True):
     """
     Print the complete banner with version info.
-    
+
     Args:
         show_disclaimer: Whether to show legal disclaimer
     """
     print(get_banner())
     print(get_version_info())
-    
+
     if show_disclaimer:
         print(get_disclaimer())
-    
+
     print(get_startup_info())
 
 
 def get_module_banner(module_name: str, module_info: dict) -> str:
     """
     Get banner for a specific module.
-    
+
     Args:
         module_name: Name of the module
         module_info: Module information dictionary
-        
+
     Returns:
         Module-specific banner
     """
@@ -176,7 +176,7 @@ def get_module_banner(module_name: str, module_info: dict) -> str:
 def get_quantum_facts() -> str:
     """
     Get random quantum computing facts for educational purposes.
-    
+
     Returns:
         Random quantum fact
     """
@@ -189,14 +189,14 @@ def get_quantum_facts() -> str:
         "Post-quantum cryptography is based on problems like lattices and hash functions",
         "IBM's quantum computers currently have over 1000 physical qubits",
         "Quantum error correction requires hundreds of physical qubits per logical qubit",
-        "The NSA recommends planning migration to post-quantum cryptography now"
+        "The NSA recommends planning migration to post-quantum cryptography now",
     ]
-    
+
     return f"Quantum Fact: {random.choice(facts)}"
 
 
 if __name__ == "__main__":
     # Test banner functions
     print_banner()
-    print("\n" + "="*70)
+    print("\n" + "=" * 70)
     print(get_quantum_facts())

@@ -9,5 +9,5 @@ Security module initialization for the Houdinis framework.
 
 from .security_config import SecurityConfig
 
-__all__ = ['SecurityConfig']
-__version__ = '1.0.0'
+__all__ = ["SecurityConfig"]
+__version__ = "1.0.0"

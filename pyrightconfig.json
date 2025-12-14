@@ -1,11 +1,22 @@
 {
   "include": [
-    "."
+    "quantum",
+    "exploits",
+    "core",
+    "scanners",
+    "utils",
+    "security",
+    "payloads",
+    "auxiliary"
   ],
   "exclude": [
     "**/node_modules",
     "**/__pycache__",
-    ".git"
+    ".git",
+    "**/venv",
+    "**/.venv",
+    "tests",
+    "notebooks"
   ],
   "extraPaths": [
     ".",
@@ -13,21 +24,32 @@
     "exploits",
     "core",
     "scanners",
-    "utils"
+    "utils",
+    "security"
   ],
-  "pythonVersion": "3.10",
+  "pythonVersion": "3.11",
   "pythonPlatform": "Linux",
-  "typeCheckingMode": "basic",
-  "reportMissingImports": false,
+  "typeCheckingMode": "standard",
+  "reportMissingImports": "warning",
   "reportMissingTypeStubs": false,
-  "reportAttributeAccessIssue": false,
+  "reportAttributeAccessIssue": "warning",
   "reportUnknownMemberType": false,
   "reportUnknownParameterType": false,
   "reportUnknownArgumentType": false,
   "reportUnknownVariableType": false,
   "reportUnknownLambdaType": false,
-  "reportImportCycles": false,
-  "reportGeneralTypeIssues": false,
+  "reportImportCycles": "warning",
+  "reportGeneralTypeIssues": "warning",
+  "reportOptionalMemberAccess": "warning",
+  "reportOptionalSubscript": "warning",
+  "reportPrivateImportUsage": "warning",
+  "reportUnusedImport": "warning",
+  "reportUnusedVariable": "warning",
+  "reportDuplicateImport": "error",
+  "reportInconsistentConstructor": "error",
+  "reportMissingParameterType": "warning",
+  "reportUnnecessaryIsInstance": "warning",
+  "reportUnnecessaryCast": "warning",
   "stubPath": "",
   "venvPath": ".",
   "venv": ""

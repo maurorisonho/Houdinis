@@ -388,6 +388,35 @@ Cloud Deploy:      NÃO CONFIGURADO (requer infraestrutura paga)
 Quantum Hardware:  NÃO CONFIGURADO (requer acesso)
 ```
 
+##  Code Quality
+
+### Current Score: 8.6/10 
+[![Type Hints](https://img.shields.io/badge/Type%20Hints-75.3%25-yellow)](docs/CODE_QUALITY_PLAN.md)
+[![Docstrings](https://img.shields.io/badge/Docstrings-97.2%25-brightgreen)](docs/CODE_QUALITY_PLAN.md)
+[![Pylance](https://img.shields.io/badge/Pylance-8.6%2F10-yellow)](docs/CODE_QUALITY_PLAN.md)
+
+**Metrics:**
+-  **397 functions** analyzed
+-  **75.3% type coverage** (299/397 functions)
+-  **97.2% docstring coverage** (386/397 functions)
+-  **0 unused imports**
+
+**Tools:**
+```bash
+# Validate code quality
+python scripts/check_quality.py
+
+# Type checking
+pyright .
+
+# Auto-format
+black . && isort .
+```
+
+** Documentation:**
+- [Code Quality Plan](docs/CODE_QUALITY_PLAN.md) - Roadmap to 9.5/10
+- [Quality Script](scripts/check_quality.py) - Automated validation
+
 ##  Support
 
 - **GitHub Issues**: [Report bugs and feature requests](https://github.com/firebitsbr/Houdinis/issues)
