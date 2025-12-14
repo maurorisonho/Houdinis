@@ -1,0 +1,40 @@
+FROM ubuntu:20.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install vulnerable services and tools
+RUN apt-get update && apt-get install -y \
+    openssh-server \
+    apache2 \
+    openssl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Configure SSH
+RUN mkdir /var/run/sshd
+# Allow root login with password "vulnerable" for testing
+RUN echo 'root:vulnerable' | chpasswd
+RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+
+# Configure Apache with Self-Signed SSL (Standard/Legacy security that Post-Quantum scanners flag)
+RUN mkdir -p /etc/apache2/ssl
+RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+    -keyout /etc/apache2/ssl/apache.key \
+    -out /etc/apache2/ssl/apache.crt \
+    -subj "/C=US/ST=State/L=City/O=Vulnerable/CN=target.houdinis.internal"
+
+# Configure Apache SSL site
+RUN echo '<VirtualHost *:443>\n\
+    SSLEngine on\n\
+    SSLCertificateFile /etc/apache2/ssl/apache.crt\n\
+    SSLCertificateKeyFile /etc/apache2/ssl/apache.key\n\
+    DocumentRoot /var/www/html\n\
+    </VirtualHost>' > /etc/apache2/sites-available/default-ssl.conf
+
+RUN a2enmod ssl
+RUN a2ensite default-ssl
+
+# Expose ports
+EXPOSE 22 80 443
+
+# Start services
+CMD service ssh start && apachectl -D FOREGROUND

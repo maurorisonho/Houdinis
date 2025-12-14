@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  houdinis:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: houdinis_framework
+    ports:
+      - "127.0.0.1:7681:7681"
+    networks:
+      - houdinis_net
+    depends_on:
+      - target
+    environment:
+      - TARGET_HOST=target
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [ gpu ]
+
+  target:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.vulnerable
+    container_name: houdinis_target
+    networks:
+      - houdinis_net
+    expose:
+      - "22"
+      - "80"
+      - "443"
+
+networks:
+  houdinis_net:
+    driver: bridge
+    internal: true

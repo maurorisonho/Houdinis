@@ -7,12 +7,12 @@
 # Security and Cryptography Libraries (PRIORITY)
 cryptography>=41.0.0  # Updated for security fixes
 pycryptodome>=3.19.0  # Secure cryptographic library
-secrets  # Built-in secure random number generation
+# secrets  # Built-in secure random number generation (Standard Library)
 
 # Input Validation and Security
 validators>=0.22.0  # Input validation
 bleach>=6.0.0  # HTML sanitization
-python-ipaddress>=1.0.23  # IP address validation
+# python-ipaddress>=1.0.23  # IP address validation (Standard Library)
 
 # Quantum Computing Libraries - IBM Qiskit
 qiskit>=0.45.0
@@ -22,8 +22,8 @@ qiskit-algorithms>=0.2.0
 
 # NVIDIA Quantum Computing Stack
 cuquantum-python>=23.10.0
-cupy-cuda11x>=12.0.0  # For CUDA 11.x
-# cupy-cuda12x>=12.0.0  # Alternative for CUDA 12.x
+# cupy-cuda11x>=12.0.0  # For CUDA 11.x
+cupy-cuda12x>=12.0.0  # Alternative for CUDA 12.x
 # Note: CUDA-Q requires separate installation via Docker or native installer
 
 # Amazon Braket Quantum Computing
