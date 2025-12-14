@@ -579,17 +579,45 @@ Type 'use <module>' to select a module
     
     def execute_resource_script(self, script_path: str):
         """Execute commands from a resource script file."""
+        from pathlib import Path
+        from security.security_config import SecurityConfig
+        
         try:
-            with open(script_path, 'r') as f:
+            # Validate path to prevent path traversal
+            path = Path(script_path).resolve()
+            if not path.exists():
+                self.console.print(f"Resource script not found: {script_path}")
+                return
+            
+            # Check if path is within allowed directories
+            allowed_dirs = [Path.cwd(), Path.home() / '.houdinis']
+            if not any(str(path).startswith(str(d.resolve())) for d in allowed_dirs):
+                self.console.print("[!] Access denied: Script must be in current directory or ~/.houdinis")
+                return
+            
+            # Validate filename
+            if not SecurityConfig.validate_filename(path.name):
+                self.console.print("[!] Invalid filename")
+                return
+            
+            with open(path, 'r') as f:
                 for line_num, line in enumerate(f, 1):
                     line = line.strip()
                     if line and not line.startswith('#'):
+                        # Validate each command before execution
+                        if len(line) > SecurityConfig.MAX_COMMAND_LENGTH:
+                            self.console.print(f"[!] Line {line_num}: Command too long")
+                            continue
+                        
                         print(f"houdini > {line}")
                         self.onecmd(line)
         except FileNotFoundError:
             self.console.print(f"Resource script not found: {script_path}")
         except Exception as e:
             self.console.print(f"Error executing resource script: {e}")
+            if self.debug:
+                import traceback
+                traceback.print_exc()
     
     def do_exit(self, line):
         """Exit Houdinis."""

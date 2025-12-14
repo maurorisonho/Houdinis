@@ -1,0 +1,101 @@
+# Houdinis Helm Chart Values
+
+replicaCount: 1
+
+image:
+  repository: ghcr.io/maurorisonho/houdinis
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 1000
+  fsGroup: 1000
+
+securityContext:
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: false
+  capabilities:
+    drop:
+    - ALL
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8080
+
+ingress:
+  enabled: false
+  className: "nginx"
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: houdinis.local
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []
+  #  - secretName: houdinis-tls
+  #    hosts:
+  #      - houdinis.local
+
+resources:
+  limits:
+    cpu: 2000m
+    memory: 4Gi
+  requests:
+    cpu: 1000m
+    memory: 2Gi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+# Houdinis specific configuration
+houdinis:
+  config:
+    pythonEnv: "production"
+    logLevel: "INFO"
+    quantumBackend: "ibm_quantum"
+  
+  secrets:
+    # Quantum backend API tokens (base64 encoded)
+    ibmQuantumToken: ""
+    awsAccessKeyId: ""
+    awsSecretAccessKey: ""
+    azureQuantumSubscription: ""
+    googleQuantumProject: ""
+  
+  persistence:
+    enabled: false
+    storageClass: "standard"
+    accessMode: ReadWriteOnce
+    size: 10Gi
+
+# Job configuration for running exploits
+jobs:
+  enabled: false
+  schedule: "0 0 * * *"  # Daily at midnight
+  restartPolicy: OnFailure
+  backoffLimit: 3

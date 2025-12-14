@@ -47,15 +47,34 @@ class SecureFileOperations:
     def validate_path(self, file_path: Union[str, Path], allow_create: bool = False) -> bool:
         """Validate file path for security"""
         try:
-            path = Path(file_path).resolve()
+            # Convert to Path and resolve to absolute path
+            path = Path(file_path).resolve(strict=False)
+            base = self.base_path.resolve()
             
-            # Check for path traversal
-            if not str(path).startswith(str(self.base_path)):
-                self.logger.warning(f"Path traversal attempt: {file_path}")
+            # Check for path traversal using common_path
+            try:
+                common = Path(os.path.commonpath([path, base]))
+                if common != base:
+                    self.logger.warning(f"Path traversal attempt: {file_path}")
+                    SecurityConfig.log_security_event(
+                        "path_traversal_attempt",
+                        {"attempted_path": str(file_path), "base_path": str(base)},
+                        self.logger
+                    )
+                    return False
+            except ValueError:
+                # Paths are on different drives (Windows)
+                self.logger.warning(f"Cross-drive path traversal attempt: {file_path}")
+                return False
+            
+            # Check for dangerous path components
+            path_str = str(path)
+            if '..' in path.parts or path_str.startswith(('/etc/', '/bin/', '/usr/', '/sys/')):
+                self.logger.warning(f"Dangerous path component: {file_path}")
                 return False
             
             # Check filename
-            if not SecurityConfig.validate_filename(path.name):
+            if path.name and not SecurityConfig.validate_filename(path.name):
                 self.logger.warning(f"Invalid filename: {path.name}")
                 return False
             

@@ -1,0 +1,17 @@
+apiVersion: v2
+name: houdinis
+description: A Helm chart for Houdinis Quantum Cryptanalysis Framework
+type: application
+version: 0.1.0
+appVersion: "0.9.5"
+keywords:
+  - quantum-computing
+  - cryptanalysis
+  - security
+  - pentesting
+home: https://github.com/maurorisonho/Houdinis
+sources:
+  - https://github.com/maurorisonho/Houdinis
+maintainers:
+  - name: Mauro Risonho de Paula Assumpção
+    email: maurorisonho@example.com
