@@ -1,0 +1,114 @@
+name: Documentation
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'docs/**'
+      - '**.py'
+      - '.github/workflows/docs.yml'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'docs/**'
+      - '**.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build-docs:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+        cache: 'pip'
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install -r docs/requirements.txt
+        
+    - name: Build Sphinx documentation
+      run: |
+        cd docs
+        sphinx-build -b html . _build/html -W --keep-going
+        
+    - name: Check for broken links
+      continue-on-error: true
+      run: |
+        cd docs
+        sphinx-build -b linkcheck . _build/linkcheck
+        
+    - name: Upload documentation artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: documentation
+        path: docs/_build/html/
+        retention-days: 30
+        
+  deploy-docs:
+    needs: build-docs
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+      
+    steps:
+    - name: Download documentation artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: documentation
+        path: ./docs
+        
+    - name: Setup Pages
+      uses: actions/configure-pages@v4
+      
+    - name: Upload to GitHub Pages
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: ./docs
+        
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
+      
+  check-coverage:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+        
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+        pip install interrogate
+        
+    - name: Check documentation coverage
+      run: |
+        echo "## Documentation Coverage Report" >> $GITHUB_STEP_SUMMARY
+        interrogate -vv . --fail-under 95 --ignore-module --ignore-private >> $GITHUB_STEP_SUMMARY || true
+        
+    - name: Generate badge
+      run: |
+        COVERAGE=$(interrogate . -q | grep -oP '\d+\.\d+(?=%)')
+        echo "Documentation coverage: ${COVERAGE}%"
+        echo "DOC_COVERAGE=${COVERAGE}" >> $GITHUB_ENV

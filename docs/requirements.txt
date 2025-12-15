@@ -1,0 +1,23 @@
+# Sphinx Documentation Requirements
+# Install with: pip install -r docs/requirements.txt
+
+# Core Sphinx
+sphinx>=7.2.0
+sphinx-rtd-theme>=2.0.0
+sphinx-autodoc-typehints>=1.25.0
+
+# Extensions
+myst-parser>=2.0.0
+sphinx-copybutton>=0.5.2
+sphinx-tabs>=3.4.5
+sphinxcontrib-bibtex>=2.6.0
+
+# API documentation
+autodoc-pydantic>=2.0.0
+
+# Diagram support
+sphinxcontrib-mermaid>=0.9.2
+
+# Enhanced features
+sphinx-design>=0.5.0
+sphinx-togglebutton>=0.3.2

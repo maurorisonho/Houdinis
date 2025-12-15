@@ -6,10 +6,17 @@ Houdinis is a comprehensive quantum cryptography exploitation framework designed
 
 ## Documentation
 
-Complete Documentation: [docs/README.md](docs/README.md) - Comprehensive documentation index  
-Docker Guide: [docs/DOCKER_README.md](docs/DOCKER_README.md) - Containerization with Rocky Linux 9  
-Implementation Details: [docs/IMPLEMENTATION_SUMMARY.md](docs/IMPLEMENTATION_SUMMARY.md) - Technical implementation guide  
-Backend Support: [docs/BACKENDS.md](docs/BACKENDS.md) - Quantum computing platforms supported
+** [Official Documentation](https://maurorisonho.github.io/Houdinis/)** - Complete API documentation and user guides  
+** [Quick Start Guide](docs/quickstart.md)** - Get started in 10 minutes  
+** [Installation Guide](docs/installation.md)** - Multi-platform installation instructions  
+** [Introduction](docs/introduction.md)** - Framework overview and concepts
+
+**Additional Documentation:**
+- [Complete Documentation Index](docs/README.md) - Comprehensive documentation index  
+- [Docker Guide](docs/DOCKER_README.md) - Containerization with Rocky Linux 9  
+- [Implementation Details](docs/IMPLEMENTATION_SUMMARY.md) - Technical implementation guide  
+- [Backend Support](docs/BACKENDS.md) - Quantum computing platforms supported  
+- [Documentation Guide](docs/README_DOCS.md) - For contributors to documentation
 
 ## Key Features
 
