@@ -473,7 +473,7 @@ Type 'use <module>' to select a module
                     return False
         return True
 
-    def _handle_module_result(self, result: Any):
+    def _handle_module_result(self, result: Optional[Dict[str, Any]]) -> None:
         """Handle module execution result."""
         if isinstance(result, dict):
             if result.get("success"):
