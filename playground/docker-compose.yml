@@ -1,0 +1,129 @@
+version: '3.8'
+
+services:
+  # ============================================
+  # Houdinis Playground - Web Application
+  # ============================================
+  playground:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - NODE_ENV=production
+    container_name: houdinis-playground
+    image: houdinis/playground:latest
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      # Application
+      - NODE_ENV=production
+      - NEXT_TELEMETRY_DISABLED=1
+      - PORT=3000
+      - HOSTNAME=0.0.0.0
+      
+      # App Configuration
+      - NEXT_PUBLIC_APP_NAME=Houdinis Playground
+      - NEXT_PUBLIC_APP_VERSION=1.0.0
+      - NEXT_PUBLIC_API_URL=https://api.houdinis.dev
+      
+      # JupyterLite/Pyodide
+      - NEXT_PUBLIC_JUPYTER_LITE_URL=/jupyterlite
+      - NEXT_PUBLIC_PYODIDE_VERSION=0.25.0
+      
+      # Analytics (Optional - set your own)
+      # - NEXT_PUBLIC_ANALYTICS_ID=G-XXXXXXXXXX
+      # - NEXT_PUBLIC_SENTRY_DSN=https://xxx@sentry.io/xxx
+      
+      # Rate Limiting (Optional)
+      # - UPSTASH_REDIS_URL=redis://...
+      # - UPSTASH_REDIS_TOKEN=...
+      # - RATE_LIMIT_ENABLED=true
+      # - RATE_LIMIT_MAX_REQUESTS=100
+      # - RATE_LIMIT_WINDOW_MS=60000
+    
+    volumes:
+      # Mount logs directory (optional)
+      - ./logs:/app/logs
+    
+    networks:
+      - houdinis-network
+    
+    labels:
+      - "com.houdinis.description=Houdinis Quantum Playground"
+      - "com.houdinis.version=1.0.0"
+      - "traefik.enable=true"
+      - "traefik.http.routers.playground.rule=Host(`playground.houdinis.dev`)"
+      - "traefik.http.services.playground.loadbalancer.server.port=3000"
+    
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    
+    # Resource limits (adjust based on your needs)
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+
+  # ============================================
+  # Redis (Optional - for rate limiting)
+  # ============================================
+  redis:
+    image: redis:7-alpine
+    container_name: houdinis-redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - houdinis-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # ============================================
+  # Nginx Reverse Proxy (Optional)
+  # ============================================
+  nginx:
+    image: nginx:alpine
+    container_name: houdinis-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+      - nginx-cache:/var/cache/nginx
+    networks:
+      - houdinis-network
+    depends_on:
+      - playground
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  houdinis-network:
+    driver: bridge
+    name: houdinis-network
+
+volumes:
+  redis-data:
+    driver: local
+  nginx-cache:
+    driver: local
