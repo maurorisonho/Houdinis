@@ -1,0 +1,160 @@
+{
+  "obs": {
+    "version": "29.0.0",
+    "recording": {
+      "resolution": "1920x1080",
+      "fps": 30,
+      "format": "mp4",
+      "encoder": "x264",
+      "quality": "high",
+      "bitrate": 6000
+    },
+    "audio": {
+      "sampleRate": 48000,
+      "channels": 2,
+      "bitrate": 192
+    },
+    "scenes": [
+      {
+        "name": "Main - Code Editor",
+        "sources": [
+          {
+            "type": "display_capture",
+            "name": "Screen",
+            "settings": {
+              "capture_cursor": true
+            }
+          },
+          {
+            "type": "video_capture_device",
+            "name": "Webcam",
+            "position": "bottom_right",
+            "size": "20%",
+            "visible": false
+          }
+        ]
+      },
+      {
+        "name": "Terminal Only",
+        "sources": [
+          {
+            "type": "window_capture",
+            "name": "Terminal",
+            "filter": "terminal"
+          }
+        ]
+      },
+      {
+        "name": "Browser Demo",
+        "sources": [
+          {
+            "type": "window_capture",
+            "name": "Browser",
+            "filter": "chrome|firefox"
+          }
+        ]
+      },
+      {
+        "name": "Picture-in-Picture",
+        "sources": [
+          {
+            "type": "display_capture",
+            "name": "Screen"
+          },
+          {
+            "type": "video_capture_device",
+            "name": "Webcam",
+            "position": "bottom_right",
+            "size": "25%",
+            "border": true
+          }
+        ]
+      }
+    ],
+    "filters": {
+      "audio": [
+        {
+          "name": "Noise Suppression",
+          "type": "noise_suppress_filter_v2",
+          "level": -30
+        },
+        {
+          "name": "Compressor",
+          "type": "compressor_filter",
+          "ratio": 4.0,
+          "threshold": -20
+        },
+        {
+          "name": "Limiter",
+          "type": "limiter",
+          "threshold": -3
+        }
+      ],
+      "video": [
+        {
+          "name": "Color Correction",
+          "type": "color_filter",
+          "contrast": 1.1,
+          "brightness": 1.05
+        }
+      ]
+    },
+    "hotkeys": {
+      "start_recording": "F9",
+      "stop_recording": "F10",
+      "pause_recording": "F11",
+      "mute_mic": "F12"
+    }
+  },
+  "terminal": {
+    "theme": "Dracula",
+    "font": "Fira Code",
+    "fontSize": 16,
+    "cursorStyle": "block",
+    "cursorBlink": true,
+    "colors": {
+      "background": "#282a36",
+      "foreground": "#f8f8f2",
+      "cursor": "#50fa7b",
+      "selection": "#44475a"
+    }
+  },
+  "vscode": {
+    "theme": "Dracula Official",
+    "fontSize": 16,
+    "fontFamily": "Fira Code",
+    "cursorStyle": "line",
+    "cursorBlinking": "smooth",
+    "zenMode": true,
+    "settings": {
+      "editor.minimap.enabled": false,
+      "editor.lineNumbers": "on",
+      "workbench.activityBar.visible": false,
+      "workbench.statusBar.visible": true
+    }
+  },
+  "notes": {
+    "preparation": [
+      "Close all unnecessary applications",
+      "Disable notifications (Do Not Disturb mode)",
+      "Clean desktop background",
+      "Increase terminal font size to 16-18pt",
+      "Test microphone levels (peak at -12dB)",
+      "Prepare demo environment (fresh VM recommended)",
+      "Have water nearby for hydration"
+    ],
+    "during_recording": [
+      "Speak clearly and at moderate pace",
+      "Pause briefly after each command",
+      "Explain what you're doing before doing it",
+      "If you make a mistake, pause 3 seconds then continue",
+      "Keep cursor visible and highlight important areas"
+    ],
+    "post_recording": [
+      "Listen to full recording before editing",
+      "Note timestamps for cuts and improvements",
+      "Back up raw footage immediately",
+      "Begin editing within 24 hours while fresh"
+    ]
+  }
+}

@@ -1,10 +1,27 @@
 # Houdinis Framework - Quantum Cryptography Testing Platform
 
 ![Houdinis Logo](https://img.shields.io/badge/Houdinis-Framework-blue?style=for-the-badge&logo=quantum)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/maurorisonho/Houdinis/main?labpath=notebooks%2Fplayground.ipynb)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 
 ** Available in:** [English](README.md) | [Português](README.pt-BR.md) | [Español](README.es.md) | [](README.zh.md)
 
 Houdinis is a comprehensive quantum cryptography exploitation framework designed for security researchers, penetration testers, and quantum computing enthusiasts. The framework provides tools to test quantum algorithms, evaluate cryptographic vulnerabilities, and benchmark quantum computing backends.
+
+##  Try It Now - Zero Installation!
+
+**Experience Houdinis in your browser without installing anything:**
+
+[![Launch Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/maurorisonho/Houdinis/main?labpath=notebooks%2Fplayground.ipynb)
+
+ Click to start an interactive 5-minute tutorial with:
+-  Live quantum circuit execution
+-  Grover's algorithm demo
+-  RSA security analysis
+-  Interactive visualizations
+
+*Runs completely in your browser powered by [MyBinder.org](https://mybinder.org/)*
 
 ## Documentation
 
@@ -45,9 +62,24 @@ Houdinis is a comprehensive quantum cryptography exploitation framework designed
 
 ##  Installation
 
-### Quick Start
+###  Option 1: Try in Browser (Recommended for Learning)
+
+**Zero installation required!** Launch an interactive environment:
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/maurorisonho/Houdinis/main?labpath=notebooks%2Fplayground.ipynb)
+
+Perfect for:
+- Learning quantum cryptography
+- Testing small quantum circuits
+- Exploring framework features
+- Quick demos and prototyping
+
+###  Option 2: Local Installation
+
+For production use and full features:
+
 ```bash
-git clone https://github.com/firebitsbr/Houdinis.git
+git clone https://github.com/maurorisonho/Houdinis.git
 cd Houdinis
 pip install -r requirements.txt
 python main.py

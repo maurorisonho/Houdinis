@@ -2,7 +2,28 @@
 
 Get started with Houdinis in 10 minutes! This guide walks you through running your first quantum cryptanalysis attack.
 
-## Prerequisites
+##  Option 1: Try in Browser (Fastest!)
+
+**Zero installation required!** Launch an interactive tutorial in your browser:
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/maurorisonho/Houdinis/main?labpath=notebooks%2Fplayground.ipynb)
+
+**What you'll get:**
+-  5-minute interactive tutorial
+-  Live quantum circuit execution
+-  Grover's algorithm demo
+-  RSA security analysis
+-  All 9 comprehensive notebooks
+
+**Perfect for:** Learning, quick demos, testing concepts
+
+---
+
+##  Option 2: Local Installation
+
+For production use and full features:
+
+### Prerequisites
 
  Houdinis installed ([Installation Guide](installation.md))  
  Virtual environment activated  
@@ -70,7 +91,13 @@ python exploits/rsa_shor.py \
 
 ### Step 4: Explore Interactive Notebooks
 
-Launch Jupyter to explore comprehensive tutorials:
+** Try in Browser (No Setup):**
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/maurorisonho/Houdinis/main?labpath=notebooks%2Fplayground.ipynb)
+
+Start with [`playground.ipynb`](https://mybinder.org/v2/gh/maurorisonho/Houdinis/main?labpath=notebooks%2Fplayground.ipynb) for a 5-minute tutorial!
+
+** Or Run Locally:**
 
 ```bash
 # Install Jupyter (if not already)
@@ -81,9 +108,10 @@ jupyter notebook notebooks/
 ```
 
 **Recommended starting notebooks:**
-1. `Shors_Algorithm_RSA_Exploitation.ipynb` - Deep dive into RSA factorization
-2. `IBM_Quantum_Experience_Integration.ipynb` - Use real quantum hardware
-3. `Grovers_Algorithm_Symmetric_Key_Attacks.ipynb` - AES/symmetric attacks
+1. [`playground.ipynb`](../notebooks/playground.ipynb) -  **START HERE** - 5-min interactive intro
+2. [`02-Shors_Algorithm_RSA_Exploitation.ipynb`](../notebooks/02-Shors_Algorithm_RSA_Exploitation.ipynb) - Deep dive into RSA factorization
+3. [`01-IBM_Quantum_Experience_Integration.ipynb`](../notebooks/01-IBM_Quantum_Experience_Integration.ipynb) - Use real quantum hardware
+4. [`03-Grovers_Algorithm_Symmetric_Key_Attacks.ipynb`](../notebooks/03-Grovers_Algorithm_Symmetric_Key_Attacks.ipynb) - AES/symmetric attacks
 
 ## Common Use Cases
 

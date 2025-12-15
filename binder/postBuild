@@ -1,0 +1,68 @@
+#!/bin/bash
+# Binder post-build script for Houdinis Framework
+# This script runs after the environment is created
+
+set -e
+
+echo "🔧 Setting up Houdinis environment..."
+
+# Install Houdinis in editable mode (if not already done via environment.yml)
+pip install -e . --no-deps || true
+
+# Pre-cache quantum backends (speeds up first notebook run)
+echo "📦 Pre-caching quantum backends..."
+python -c "
+try:
+    from qiskit import Aer
+    backends = Aer.backends()
+    print(f'✅ Cached {len(backends)} Qiskit backends')
+except Exception as e:
+    print(f'⚠️  Backend caching failed: {e}')
+" || true
+
+# Enable JupyterLab extensions
+echo "🎨 Enabling JupyterLab extensions..."
+jupyter labextension enable @jupyter-widgets/jupyterlab-manager || true
+
+# Create a welcome message
+echo "📝 Creating welcome message..."
+cat > /tmp/binder_welcome.txt << 'EOF'
+╔══════════════════════════════════════════════════════════╗
+║                                                          ║
+║         🎉 Welcome to Houdinis Framework! 🎉            ║
+║                                                          ║
+║   Quantum Cryptography Testing Platform                 ║
+║   Running in MyBinder.org - Zero Installation!          ║
+║                                                          ║
+╚══════════════════════════════════════════════════════════╝
+
+🚀 Quick Start:
+   1. Open 'playground.ipynb' for a 5-minute tutorial
+   2. Or explore the 'notebooks/' directory
+   3. Run cells with Shift+Enter
+
+📚 Documentation: https://maurorisonho.github.io/Houdinis/
+🐙 GitHub: https://github.com/maurorisonho/Houdinis
+
+⚠️  Note: This is a cloud environment with resource limits:
+   - 2GB RAM, 1-2 CPU cores
+   - Best for learning and small experiments
+   - For production use, install locally
+
+Happy hacking! 🔐
+EOF
+
+# Display welcome message
+cat /tmp/binder_welcome.txt
+
+# Configure Jupyter to show the welcome message on startup
+mkdir -p ~/.jupyter/custom
+cat > ~/.jupyter/custom/custom.js << 'EOF'
+// Show welcome message in console
+console.log('%c🎉 Houdinis Framework loaded successfully!', 'color: #00ff00; font-size: 16px; font-weight: bold;');
+EOF
+
+echo ""
+echo "✅ Houdinis Binder environment setup complete!"
+echo "🎮 Ready to run quantum cryptography attacks in your browser!"
+echo ""

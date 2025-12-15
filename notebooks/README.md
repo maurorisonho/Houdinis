@@ -1,5 +1,16 @@
 #  Houdinis Jupyter Notebooks
 
+##  Try Interactive Notebooks Now!
+
+**Run all notebooks in your browser without installation:**
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/maurorisonho/Houdinis/main?labpath=notebooks%2Fplayground.ipynb)
+
+ **Quick Start:** 5-minute interactive tutorial  
+ **Full Access:** All 9 comprehensive notebooks available
+
+---
+
 ## Overview
 
 This directory contains Jupyter notebooks demonstrating quantum cryptographic attacks using the Houdinis framework with Docker containers.
@@ -32,21 +43,100 @@ This directory contains Jupyter notebooks demonstrating quantum cryptographic at
 
 ##  Available Notebooks
 
-### 1. `Grovers_Algorithm_Symmetric_Key_Attacks.ipynb`
-Demonstrates Grover's algorithm for symmetric key attacks:
+###  Quick Start
+**[`playground.ipynb`](playground.ipynb)** - **START HERE!**   
+5-minute interactive tutorial covering:
+- Your first quantum circuit
+- Bell state entanglement demo
+- Grover's search algorithm
+- RSA security analysis widget
+
+[ Launch playground.ipynb in Binder](https://mybinder.org/v2/gh/maurorisonho/Houdinis/main?labpath=notebooks%2Fplayground.ipynb)
+
+---
+
+###  Comprehensive Tutorials
+
+### 1. `01-IBM_Quantum_Experience_Integration.ipynb`
+Connect to real IBM quantum hardware:
+- IBM Quantum account setup
+- Access real quantum processors
+- Run circuits on actual quantum computers
+- Compare simulator vs hardware results
+
+[ Launch in Binder](https://mybinder.org/v2/gh/maurorisonho/Houdinis/main?labpath=notebooks%2F01-IBM_Quantum_Experience_Integration.ipynb)
+
+### 2. `02-Shors_Algorithm_RSA_Exploitation.ipynb`
+RSA factorization using Shor's algorithm:
+- Integer factorization theory
+- Quantum Fourier Transform
+- Period finding algorithm
+- Break RSA encryption
+
+[ Launch in Binder](https://mybinder.org/v2/gh/maurorisonho/Houdinis/main?labpath=notebooks%2F02-Shors_Algorithm_RSA_Exploitation.ipynb)
+
+### 3. `03-Grovers_Algorithm_Symmetric_Key_Attacks.ipynb`
+Grover's algorithm for symmetric key attacks:
 - AES key recovery with quadratic speedup
 - SSH password cracking acceleration
 - TLS/RSA vulnerability analysis
 - Real attacks against vulnerable Docker container
 
-### 2. `Shors_Algorithm_RSA_Exploitation.ipynb`
-RSA factorization using Shor's algorithm
+[ Launch in Binder](https://mybinder.org/v2/gh/maurorisonho/Houdinis/main?labpath=notebooks%2F03-Grovers_Algorithm_Symmetric_Key_Attacks.ipynb)
 
-### 3. `Quantum_Network_Scanning.ipynb`
-Quantum-enhanced network reconnaissance
+### 4. `04-Quantum_Network_Scanning.ipynb`
+Quantum-enhanced network reconnaissance:
+- Identify quantum-vulnerable systems
+- Protocol analysis and detection
+- Network mapping strategies
+- Vulnerability scoring
 
-### 4. Other notebooks...
-See individual notebooks for specific demonstrations
+[ Launch in Binder](https://mybinder.org/v2/gh/maurorisonho/Houdinis/main?labpath=notebooks%2F04-Quantum_Network_Scanning.ipynb)
+
+### 5. `05-Harvest_Now_Decrypt_Later_Attacks.ipynb`
+Future quantum threat assessment:
+- Store encrypted data now, decrypt later
+- Timeline to quantum threats
+- Risk assessment frameworks
+- Migration strategies
+
+[ Launch in Binder](https://mybinder.org/v2/gh/maurorisonho/Houdinis/main?labpath=notebooks%2F05-Harvest_Now_Decrypt_Later_Attacks.ipynb)
+
+### 6. `06-Post_Quantum_Cryptography_Analysis.ipynb`
+Post-quantum cryptography solutions:
+- NIST PQC standards (Kyber, Dilithium)
+- Lattice-based cryptography
+- Hash-based signatures
+- Migration guides
+
+[ Launch in Binder](https://mybinder.org/v2/gh/maurorisonho/Houdinis/main?labpath=notebooks%2F06-Post_Quantum_Cryptography_Analysis.ipynb)
+
+### 7. `07-Quantum_Machine_Learning_Cryptanalysis.ipynb`
+QML-based cryptanalysis:
+- Quantum neural networks
+- Adversarial attacks
+- Pattern recognition
+- Cryptographic weaknesses
+
+[ Launch in Binder](https://mybinder.org/v2/gh/maurorisonho/Houdinis/main?labpath=notebooks%2F07-Quantum_Machine_Learning_Cryptanalysis.ipynb)
+
+### 8. `08-Houdinis_Advanced_Features.ipynb`
+Framework deep dive:
+- Multi-backend configuration
+- Performance benchmarking
+- Custom exploit development
+- Best practices
+
+[ Launch in Binder](https://mybinder.org/v2/gh/maurorisonho/Houdinis/main?labpath=notebooks%2F08-Houdinis_Advanced_Features.ipynb)
+
+### 9. `09-Houdinis_Framework_Conclusion.ipynb`
+Summary and next steps:
+- Framework capabilities review
+- Real-world applications
+- Research directions
+- Contributing guide
+
+[ Launch in Binder](https://mybinder.org/v2/gh/maurorisonho/Houdinis/main?labpath=notebooks%2F09-Houdinis_Framework_Conclusion.ipynb)
 
 ##  Quick Start
 
