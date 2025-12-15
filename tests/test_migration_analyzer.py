@@ -28,7 +28,8 @@ class TestMigrationAnalyzerInitialization:
         assert analyzer is not None
 
 
-class TestFileScan ning:
+
+class TestFileScanning:
     """Test file scanning functionality"""
     
     def test_scan_file_with_rsa(self):
@@ -41,11 +42,11 @@ class TestFileScan ning:
         
         try:
             result = analyzer.scan_file(tmpfile)
-            assert 'crypto_usages' in result
-            assert len(result['crypto_usages']) > 0
+            assert isinstance(result, list)
+            assert len(result) > 0
             
             # Should find RSA
-            algorithms = [usage.algorithm for usage in result['crypto_usages']]
+            algorithms = [usage.algorithm for usage in result]
             assert 'RSA' in algorithms
         finally:
             Path(tmpfile).unlink()
@@ -60,7 +61,9 @@ class TestFileScan ning:
         
         try:
             result = analyzer.scan_file(tmpfile)
-            assert 'crypto_usages' in result
+            assert isinstance(result, list)
+            # Note: Regex might not match "ec.generate_private_key", check patterns if fails
+            # But we update structure first
         finally:
             Path(tmpfile).unlink()
 
@@ -79,11 +82,10 @@ class TestDirectoryScan:
             (tmppath / 'test1.py').write_text('import rsa\nkey = rsa.newkeys(2048)')
             (tmppath / 'test2.py').write_text('from ecdsa import SigningKey')
             
-            result = analyzer.scan_directory(tmpdir)
+            count = analyzer.scan_directory(tmpdir)
             
-            assert 'files_scanned' in result
-            assert result['files_scanned'] >= 2
-            assert 'crypto_usages' in result
+            assert count >= 2
+            assert len(analyzer.crypto_usages) >= 2
 
 
 class TestVulnerabilityAssessment:
@@ -95,15 +97,20 @@ class TestVulnerabilityAssessment:
         
         usage = CryptoUsage(
             algorithm='RSA',
-            file_path='/test.py',
+            location='/test.py',
             line_number=1,
             context='RSA.generate(2048)',
-            security_level=112
+            quantum_vulnerable=True,
+            security_level=112,
+            usage_type='key_exchange'
         )
+        analyzer.crypto_usages.append(usage)
         
-        assessment = analyzer.assess_vulnerabilities(usage)
+        assessments = analyzer.assess_vulnerabilities()
         
-        assert assessment.threat_level in ['immediate', 'near_term', 'long_term']
+        assert len(assessments) > 0
+        assessment = assessments[0]
+        assert assessment.quantum_threat_level in ['immediate', 'near_term', 'long_term']
         assert assessment.quantum_security_bits >= 0
 
 
@@ -116,17 +123,23 @@ class TestRecommendations:
         
         usage = CryptoUsage(
             algorithm='RSA',
-            file_path='/test.py',
+            location='/test.py',
             line_number=1,
             context='RSA.generate(2048)',
-            security_level=112
+            quantum_vulnerable=True,
+            security_level=112,
+            usage_type='key_exchange'
         )
+        analyzer.crypto_usages.append(usage)
         
-        assessment = analyzer.assess_vulnerabilities(usage)
-        recommendation = analyzer.generate_recommendations(assessment)
+        # Recommendations generation usually requires assessment first or just usage
+        # Implementation: uses self.crypto_usages directly
+        recommendations = analyzer.generate_recommendations()
         
-        assert recommendation.current_algorithm == 'RSA'
-        assert recommendation.recommended_pqc_algorithm is not None
+        assert len(recommendations) > 0
+        rec = recommendations[0]
+        assert 'RSA' in rec.current_algorithm
+        assert rec.recommended_pqc is not None
 
 
 class TestMigrationPath:
@@ -136,22 +149,12 @@ class TestMigrationPath:
         """Test creating direct migration path"""
         analyzer = PQCMigrationAnalyzer()
         
-        usage = CryptoUsage(
-            algorithm='RSA',
-            file_path='/test.py',
-            line_number=1,
-            context='RSA.generate(2048)',
-            security_level=112
-        )
+        # Methods work independently of state if just requesting strategy path
+        path = analyzer.create_migration_path(strategy="direct_replacement")
         
-        assessment = analyzer.assess_vulnerabilities(usage)
-        recommendation = analyzer.generate_recommendations(assessment)
-        path = analyzer.create_migration_path(recommendation)
-        
-        assert 'strategy' in path
-        assert 'phases' in path
-        assert 'timeline_weeks' in path
-        assert len(path['phases']) > 0
+        assert path.name == "Direct PQC Replacement"
+        assert len(path.phases) > 0
+        assert path.total_duration_weeks > 0
 
 
 class TestComprehensiveReport:
@@ -161,21 +164,24 @@ class TestComprehensiveReport:
         """Test generating comprehensive report"""
         analyzer = PQCMigrationAnalyzer()
         
-        scan_result = {
-            'files_scanned': 5,
-            'crypto_usages': []
-        }
-        
-        report = analyzer.generate_comprehensive_report(
-            scan_result=scan_result,
-            assessments=[],
-            recommendations=[]
+        # Add some dummy data to avoid empty report
+        usage = CryptoUsage(
+            algorithm='RSA',
+            location='/test.py',
+            line_number=1,
+            context='RSA.generate(2048)',
+            quantum_vulnerable=True,
+            security_level=112,
+            usage_type='key_exchange'
         )
+        analyzer.crypto_usages.append(usage)
+        
+        report = analyzer.generate_comprehensive_report()
         
         assert 'summary' in report
         assert 'vulnerabilities' in report
         assert 'recommendations' in report
-        assert 'budget_estimate' in report
+        assert 'estimated_migration' in report # Changed from budget_estimate to nested
 
 
 class TestExport:
@@ -185,18 +191,25 @@ class TestExport:
         """Test exporting report to JSON"""
         analyzer = PQCMigrationAnalyzer()
         
-        report = {
-            'summary': {'files': 0},
-            'vulnerabilities': [],
-            'recommendations': []
-        }
-        
         with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False) as f:
             tmpfile = f.name
         
         try:
-            analyzer.export_report(report, tmpfile)
-            assert Path(tmpfile).exists()
+            # Add data so report is not empty
+            usage = CryptoUsage(
+                algorithm='RSA',
+                location='/test.py',
+                line_number=1,
+                context='RSA.generate(2048)',
+                quantum_vulnerable=True,
+                security_level=112,
+                usage_type='key_exchange'
+            )
+            analyzer.crypto_usages.append(usage)
+            
+            output_file = analyzer.export_report(tmpfile)
+            assert Path(output_file).exists()
+            assert output_file == tmpfile
         finally:
             Path(tmpfile).unlink()
 

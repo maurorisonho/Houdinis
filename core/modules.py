@@ -97,6 +97,7 @@ class ScannerModule(BaseModule):
     """
 
     def __init__(self) -> None:
+        """Initialize scanner module with common options."""
         super().__init__()
         self.info["category"] = "scanner"
 
@@ -135,6 +136,7 @@ class ExploitModule(BaseModule):
     """
 
     def __init__(self) -> None:
+        """Initialize exploit module with common options."""
         super().__init__()
         self.info["category"] = "exploit"
 
@@ -176,6 +178,7 @@ class PayloadModule(BaseModule):
     """
 
     def __init__(self) -> None:
+        """Initialize payload module with common options."""
         super().__init__()
         self.info["category"] = "payload"
 

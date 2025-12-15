@@ -3,10 +3,10 @@
     "total_files": 49,
     "total_functions": 470,
     "typed_functions": 424,
-    "documented_functions": 426,
+    "documented_functions": 435,
     "type_coverage": 90.2,
-    "docstring_coverage": 90.6,
-    "quality_score": 9.2
+    "docstring_coverage": 92.6,
+    "quality_score": 9.3
   },
   "files": [
     {
@@ -21,9 +21,9 @@
       "path": "core/modules.py",
       "total_functions": 15,
       "typed_functions": 15,
-      "documented_functions": 12,
+      "documented_functions": 15,
       "type_coverage": 100.0,
-      "docstring_coverage": 80.0
+      "docstring_coverage": 100.0
     },
     {
       "path": "core/session.py",
@@ -77,9 +77,9 @@
       "path": "exploits/rsa_shor.py",
       "total_functions": 4,
       "typed_functions": 3,
-      "documented_functions": 2,
+      "documented_functions": 3,
       "type_coverage": 75.0,
-      "docstring_coverage": 50.0
+      "docstring_coverage": 75.0
     },
     {
       "path": "exploits/simon_algorithm.py",
@@ -93,9 +93,9 @@
       "path": "exploits/quantum_annealing_attack.py",
       "total_functions": 11,
       "typed_functions": 5,
-      "documented_functions": 6,
+      "documented_functions": 11,
       "type_coverage": 45.45454545454545,
-      "docstring_coverage": 54.54545454545454
+      "docstring_coverage": 100.0
     },
     {
       "path": "exploits/adversarial_qml_attack.py",
