@@ -1,10 +1,44 @@
 # Houdinis Quantum Playground 
 
+> **Desenvolvido:** Lógica e Codificação por Humano e AI Assistida (Claude Sonnet 4.5)
+
 **Interactive browser-based quantum cryptanalysis platform**
 
 [![Live Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://playground.houdinis.dev)
 [![Status](https://img.shields.io/badge/status-beta-yellow)](https://github.com/maurorisonho/Houdinis)
 [![License](https://img.shields.io/badge/license-MIT-blue)](../LICENSE)
+
+###  Tech Stack
+
+**Frontend:**
+
+![Next.js](https://img.shields.io/badge/Next.js-14-000000?style=flat-square&logo=next.js&logoColor=white)
+![React](https://img.shields.io/badge/React-18-61DAFB?style=flat-square&logo=react&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3-06B6D4?style=flat-square&logo=tailwind-css&logoColor=white)
+![Monaco Editor](https://img.shields.io/badge/Monaco_Editor-VSCode-007ACC?style=flat-square&logo=visual-studio-code&logoColor=white)
+
+**Backend & Runtime:**
+
+![Pyodide](https://img.shields.io/badge/Pyodide-0.25-3776AB?style=flat-square&logo=python&logoColor=white)
+![JupyterLite](https://img.shields.io/badge/JupyterLite-Browser-F37626?style=flat-square&logo=jupyter&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-18+-339933?style=flat-square&logo=node.js&logoColor=white)
+![WebAssembly](https://img.shields.io/badge/WebAssembly-WASM-654FF0?style=flat-square&logo=webassembly&logoColor=white)
+
+**State Management & Tools:**
+
+![Zustand](https://img.shields.io/badge/Zustand-State-FF6B6B?style=flat-square)
+![Radix UI](https://img.shields.io/badge/Radix_UI-Components-161618?style=flat-square)
+![Recharts](https://img.shields.io/badge/Recharts-Visualization-22B5BF?style=flat-square)
+![Three.js](https://img.shields.io/badge/Three.js-3D-000000?style=flat-square&logo=three.js&logoColor=white)
+
+**DevOps:**
+
+![Docker](https://img.shields.io/badge/Docker-Containerized-2496ED?style=flat-square&logo=docker&logoColor=white)
+![Docker Compose](https://img.shields.io/badge/Docker_Compose-Orchestration-2496ED?style=flat-square&logo=docker&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-Deploy-000000?style=flat-square&logo=vercel&logoColor=white)
+![Nginx](https://img.shields.io/badge/Nginx-Proxy-009639?style=flat-square&logo=nginx&logoColor=white)
+![Redis](https://img.shields.io/badge/Redis-Cache-DC382D?style=flat-square&logo=redis&logoColor=white)
 
 ---
 

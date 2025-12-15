@@ -1,9 +1,36 @@
 # Houdinis Framework - Quantum Cryptography Testing Platform
 
+> **Desenvolvido:** Lógica e Codificação por Humano e AI Assistida (Claude Sonnet 4.5)
+
 ![Houdinis Logo](https://img.shields.io/badge/Houdinis-Framework-blue?style=for-the-badge&logo=quantum)
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/maurorisonho/Houdinis/main?labpath=notebooks%2Fplayground.ipynb)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
+
+###  Technologies & Frameworks
+
+**Core Technologies:**
+
+![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=flat-square&logo=python&logoColor=white)
+![Qiskit](https://img.shields.io/badge/Qiskit-Latest-6929C4?style=flat-square&logo=qiskit&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-Latest-2496ED?style=flat-square&logo=docker&logoColor=white)
+![Rocky Linux](https://img.shields.io/badge/Rocky_Linux-9-10B981?style=flat-square&logo=rockylinux&logoColor=white)
+
+**Quantum Backends:**
+
+![IBM Quantum](https://img.shields.io/badge/IBM_Quantum-Supported-052FAD?style=flat-square&logo=ibm&logoColor=white)
+![NVIDIA cuQuantum](https://img.shields.io/badge/NVIDIA_cuQuantum-GPU-76B900?style=flat-square&logo=nvidia&logoColor=white)
+![Amazon Braket](https://img.shields.io/badge/Amazon_Braket-AWS-FF9900?style=flat-square&logo=amazon-aws&logoColor=white)
+![Azure Quantum](https://img.shields.io/badge/Azure_Quantum-Cloud-0078D4?style=flat-square&logo=microsoft-azure&logoColor=white)
+![Google Cirq](https://img.shields.io/badge/Google_Cirq-Research-4285F4?style=flat-square&logo=google&logoColor=white)
+![PennyLane](https://img.shields.io/badge/PennyLane-ML-00C7B7?style=flat-square)
+
+**Development & Testing:**
+
+![pytest](https://img.shields.io/badge/pytest-Testing-0A9EDC?style=flat-square&logo=pytest&logoColor=white)
+![NumPy](https://img.shields.io/badge/NumPy-Scientific-013243?style=flat-square&logo=numpy&logoColor=white)
+![Jupyter](https://img.shields.io/badge/Jupyter-Notebooks-F37626?style=flat-square&logo=jupyter&logoColor=white)
+![Git](https://img.shields.io/badge/Git-Version_Control-F05032?style=flat-square&logo=git&logoColor=white)
 
 ** Available in:** [English](README.md) | [Português](README.pt-BR.md) | [Español](README.es.md) | [](README.zh.md)
 

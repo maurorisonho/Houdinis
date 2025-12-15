@@ -6,6 +6,7 @@ Unit Tests for PQC Migration Analyzer
 Comprehensive unit tests for the PQC migration analysis framework.
 
 Author: Houdinis Framework
+Desenvolvido: Lógica e Codificação por Humano e AI Assistida (Claude Sonnet 4.5)
 License: MIT
 """
 

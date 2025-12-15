@@ -2,6 +2,7 @@
 """
 Houdinis Framework - Secrets Management Module
 Author: Mauro Risonho de Paula Assumpção aka firebitsbr
+Desenvolvido: Lógica e Codificação por Humano e AI Assistida (Claude Sonnet 4.5)
 License: MIT
 
 Secure secrets management for API keys, tokens, and credentials.

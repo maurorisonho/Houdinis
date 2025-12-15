@@ -2,6 +2,7 @@
 """
 Houdinis Framework - Houdinis Framework Installation Test
 Author: Mauro Risonho de Paula Assumpção aka firebitsbr
+Desenvolvido: Lógica e Codificação por Humano e AI Assistida (Claude Sonnet 4.5)
 License: MIT
 
 Quick test to verify framework setup

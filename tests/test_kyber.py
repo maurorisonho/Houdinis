@@ -7,6 +7,7 @@ Comprehensive unit tests for the Kyber KEM attack implementation.
 Tests all attack methods, parameter sets, and edge cases.
 
 Author: Houdinis Framework
+Desenvolvido: Lógica e Codificação por Humano e AI Assistida (Claude Sonnet 4.5)
 License: MIT
 """
 

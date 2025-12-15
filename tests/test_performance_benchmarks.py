@@ -1,6 +1,7 @@
 """
 Performance Benchmark Tests for CI/CD
 Author: Mauro Risonho de Paula Assumpção aka firebitsbr
+Desenvolvido: Lógica e Codificação por Humano e AI Assistida (Claude Sonnet 4.5)
 License: MIT
 
 Automated performance regression testing for Houdinis Framework.

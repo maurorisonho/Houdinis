@@ -1,6 +1,7 @@
 """
 Houdinis Framework - Quantum Vulnerability Scanner for Houdinis
 Author: Mauro Risonho de Paula Assumpção aka firebitsbr
+Desenvolvido: Lógica e Codificação por Humano e AI Assistida (Claude Sonnet 4.5)
 License: MIT
 
 General scanner for quantum-vulnerable cryptographic implementations.

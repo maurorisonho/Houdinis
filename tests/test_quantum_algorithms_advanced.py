@@ -2,6 +2,7 @@
 Houdinis Framework - Quantum Algorithm Advanced Tests
 Data de Criação: 15 de dezembro de 2025
 Author: Mauro Risonho de Paula Assumpção aka firebitsbr
+Desenvolvido: Lógica e Codificação por Humano e AI Assistida (Claude Sonnet 4.5)
 License: MIT
 
 Additional tests for quantum algorithms to increase coverage to 85%+.

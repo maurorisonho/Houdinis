@@ -1,3 +1,7 @@
+/**
+ * Houdinis Playground - Code Execution Hook
+ * Desenvolvido: Lógica e Codificação por Humano e AI Assistida (Claude Sonnet 4.5)
+ */
 import { useCallback, useRef, useEffect } from 'react';
 import { useExecutionStore } from '@/stores/executionStore';
 import { loadPyodide } from '@/lib/jupyter/pyodide';

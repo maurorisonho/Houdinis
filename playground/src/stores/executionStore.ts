@@ -1,3 +1,7 @@
+/**
+ * Houdinis Playground - Execution State Store
+ * Desenvolvido: Lógica e Codificação por Humano e AI Assistida (Claude Sonnet 4.5)
+ */
 import { create } from 'zustand';
 
 interface ExecutionState {

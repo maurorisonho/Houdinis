@@ -1,4 +1,8 @@
-// Pyodide loader and manager
+/**
+ * Houdinis Playground - Pyodide Loader and Manager
+ * Desenvolvido: Lógica e Codificação por Humano e AI Assistida (Claude Sonnet 4.5)
+ */
+
 let pyodideInstance: any = null;
 let loadingPromise: Promise<any> | null = null;
 

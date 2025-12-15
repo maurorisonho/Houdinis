@@ -2,6 +2,7 @@
 """
 Houdinis Framework - Secure File Operations Module
 Author: Mauro Risonho de Paula Assumpção aka firebitsbr
+Desenvolvido: Lógica e Codificação por Humano e AI Assistida (Claude Sonnet 4.5)
 License: MIT
 
 Secure file operations with proper validation and error handling.

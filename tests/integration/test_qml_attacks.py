@@ -7,6 +7,7 @@ Integration tests for QML attack frameworks, testing interactions
 between QML attacks and other system components.
 
 Author: Houdinis Framework
+Desenvolvido: Lógica e Codificação por Humano e AI Assistida (Claude Sonnet 4.5)
 License: MIT
 """
 

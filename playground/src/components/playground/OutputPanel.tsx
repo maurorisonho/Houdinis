@@ -1,3 +1,7 @@
+/**
+ * Houdinis Playground - Output Panel Component
+ * Desenvolvido: Lógica e Codificação por Humano e AI Assistida (Claude Sonnet 4.5)
+ */
 'use client';
 
 import React, { useEffect, useRef } from 'react';

@@ -1,7 +1,8 @@
 """
 # Houdinis Framework - Multi-Platform Quantum Configuration Module for Houdinis
 # Author: Mauro Risonho de Paula Assumpção aka firebitsbr
-# License: MIT
+# Desenvolvido: Lógica e Codificação por Humano e AI Assistida (Claude Sonnet 4.5)
+License: MIT
 
 Supports configuration and management of:
 - IBM Quantum Experience

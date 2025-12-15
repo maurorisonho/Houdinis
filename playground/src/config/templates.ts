@@ -1,3 +1,8 @@
+/**
+ * Houdinis Playground - Quantum Circuit Templates
+ * Desenvolvido: Lógica e Codificação por Humano e AI Assistida (Claude Sonnet 4.5)
+ */
+
 export interface QuantumTemplate {
   id: string;
   name: string;

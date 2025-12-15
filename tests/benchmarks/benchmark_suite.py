@@ -14,6 +14,7 @@ Features:
 - Historical performance database
 
 Author: Houdinis Framework
+Desenvolvido: Lógica e Codificação por Humano e AI Assistida (Claude Sonnet 4.5)
 License: MIT
 """
 

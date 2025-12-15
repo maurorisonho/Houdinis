@@ -2,6 +2,7 @@
 """
 Houdinis Framework - Houdinis Framework Multi-Backend Demo
 Author: Mauro Risonho de Paula Assumpção aka firebitsbr
+Desenvolvido: Lógica e Codificação por Humano e AI Assistida (Claude Sonnet 4.5)
 License: MIT
 
 This demo shows how to use the Houdinis Framework with multiple quantum backends.
