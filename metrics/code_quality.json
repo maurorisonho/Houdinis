@@ -1,10 +1,10 @@
 {
   "overall": {
     "total_files": 49,
-    "total_functions": 470,
-    "typed_functions": 424,
-    "documented_functions": 435,
-    "type_coverage": 90.2,
+    "total_functions": 461,
+    "typed_functions": 417,
+    "documented_functions": 427,
+    "type_coverage": 90.5,
     "docstring_coverage": 92.6,
     "quality_score": 9.3
   },
@@ -59,11 +59,11 @@
     },
     {
       "path": "quantum/backend.py",
-      "total_functions": 48,
-      "typed_functions": 47,
-      "documented_functions": 40,
-      "type_coverage": 97.91666666666666,
-      "docstring_coverage": 83.33333333333334
+      "total_functions": 39,
+      "typed_functions": 39,
+      "documented_functions": 32,
+      "type_coverage": 100.0,
+      "docstring_coverage": 82.05128205128204
     },
     {
       "path": "quantum/distributed.py",
@@ -92,9 +92,9 @@
     {
       "path": "exploits/quantum_annealing_attack.py",
       "total_functions": 11,
-      "typed_functions": 5,
+      "typed_functions": 6,
       "documented_functions": 11,
-      "type_coverage": 45.45454545454545,
+      "type_coverage": 54.54545454545454,
       "docstring_coverage": 100.0
     },
     {
