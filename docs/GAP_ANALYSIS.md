@@ -564,7 +564,6 @@ After:  15+ files, ~4,100 lines, ~70% coverage (+2,900 lines)
 -  **arXiv paper preparation** (ARXIV_ABSTRACT.md, arxiv_paper.tex)
 -  **Infrastructure documentation** (Docker, K8s, CI/CD)
 -  **Security documentation** (audit reports, best practices)
--  **Video tutorials** (planned - P3)
 -  **Translated docs** (PT-BR, ES, ZH - planned - P3)
 
 **Documentation Breakdown:**
@@ -1017,10 +1016,8 @@ Target (Q2 2025):     132/100 (9.5/10)
 | **PQC Algorithm Suite** | 7 | 9 | 70% | 5 | **88** |  Done | **COMPLETE** |
 | **Kubernetes Deployment** | 6 | 7 | 80% | 4 | **67** |  Done | **COMPLETE** |
 | **API Documentation** | 8 | 6 | 90% | 3 | **144** | P1  |
-| **Discord Community** | 5 | 8 | 85% | 2 | **170** | P1  |
 | **Simon's Algorithm** | 4 | 7 | 75% | 3 | **70** | P2  |
 | **QML Attack Library** | 5 | 6 | 70% | 4 | **53** | P2  |
-| **Video Tutorials** | 6 | 5 | 80% | 5 | **48** | P2  |
 
 **RICE Formula:** (Reach × Impact × Confidence) ÷ Effort
 
@@ -1061,7 +1058,6 @@ Week 10-12[] API Documentation (Sphinx)
 Week 13-16 [] PQC Algorithm Suite 
 Week 16-20 [] API Documentation (Sphinx) 
 Week 20-24 [] Kubernetes Deployment 
-Week 22-26 [] Discord Community Setup (pending)
 ```
 
 **Deliverables:**
@@ -1071,12 +1067,10 @@ Week 22-26 [] Discord Community Setup (pending)
 -  PQC migration analyzer **COMPLETE**
 -  Complete API documentation **COMPLETE**
 -  K8s manifests and Helm charts **COMPLETE**
--  Discord server with 100+ members (pending)
 
 **KPIs:**
 - PQC algorithm coverage: 100%  (exceeds 80% target)
 - Documentation completeness: 95%  (exceeds 90% target)
-- Community members: 0/100 (pending)
 
 ---
 
@@ -1271,7 +1265,6 @@ Total:                              3.0 FTE  $340k/year
      API Documentation Site: 100% (Sphinx infrastructure) 
      User Guides:           100% (installation, quickstart, introduction) 
      Automated Build/Deploy: 100% (GitHub Actions) 
-     Video Tutorials:       0% (future work - P3)
      Interactive Docs:      0% (future work - P3)
 
  Documentation Growth:
@@ -1301,17 +1294,11 @@ Total:                              3.0 FTE  $340k/year
      Documentation contributor guide (README_DOCS.md)
     Result: +3% coverage → 95% ACHIEVED
     
-  Phase 2: Video Tutorials (FUTURE - P3)
-     Setup and installation (10 min)
-     Basic exploits walkthrough (15 min)
-     Advanced features tutorial (20 min)
-    Target: +1% coverage
-    
-  Phase 3: Interactive Documentation
+  Phase 2: Interactive Documentation (FUTURE - P3)
     - Live code examples (nbviewer/Binder)
     - Interactive API explorer
     - Multi-language support (PT-BR, ES, ZH)
-    Target: +1% coverage
+    Target: +2% coverage
 
  Documentation by Audience:
    Developers:         95% coverage (setup, API, architecture)
@@ -1415,11 +1402,10 @@ Total:                              3.0 FTE  $340k/year
 5. **Complete API documentation** - Improve developer experience 
 
 ### Medium-Term (3-6 months)
-1. **Launch Discord community** - Foster engagement
-2. **Complete PQC suite** - Stay ahead of NIST standards
-3. **Professional security audit** - Validate security posture
-4. **API documentation** - Improve developer experience
-5. **First conference talk** - Build academic credibility
+1. **Complete PQC suite** - Stay ahead of NIST standards 
+2. **Professional security audit** - Validate security posture
+3. **API documentation** - Improve developer experience 
+4. **First conference talk** - Build academic credibility
 
 ### Long-Term (6-12 months)
 1. **Establish academic partnerships** - Drive research impact
@@ -1560,14 +1546,12 @@ Total:                              3.0 FTE  $340k/year
 - Performance benchmarking
 
 #### 8. Community Launch (Week 5-8)
-- Setup Discord server
 - Create social media presence
 - Outreach to quantum computing communities
 - First blog post/tutorial
 
 #### 9. Documentation Enhancement (Week 9-12)
-- API documentation with Sphinx
-- Video tutorials for key exploits
+- API documentation with Sphinx 
 - Interactive documentation site
 - Translated docs (PT-BR)
 
