@@ -129,13 +129,13 @@ pip install cryptography paramiko requests
 
 ##  Testing
 
-Teste a instalação e funcionalidade básica do framework:
+Test the installation and basic framework functionality:
 
 ```bash
-# Teste principal do framework
+# Main framework test
 python3 tests/test_houdinis.py
 
-# Ou usando pytest (se instalado)
+# Or using pytest (if installed)
 pytest tests/
 ```
 
@@ -159,20 +159,6 @@ cd docker/
 ### Complete Test Documentation
 For detailed information about tests, structure, debugging and contributions, see:
 **[`tests/README.md`](tests/README.md)** - Complete test documentation
-
-## Quick Start Guide
-
-### 1. Basic Framework Usage
-```python
-from core.session import Session
-from core.cli import CLI
-
-# Initialize Houdinis session
-cli = CLI()
-
-### Documentação Completa de Testes
-Para informações detalhadas sobre testes, estrutura, debugging e contribuições, consulte:
-**[`tests/README.md`](tests/README.md)** - Documentação completa de testes
 
 ##  Quick Start Guide
 
@@ -432,28 +418,28 @@ The above copyright notice and this permission notice shall be included in all c
 ### Automated Testing (GitHub Actions)
 [![CI/CD Pipeline](https://img.shields.io/badge/CI%2FCD-GitHub%20Actions-2088FF?logo=github-actions)](https://github.com/firebitsbr/Houdinis/actions)
 
-** O que funciona automaticamente:**
+** What works automatically:**
 - Lint & Code Quality (Black, flake8, Pyright)
 - Security Scanning (Bandit, Safety, Trivy)
-- Automated Tests (pytest em 3 versões Python, 3 SOs)
+- Automated Tests (pytest on 3 Python versions, 3 OSes)
 - Docker Builds
 - Package Building
 - Coverage Reports (Codecov)
 
-** Requer configuração simples (5 minutos):**
-- PyPI Publishing: Requer `PYPI_API_TOKEN` secret
-- [Ver guia completo de configuração](.github/README.md)
+** Requires simple configuration (5 minutes):**
+- PyPI Publishing: Requires `PYPI_API_TOKEN` secret
+- [See complete configuration guide](.github/README.md)
 
-** Documentação:**
-- [GitHub Actions Pipeline](.github/README.md) - Detalhes do CI/CD
-- [Infrastructure Guide](docs/INFRASTRUCTURE_GUIDE.md) - Deploy em cloud e custos
+** Documentation:**
+- [GitHub Actions Pipeline](.github/README.md) - CI/CD Details
+- [Infrastructure Guide](docs/INFRASTRUCTURE_GUIDE.md) - Cloud deployment and costs
 
-### Status Atual
+### Current Status
 ```
-Desenvolvimento:   FUNCIONAL (sem configuração)
-PyPI Publishing:    OPCIONAL (requer token)
-Cloud Deploy:      NÃO CONFIGURADO (requer infraestrutura paga)
-Quantum Hardware:  NÃO CONFIGURADO (requer acesso)
+Development:       FUNCTIONAL (no configuration required)
+PyPI Publishing:    OPTIONAL (requires token)
+Cloud Deploy:      NOT CONFIGURED (requires paid infrastructure)
+Quantum Hardware:  NOT CONFIGURED (requires access)
 ```
 
 ##  Code Quality
