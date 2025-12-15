@@ -1,0 +1,210 @@
+# Houdinis Framework .gitignore
+# Developed by: Human Logic & Coding with AI Assistance (Claude Sonnet 4.5)
+
+# ============================================================================
+# Python
+# ============================================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# ============================================================================
+# Virtual Environments
+# ============================================================================
+.venv/
+venv/
+ENV/
+env/
+.virtualenv/
+
+# ============================================================================
+# Testing & Coverage
+# ============================================================================
+.pytest_cache/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+.hypothesis/
+htmlcov/
+coverage_html/
+.tox/
+.benchmarks/
+
+# ============================================================================
+# Jupyter Notebooks
+# ============================================================================
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+notebooks/.ipynb_checkpoints/
+
+# ============================================================================
+# IDE & Editors
+# ============================================================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+*.sublime-project
+*.sublime-workspace
+
+# ============================================================================
+# Reports & Logs (keep structure, ignore content)
+# ============================================================================
+.reports/*.log
+.reports/*.json
+.reports/*.html
+.reports/*.md
+.reports/*.txt
+!.reports/README.md
+
+# ============================================================================
+# Backups (keep structure, ignore content)
+# ============================================================================
+.backups/*
+!.backups/README.md
+backups/*
+
+# ============================================================================
+# Docker
+# ============================================================================
+*.log
+docker-compose.override.yml
+
+# ============================================================================
+# Node.js & Playground
+# ============================================================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.next/
+out/
+.nuxt/
+dist/
+.cache/
+playground/node_modules/
+playground/.next/
+playground/out/
+playground/.env.local
+playground/.env.production.local
+
+# ============================================================================
+# Build & Distribution
+# ============================================================================
+*.egg
+*.whl
+*.tar.gz
+*.rpm
+*.deb
+
+# ============================================================================
+# Temporary Files
+# ============================================================================
+*.tmp
+*.temp
+*.bak
+*.orig
+.DS_Store
+Thumbs.db
+
+# ============================================================================
+# Sensitive Data
+# ============================================================================
+*.key
+*.pem
+*.crt
+*.p12
+secrets/
+.env
+.env.local
+.env.production
+config/secrets.ini
+*.credentials
+
+# ============================================================================
+# Performance & Metrics
+# ============================================================================
+performance_*.json
+metrics/*.json
+analysis_results.json
+baseline_results.json
+
+# ============================================================================
+# Legacy Files (entire directory)
+# ============================================================================
+.legacy/*
+!.legacy/README.md
+
+# ============================================================================
+# OS Files
+# ============================================================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ============================================================================
+# Project Specific
+# ============================================================================
+# Quantum backend credentials
+quantum_credentials.json
+ibm_quantum_token.txt
+
+# Local configuration overrides
+config.local.ini
+local_settings.py
+
+# Debug files
+debug.log
+*.debug
+
+# ============================================================================
+# Documentation Build
+# ============================================================================
+docs/_build/
+docs/_static/
+docs/_templates/
+site/
+
+# ============================================================================
+# Video Files (large files)
+# ============================================================================
+videos/*.mp4
+videos/*.avi
+videos/*.mov
+videos/*.mkv
+!videos/README.md
+
+# ============================================================================
+# Keep Important Files
+# ============================================================================
+!.github/
+!.tools/README.md
+!.docker-files/README.md
+!.gitignore
+!.gitattributes
