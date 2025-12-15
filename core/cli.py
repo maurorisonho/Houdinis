@@ -172,7 +172,7 @@ Type 'use <module>' to select a module
                 print(f"  {cmd:<25} {desc}")
             print()
 
-    def do_show(self, line):
+    def do_show(self, line: str) -> None:
         """Show various information."""
         args = line.split()
         if not args:
@@ -198,7 +198,7 @@ Type 'use <module>' to select a module
         else:
             self.console.print(f"Unknown show target: {target}")
 
-    def _show_modules(self, module_type: Optional[str] = None):
+    def _show_modules(self, module_type: Optional[str] = None) -> None:
         """Show available modules."""
         modules = self.module_manager.get_modules(module_type)
 
@@ -242,7 +242,7 @@ Type 'use <module>' to select a module
                     print(f"  {name:<30} Error: {e}")
             print()
 
-    def _show_options(self):
+    def _show_options(self) -> None:
         """Show current module options."""
         if not self.current_module:
             self.console.print("No module selected. Use 'use <module>' first.")
@@ -321,7 +321,7 @@ Type 'use <module>' to select a module
                 )
             print()
 
-    def do_use(self, line):
+    def do_use(self, line: str) -> None:
         """Select a module to use."""
         if not line:
             self.console.print("Usage: use <module_name>")
@@ -366,7 +366,7 @@ Type 'use <module>' to select a module
             if self.debug:
                 traceback.print_exc()
 
-    def do_set(self, line):
+    def do_set(self, line: str) -> None:
         """Set module option value."""
         if not self.current_module:
             self.console.print("No module selected. Use 'use <module>' first.")
