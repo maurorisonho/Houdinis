@@ -1,0 +1,136 @@
+global:
+  resolve_timeout: 5m
+  smtp_smarthost: 'smtp.gmail.com:587'
+  smtp_from: 'alerts@houdinis.io'
+  smtp_auth_username: 'alerts@houdinis.io'
+  smtp_auth_password: 'your_password_here'
+
+# Templates for notifications
+templates:
+  - '/etc/alertmanager/templates/*.tmpl'
+
+# Route tree for alerts
+route:
+  receiver: 'default'
+  group_by: ['alertname', 'cluster', 'service']
+  group_wait: 10s
+  group_interval: 10s
+  repeat_interval: 12h
+  
+  routes:
+    # Critical alerts
+    - match:
+        severity: critical
+      receiver: 'critical'
+      group_wait: 10s
+      repeat_interval: 1h
+      continue: true
+    
+    # Warning alerts
+    - match:
+        severity: warning
+      receiver: 'warning'
+      group_wait: 30s
+      repeat_interval: 4h
+    
+    # Houdinis specific alerts
+    - match:
+        component: houdinis
+      receiver: 'houdinis-team'
+      group_wait: 10s
+      repeat_interval: 2h
+    
+    # Kubernetes infrastructure alerts
+    - match:
+        component: kubernetes
+      receiver: 'platform-team'
+      group_wait: 30s
+      repeat_interval: 6h
+
+# Inhibition rules (suppress alerts based on other alerts)
+inhibit_rules:
+  # Inhibit warning alerts if critical alert is firing
+  - source_match:
+      severity: 'critical'
+    target_match:
+      severity: 'warning'
+    equal: ['alertname', 'cluster', 'service']
+  
+  # Inhibit pod alerts if node is down
+  - source_match:
+      alertname: 'KubernetesNodeNotReady'
+    target_match:
+      alertname: 'HoudinisPodNotReady'
+    equal: ['node']
+
+# Receivers (notification endpoints)
+receivers:
+  - name: 'default'
+    email_configs:
+      - to: 'team@houdinis.io'
+        headers:
+          Subject: '[Houdinis] {{ .GroupLabels.alertname }}'
+    webhook_configs:
+      - url: 'http://localhost:5001/alerts'
+        send_resolved: true
+
+  - name: 'critical'
+    email_configs:
+      - to: 'oncall@houdinis.io'
+        headers:
+          Subject: ' [CRITICAL] {{ .GroupLabels.alertname }}'
+        html: |
+          <h2>Critical Alert</h2>
+          <p><b>Alert:</b> {{ .GroupLabels.alertname }}</p>
+          <p><b>Severity:</b> {{ .CommonLabels.severity }}</p>
+          <p><b>Summary:</b> {{ .CommonAnnotations.summary }}</p>
+          <p><b>Description:</b> {{ .CommonAnnotations.description }}</p>
+          <p><b>Time:</b> {{ .StartsAt }}</p>
+    slack_configs:
+      - api_url: 'https://hooks.slack.com/services/YOUR/SLACK/WEBHOOK'
+        channel: '#houdinis-critical'
+        title: ' Critical: {{ .GroupLabels.alertname }}'
+        text: '{{ .CommonAnnotations.description }}'
+        send_resolved: true
+    pagerduty_configs:
+      - service_key: 'YOUR_PAGERDUTY_KEY'
+        description: '{{ .CommonAnnotations.summary }}'
+
+  - name: 'warning'
+    email_configs:
+      - to: 'team@houdinis.io'
+        headers:
+          Subject: ' [WARNING] {{ .GroupLabels.alertname }}'
+    slack_configs:
+      - api_url: 'https://hooks.slack.com/services/YOUR/SLACK/WEBHOOK'
+        channel: '#houdinis-alerts'
+        title: ' Warning: {{ .GroupLabels.alertname }}'
+        text: '{{ .CommonAnnotations.description }}'
+        send_resolved: true
+
+  - name: 'houdinis-team'
+    email_configs:
+      - to: 'houdinis-dev@houdinis.io'
+        headers:
+          Subject: '[Houdinis App] {{ .GroupLabels.alertname }}'
+    slack_configs:
+      - api_url: 'https://hooks.slack.com/services/YOUR/SLACK/WEBHOOK'
+        channel: '#houdinis-app'
+        title: '{{ .GroupLabels.alertname }}'
+        text: '{{ .CommonAnnotations.description }}'
+        send_resolved: true
+
+  - name: 'platform-team'
+    email_configs:
+      - to: 'platform@houdinis.io'
+        headers:
+          Subject: '[Platform] {{ .GroupLabels.alertname }}'
+    slack_configs:
+      - api_url: 'https://hooks.slack.com/services/YOUR/SLACK/WEBHOOK'
+        channel: '#platform-alerts'
+        title: '{{ .GroupLabels.alertname }}'
+        text: '{{ .CommonAnnotations.description }}'
+        send_resolved: true
+
+  - name: 'null'
+    # Used to suppress alerts

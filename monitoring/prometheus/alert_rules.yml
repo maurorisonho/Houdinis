@@ -1,0 +1,317 @@
+# Prometheus Alert Rules for Houdinis Framework
+
+groups:
+  - name: houdinis_alerts
+    interval: 30s
+    rules:
+      # High CPU Usage
+      - alert: HoudinisCPUHigh
+        expr: |
+          rate(container_cpu_usage_seconds_total{namespace="houdinis", pod=~"houdinis-.*"}[5m]) > 0.8
+        for: 5m
+        labels:
+          severity: warning
+          component: houdinis
+        annotations:
+          summary: "High CPU usage on {{ $labels.pod }}"
+          description: "Pod {{ $labels.pod }} has CPU usage above 80% for more than 5 minutes (current: {{ $value | humanizePercentage }})"
+
+      # Critical CPU Usage
+      - alert: HoudinisCPUCritical
+        expr: |
+          rate(container_cpu_usage_seconds_total{namespace="houdinis", pod=~"houdinis-.*"}[5m]) > 0.95
+        for: 2m
+        labels:
+          severity: critical
+          component: houdinis
+        annotations:
+          summary: "Critical CPU usage on {{ $labels.pod }}"
+          description: "Pod {{ $labels.pod }} has CPU usage above 95% for more than 2 minutes (current: {{ $value | humanizePercentage }})"
+
+      # High Memory Usage
+      - alert: HoudinisMemoryHigh
+        expr: |
+          container_memory_usage_bytes{namespace="houdinis", pod=~"houdinis-.*"} / 
+          container_spec_memory_limit_bytes{namespace="houdinis", pod=~"houdinis-.*"} > 0.8
+        for: 5m
+        labels:
+          severity: warning
+          component: houdinis
+        annotations:
+          summary: "High memory usage on {{ $labels.pod }}"
+          description: "Pod {{ $labels.pod }} has memory usage above 80% for more than 5 minutes (current: {{ $value | humanizePercentage }})"
+
+      # Critical Memory Usage
+      - alert: HoudinisMemoryCritical
+        expr: |
+          container_memory_usage_bytes{namespace="houdinis", pod=~"houdinis-.*"} / 
+          container_spec_memory_limit_bytes{namespace="houdinis", pod=~"houdinis-.*"} > 0.95
+        for: 2m
+        labels:
+          severity: critical
+          component: houdinis
+        annotations:
+          summary: "Critical memory usage on {{ $labels.pod }}"
+          description: "Pod {{ $labels.pod }} has memory usage above 95% for more than 2 minutes (current: {{ $value | humanizePercentage }})"
+
+      # Pod Crash Looping
+      - alert: HoudinisPodCrashLooping
+        expr: |
+          rate(kube_pod_container_status_restarts_total{namespace="houdinis"}[15m]) > 0
+        for: 5m
+        labels:
+          severity: critical
+          component: houdinis
+        annotations:
+          summary: "Pod {{ $labels.pod }} is crash looping"
+          description: "Pod {{ $labels.pod }} has restarted {{ $value }} times in the last 15 minutes"
+
+      # Pod Not Ready
+      - alert: HoudinisPodNotReady
+        expr: |
+          kube_pod_status_ready{namespace="houdinis", condition="false"} == 1
+        for: 10m
+        labels:
+          severity: warning
+          component: houdinis
+        annotations:
+          summary: "Pod {{ $labels.pod }} not ready"
+          description: "Pod {{ $labels.pod }} has been in not ready state for more than 10 minutes"
+
+      # Deployment Replica Mismatch
+      - alert: HoudinisDeploymentReplicaMismatch
+        expr: |
+          kube_deployment_spec_replicas{namespace="houdinis"} != 
+          kube_deployment_status_replicas_available{namespace="houdinis"}
+        for: 15m
+        labels:
+          severity: warning
+          component: houdinis
+        annotations:
+          summary: "Deployment {{ $labels.deployment }} has replica mismatch"
+          description: "Deployment {{ $labels.deployment }} has {{ $value }} available replicas but {{ $labels.spec_replicas }} desired"
+
+      # High Request Rate
+      - alert: HoudinisHighRequestRate
+        expr: |
+          rate(http_requests_total{namespace="houdinis"}[5m]) > 1000
+        for: 5m
+        labels:
+          severity: warning
+          component: houdinis
+        annotations:
+          summary: "High request rate on {{ $labels.pod }}"
+          description: "Pod {{ $labels.pod }} is receiving {{ $value }} requests/sec"
+
+      # High Error Rate
+      - alert: HoudinisHighErrorRate
+        expr: |
+          rate(http_requests_total{namespace="houdinis", status=~"5.."}[5m]) / 
+          rate(http_requests_total{namespace="houdinis"}[5m]) > 0.05
+        for: 5m
+        labels:
+          severity: critical
+          component: houdinis
+        annotations:
+          summary: "High error rate on {{ $labels.pod }}"
+          description: "Pod {{ $labels.pod }} has error rate above 5% (current: {{ $value | humanizePercentage }})"
+
+      # Disk Space Low
+      - alert: HoudinisDiskSpaceLow
+        expr: |
+          (node_filesystem_avail_bytes{mountpoint="/app"} / 
+          node_filesystem_size_bytes{mountpoint="/app"}) < 0.2
+        for: 10m
+        labels:
+          severity: warning
+          component: houdinis
+        annotations:
+          summary: "Low disk space on {{ $labels.instance }}"
+          description: "Disk space on {{ $labels.instance }} is below 20% (current: {{ $value | humanizePercentage }})"
+
+      # Disk Space Critical
+      - alert: HoudinisDiskSpaceCritical
+        expr: |
+          (node_filesystem_avail_bytes{mountpoint="/app"} / 
+          node_filesystem_size_bytes{mountpoint="/app"}) < 0.1
+        for: 5m
+        labels:
+          severity: critical
+          component: houdinis
+        annotations:
+          summary: "Critical disk space on {{ $labels.instance }}"
+          description: "Disk space on {{ $labels.instance }} is below 10% (current: {{ $value | humanizePercentage }})"
+
+      # Service Down
+      - alert: HoudinisServiceDown
+        expr: |
+          up{job="houdinis"} == 0
+        for: 2m
+        labels:
+          severity: critical
+          component: houdinis
+        annotations:
+          summary: "Houdinis service is down"
+          description: "Houdinis service {{ $labels.instance }} has been down for more than 2 minutes"
+
+      # Slow Response Time
+      - alert: HoudinisSlowResponseTime
+        expr: |
+          histogram_quantile(0.95, rate(http_request_duration_seconds_bucket{namespace="houdinis"}[5m])) > 5
+        for: 10m
+        labels:
+          severity: warning
+          component: houdinis
+        annotations:
+          summary: "Slow response time on {{ $labels.pod }}"
+          description: "95th percentile response time on {{ $labels.pod }} is above 5 seconds (current: {{ $value }}s)"
+
+      # High Network Traffic
+      - alert: HoudinisHighNetworkTraffic
+        expr: |
+          rate(container_network_transmit_bytes_total{namespace="houdinis"}[5m]) > 100000000
+        for: 10m
+        labels:
+          severity: warning
+          component: houdinis
+        annotations:
+          summary: "High network traffic on {{ $labels.pod }}"
+          description: "Pod {{ $labels.pod }} has network transmit rate above 100MB/s (current: {{ $value | humanize }})"
+
+      # Quantum Backend Failure
+      - alert: HoudinisQuantumBackendFailure
+        expr: |
+          rate(quantum_backend_errors_total{namespace="houdinis"}[5m]) > 0.1
+        for: 5m
+        labels:
+          severity: critical
+          component: houdinis
+        annotations:
+          summary: "Quantum backend failures on {{ $labels.pod }}"
+          description: "Pod {{ $labels.pod }} has quantum backend error rate above 0.1/s (current: {{ $value }})"
+
+      # Exploit Execution Failures
+      - alert: HoudinisExploitExecutionFailures
+        expr: |
+          rate(exploit_execution_failures_total{namespace="houdinis"}[5m]) > 0.05
+        for: 5m
+        labels:
+          severity: warning
+          component: houdinis
+        annotations:
+          summary: "Exploit execution failures on {{ $labels.pod }}"
+          description: "Pod {{ $labels.pod }} has exploit execution failure rate above 0.05/s (current: {{ $value }})"
+
+  - name: kubernetes_infrastructure
+    interval: 30s
+    rules:
+      # Node Not Ready
+      - alert: KubernetesNodeNotReady
+        expr: |
+          kube_node_status_condition{condition="Ready", status="true"} == 0
+        for: 10m
+        labels:
+          severity: critical
+          component: kubernetes
+        annotations:
+          summary: "Node {{ $labels.node }} not ready"
+          description: "Node {{ $labels.node }} has been in not ready state for more than 10 minutes"
+
+      # Node Memory Pressure
+      - alert: KubernetesNodeMemoryPressure
+        expr: |
+          kube_node_status_condition{condition="MemoryPressure", status="true"} == 1
+        for: 5m
+        labels:
+          severity: warning
+          component: kubernetes
+        annotations:
+          summary: "Node {{ $labels.node }} under memory pressure"
+          description: "Node {{ $labels.node }} is experiencing memory pressure"
+
+      # Node Disk Pressure
+      - alert: KubernetesNodeDiskPressure
+        expr: |
+          kube_node_status_condition{condition="DiskPressure", status="true"} == 1
+        for: 5m
+        labels:
+          severity: warning
+          component: kubernetes
+        annotations:
+          summary: "Node {{ $labels.node }} under disk pressure"
+          description: "Node {{ $labels.node }} is experiencing disk pressure"
+
+      # Too Many Pods
+      - alert: KubernetesTooManyPods
+        expr: |
+          kube_node_status_capacity_pods - kube_node_status_allocatable_pods < 5
+        for: 10m
+        labels:
+          severity: warning
+          component: kubernetes
+        annotations:
+          summary: "Node {{ $labels.node }} has too many pods"
+          description: "Node {{ $labels.node }} has less than 5 available pod slots"
+
+      # Persistent Volume Claim Pending
+      - alert: KubernetesPVCPending
+        expr: |
+          kube_persistentvolumeclaim_status_phase{namespace="houdinis", phase="Pending"} == 1
+        for: 10m
+        labels:
+          severity: warning
+          component: kubernetes
+        annotations:
+          summary: "PVC {{ $labels.persistentvolumeclaim }} pending"
+          description: "PVC {{ $labels.persistentvolumeclaim }} in namespace {{ $labels.namespace }} has been pending for more than 10 minutes"
+
+      # Job Failed
+      - alert: KubernetesJobFailed
+        expr: |
+          kube_job_status_failed{namespace="houdinis"} > 0
+        for: 5m
+        labels:
+          severity: warning
+          component: kubernetes
+        annotations:
+          summary: "Job {{ $labels.job_name }} failed"
+          description: "Job {{ $labels.job_name }} in namespace {{ $labels.namespace }} has failed"
+
+  - name: prometheus_alerts
+    interval: 30s
+    rules:
+      # Prometheus Configuration Reload Failed
+      - alert: PrometheusConfigReloadFailed
+        expr: |
+          prometheus_config_last_reload_successful == 0
+        for: 5m
+        labels:
+          severity: warning
+          component: prometheus
+        annotations:
+          summary: "Prometheus configuration reload failed"
+          description: "Prometheus configuration reload has failed"
+
+      # Prometheus Too Many Restarts
+      - alert: PrometheusTooManyRestarts
+        expr: |
+          rate(process_start_time_seconds{job="prometheus"}[15m]) > 0
+        for: 5m
+        labels:
+          severity: warning
+          component: prometheus
+        annotations:
+          summary: "Prometheus restarting frequently"
+          description: "Prometheus has restarted {{ $value }} times in the last 15 minutes"
+
+      # AlertManager Configuration Reload Failed
+      - alert: AlertManagerConfigReloadFailed
+        expr: |
+          alertmanager_config_last_reload_successful == 0
+        for: 5m
+        labels:
+          severity: warning
+          component: alertmanager
+        annotations:
+          summary: "AlertManager configuration reload failed"
+          description: "AlertManager configuration reload has failed"
