@@ -1,6 +1,6 @@
 # Houdinis Framework - Quantum Cryptography Testing Platform
 
-> **Desenvolvido:** Lógica e Codificação por Humano e AI Assistida (Claude Sonnet 4.5)
+> **Developed by:** Human Logic & Coding with AI Assistance (Claude Sonnet 4.5)
 
 ![Houdinis Logo](https://img.shields.io/badge/Houdinis-Framework-blue?style=for-the-badge&logo=quantum)
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/maurorisonho/Houdinis/main?labpath=notebooks%2Fplayground.ipynb)

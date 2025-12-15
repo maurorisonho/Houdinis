@@ -6,7 +6,7 @@ Unit Tests for Hybrid PQC Attack Framework
 Comprehensive unit tests for hybrid classical+PQC attack implementation.
 
 Author: Houdinis Framework
-Desenvolvido: Lógica e Codificação por Humano e AI Assistida (Claude Sonnet 4.5)
+Developed by: Human Logic & Coding with AI Assistance (Claude Sonnet 4.5)
 License: MIT
 """
 

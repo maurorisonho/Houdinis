@@ -7,7 +7,7 @@ import os
 import re
 from pathlib import Path
 
-HEADER_TEXT = "Desenvolvido: Lógica e Codificação por Humano e AI Assistida (Claude Sonnet 4.5)"
+HEADER_TEXT = "Developed by: Human Logic & Coding with AI Assistance (Claude Sonnet 4.5)"
 
 def should_add_header(content: str) -> bool:
     """Check if file needs header added"""
@@ -34,15 +34,15 @@ def add_header_to_file(file_path: Path) -> bool:
         patterns = [
             # Pattern 1: """...\nAuthor:...\nLicense:...\n"""
             (r'("""\n)([^"]*Author: Mauro[^\n]*\n)(License: MIT\n)',
-             r'\1\2Desenvolvido: Lógica e Codificação por Humano e AI Assistida (Claude Sonnet 4.5)\n\3'),
+             r'\1\2Developed by: Human Logic & Coding with AI Assistance (Claude Sonnet 4.5)\n\3'),
             
             # Pattern 2: """...\nLicense: MIT\n..."""
             (r'("""\n[^"]*)(License: MIT\n)',
-             r'\1Desenvolvido: Lógica e Codificação por Humano e AI Assistida (Claude Sonnet 4.5)\n\2'),
+             r'\1Developed by: Human Logic & Coding with AI Assistance (Claude Sonnet 4.5)\n\2'),
             
             # Pattern 3: # Author:...\n# License:...
             (r'(# Author: Mauro[^\n]*\n)(# License: MIT)',
-             r'\1# Desenvolvido: Lógica e Codificação por Humano e AI Assistida (Claude Sonnet 4.5)\n\2'),
+             r'\1# Developed by: Human Logic & Coding with AI Assistance (Claude Sonnet 4.5)\n\2'),
         ]
         
         new_content = content

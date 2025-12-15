@@ -1,6 +1,6 @@
 # Houdinis Playground - Deployment Guide
 
-> **Desenvolvido:** Lógica e Codificação por Humano e AI Assistida (Claude Sonnet 4.5)
+> **Developed by:** Human Logic & Coding with AI Assistance (Claude Sonnet 4.5)
 
 Complete guide for deploying the Houdinis Quantum Playground to production.
 
