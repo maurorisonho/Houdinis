@@ -1,0 +1,151 @@
+{
+  "has_regression": false,
+  "regression_count": 0,
+  "improvement_count": 0,
+  "total_tests": 15,
+  "comparisons": [
+    {
+      "name": "test_rsa_key_generation",
+      "current_mean": 1.4915257168002427,
+      "baseline_mean": 1.4915257168002427,
+      "change_percent": 0.0,
+      "is_regression": false,
+      "is_improvement": false,
+      "threshold_exceeded": false
+    },
+    {
+      "name": "test_aes_encryption_1kb",
+      "current_mean": 0.0003343123999911768,
+      "baseline_mean": 0.0003343123999911768,
+      "change_percent": 0.0,
+      "is_regression": false,
+      "is_improvement": false,
+      "threshold_exceeded": false
+    },
+    {
+      "name": "test_sha256_hashing_1mb",
+      "current_mean": 0.003173149556306258,
+      "baseline_mean": 0.003173149556306258,
+      "change_percent": 0.0,
+      "is_regression": false,
+      "is_improvement": false,
+      "threshold_exceeded": false
+    },
+    {
+      "name": "test_matrix_multiplication_64x64",
+      "current_mean": 2.589778570549872e-05,
+      "baseline_mean": 2.589778570549872e-05,
+      "change_percent": 0.0,
+      "is_regression": false,
+      "is_improvement": false,
+      "threshold_exceeded": false
+    },
+    {
+      "name": "test_matrix_eigenvalues_32x32",
+      "current_mean": 0.0002822709302524691,
+      "baseline_mean": 0.0002822709302524691,
+      "change_percent": 0.0,
+      "is_regression": false,
+      "is_improvement": false,
+      "threshold_exceeded": false
+    },
+    {
+      "name": "test_svd_decomposition_64x64",
+      "current_mean": 0.01893345940563705,
+      "baseline_mean": 0.01893345940563705,
+      "change_percent": 0.0,
+      "is_regression": false,
+      "is_improvement": false,
+      "threshold_exceeded": false
+    },
+    {
+      "name": "test_fft_1024_points",
+      "current_mean": 3.906705147622449e-05,
+      "baseline_mean": 3.906705147622449e-05,
+      "change_percent": 0.0,
+      "is_regression": false,
+      "is_improvement": false,
+      "threshold_exceeded": false
+    },
+    {
+      "name": "test_json_serialization_large",
+      "current_mean": 0.004387083035596295,
+      "baseline_mean": 0.004387083035596295,
+      "change_percent": 0.0,
+      "is_regression": false,
+      "is_improvement": false,
+      "threshold_exceeded": false
+    },
+    {
+      "name": "test_numpy_array_operations",
+      "current_mean": 0.000455710375128686,
+      "baseline_mean": 0.000455710375128686,
+      "change_percent": 0.0,
+      "is_regression": false,
+      "is_improvement": false,
+      "threshold_exceeded": false
+    },
+    {
+      "name": "test_list_comprehension_10k",
+      "current_mean": 0.0012826410909290193,
+      "baseline_mean": 0.0012826410909290193,
+      "change_percent": 0.0,
+      "is_regression": false,
+      "is_improvement": false,
+      "threshold_exceeded": false
+    },
+    {
+      "name": "test_write_1mb_file",
+      "current_mean": 0.004354586583101342,
+      "baseline_mean": 0.004354586583101342,
+      "change_percent": 0.0,
+      "is_regression": false,
+      "is_improvement": false,
+      "threshold_exceeded": false
+    },
+    {
+      "name": "test_read_1mb_file",
+      "current_mean": 0.00011697545190890153,
+      "baseline_mean": 0.00011697545190890153,
+      "change_percent": 0.0,
+      "is_regression": false,
+      "is_improvement": false,
+      "threshold_exceeded": false
+    },
+    {
+      "name": "test_memory_allocation_large_array",
+      "current_mean": 0.00044388256591277155,
+      "baseline_mean": 0.00044388256591277155,
+      "change_percent": 0.0,
+      "is_regression": false,
+      "is_improvement": false,
+      "threshold_exceeded": false
+    },
+    {
+      "name": "test_memory_copy_large_array",
+      "current_mean": 0.0007139616172879206,
+      "baseline_mean": 0.0007139616172879206,
+      "change_percent": 0.0,
+      "is_regression": false,
+      "is_improvement": false,
+      "threshold_exceeded": false
+    },
+    {
+      "name": "test_dictionary_creation_10k",
+      "current_mean": 0.0013189420831331996,
+      "baseline_mean": 0.0013189420831331996,
+      "change_percent": 0.0,
+      "is_regression": false,
+      "is_improvement": false,
+      "threshold_exceeded": false
+    }
+  ],
+  "summary": {
+    "threshold_percent": 10.0,
+    "total_current": 15,
+    "total_compared": 15,
+    "avg_change_percent": 0.0,
+    "max_regression_percent": 0,
+    "max_improvement_percent": 0
+  }
+}

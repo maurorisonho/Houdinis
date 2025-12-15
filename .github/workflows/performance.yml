@@ -1,0 +1,170 @@
+name: Performance Benchmarking
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+  schedule:
+    # Run daily at 2 AM UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+jobs:
+  benchmark:
+    name: Run Performance Benchmarks
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch all history for comparison
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest pytest-benchmark pytest-timeout
+
+      - name: Create benchmark results directory
+        run: mkdir -p benchmark_results
+
+      - name: Run performance benchmarks
+        id: benchmark
+        run: |
+          python -m pytest tests/test_performance_benchmarks.py \
+            --benchmark-only \
+            --benchmark-json=benchmark_results/current.json \
+            --benchmark-min-rounds=5 \
+            --benchmark-warmup=on \
+            --benchmark-warmup-iterations=2 \
+            -v || echo "BENCHMARK_FAILED=true" >> $GITHUB_ENV
+
+      - name: Download previous benchmark results
+        continue-on-error: true
+        uses: actions/cache@v3
+        with:
+          path: benchmark_results/baseline.json
+          key: benchmark-baseline-${{ github.ref_name }}
+          restore-keys: |
+            benchmark-baseline-main
+            benchmark-baseline-
+
+      - name: Analyze performance regression
+        id: analyze
+        run: |
+          python scripts/analyze_performance.py \
+            --current benchmark_results/current.json \
+            --baseline benchmark_results/baseline.json \
+            --threshold 10 \
+            --output benchmark_results/analysis.json
+
+      - name: Generate performance report
+        if: always()
+        run: |
+          python scripts/generate_performance_report.py \
+            --analysis benchmark_results/analysis.json \
+            --output benchmark_results/report.md
+
+      - name: Upload benchmark results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: benchmark-results-${{ github.sha }}
+          path: benchmark_results/
+          retention-days: 90
+
+      - name: Save baseline for future comparisons
+        if: github.ref == 'refs/heads/main' && success()
+        uses: actions/cache@v3
+        with:
+          path: benchmark_results/current.json
+          key: benchmark-baseline-${{ github.ref_name }}-${{ github.sha }}
+
+      - name: Comment PR with performance results
+        if: github.event_name == 'pull_request' && always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            let report = '';
+            
+            try {
+              report = fs.readFileSync('benchmark_results/report.md', 'utf8');
+            } catch (error) {
+              report = ' Failed to generate performance report. Check workflow logs.';
+            }
+            
+            const body = `##  Performance Benchmark Results\n\n${report}`;
+            
+            // Find existing comment
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+            
+            const botComment = comments.find(comment => 
+              comment.user.type === 'Bot' && 
+              comment.body.includes('Performance Benchmark Results')
+            );
+            
+            if (botComment) {
+              // Update existing comment
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: botComment.id,
+                body: body
+              });
+            } else {
+              // Create new comment
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: body
+              });
+            }
+
+      - name: Check for performance regression
+        if: always()
+        run: |
+          if [ -f "benchmark_results/analysis.json" ]; then
+            HAS_REGRESSION=$(python -c "import json; data = json.load(open('benchmark_results/analysis.json')); print('true' if data.get('has_regression', False) else 'false')")
+            
+            if [ "$HAS_REGRESSION" = "true" ]; then
+              echo " Performance regression detected!"
+              echo "Review the benchmark results and analysis report."
+              exit 1
+            else
+              echo " No performance regression detected."
+            fi
+          else
+            echo " Analysis file not found, skipping regression check."
+          fi
+
+      - name: Update performance dashboard data
+        if: github.ref == 'refs/heads/main' && success()
+        run: |
+          python scripts/update_performance_dashboard.py \
+            --results benchmark_results/current.json \
+            --history performance_history.json \
+            --max-entries 100
+
+      - name: Commit performance history
+        if: github.ref == 'refs/heads/main' && success()
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add performance_history.json
+          git diff --quiet && git diff --staged --quiet || git commit -m " Update performance history [skip ci]"
+          git push

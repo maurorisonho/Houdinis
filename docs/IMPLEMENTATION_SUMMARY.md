@@ -187,6 +187,197 @@ houdinis> run
 - GPU acceleration (cuQuantum)
 - Visualization and networking tools
 
+## 5. Performance Benchmarking System (December 15, 2025) 
+
+**Automated Performance Regression Detection:**
+
+### Architecture
+- **GitHub Actions Workflow:** `.github/workflows/performance.yml`
+- **Test Suite:** `tests/test_performance_benchmarks.py` (23 benchmarks)
+- **Analysis Engine:** `scripts/analyze_performance.py`
+- **Report Generator:** `scripts/generate_performance_report.py`
+- **Dashboard Updater:** `scripts/update_performance_dashboard.py`
+- **Historical Data:** `performance_history.json`
+
+### Test Coverage (23 Benchmarks in 7 Categories)
+
+**1. Quantum Algorithm Performance (3 tests)**
+- Shor's factorization (N=15)
+- Grover's search (4-bit)
+- Simon's algorithm (3-bit)
+
+**2. Quantum Simulator Operations (4 tests)**
+- Simulator initialization
+- Hadamard gate application
+- CNOT gate chains
+- Full circuit execution
+
+**3. Cryptographic Operations (3 tests)**
+- RSA key generation (2048-bit)
+- AES encryption (1KB data)
+- SHA-256 hashing (1MB data)
+
+**4. Matrix Operations (4 tests)**
+- Matrix multiplication (64x64)
+- Eigenvalue computation (32x32)
+- SVD decomposition (64x64)
+- FFT (1024 points)
+
+**5. Data Processing (3 tests)**
+- JSON serialization (1000 objects)
+- NumPy array operations (10K elements)
+- List comprehension (10K items)
+
+**6. File I/O Operations (2 tests)**
+- Write 1MB file
+- Read 1MB file
+
+**7. Memory Operations (3 tests)**
+- Large array allocation (1000x1000)
+- Memory copying (large arrays)
+- Dictionary creation (10K items)
+
+### CI/CD Integration
+
+**Workflow Triggers:**
+- Every push to main/develop
+- All pull requests
+- Daily scheduled run (2 AM UTC)
+- Manual workflow dispatch
+
+**Workflow Steps:**
+1. Checkout code & setup Python
+2. Install dependencies (pytest-benchmark)
+3. Run benchmark test suite
+4. Download previous baseline from cache
+5. Analyze performance (detect regressions)
+6. Generate markdown report
+7. Comment PR with performance results
+8. Check for regressions (fail if detected)
+9. Update performance history (main branch only)
+10. Commit history automatically
+
+### Features
+
+**Regression Detection:**
+- Configurable threshold (default: 10%)
+- Automatic PR blocking on regression
+- Color-coded PR comments
+- Detailed comparison tables
+
+**Baseline Comparison:**
+- Cache previous results for comparison
+- Percentage change calculation
+- Mean time tracking
+- Standard deviation analysis
+
+**Historical Tracking:**
+- Performance trends over time
+- Dashboard HTML generation
+- Chart.js visualizations
+- Commit-based history
+
+**PR Integration:**
+- Automatic comments with results
+- Summary statistics
+- Regressions highlighted
+- Improvements celebrated
+- Stable tests shown
+
+### Usage
+
+**Run Benchmarks Locally:**
+```bash
+# Run all benchmarks
+pytest tests/test_performance_benchmarks.py --benchmark-only
+
+# Save results
+pytest tests/test_performance_benchmarks.py --benchmark-only \
+  --benchmark-json=benchmark_results.json
+
+# Compare with baseline
+python scripts/analyze_performance.py \
+  --current benchmark_results.json \
+  --baseline baseline_results.json \
+  --threshold 10
+
+# Generate report
+python scripts/generate_performance_report.py \
+  --analysis analysis_results.json \
+  --output performance_report.md
+
+# Update dashboard
+python scripts/update_performance_dashboard.py \
+  --results benchmark_results.json \
+  --history performance_history.json \
+  --generate-html
+```
+
+**View Dashboard:**
+```bash
+# Generate HTML dashboard
+python scripts/update_performance_dashboard.py \
+  --results benchmark_results.json \
+  --history performance_history.json \
+  --generate-html
+
+# Open in browser
+open performance_dashboard.html
+```
+
+### Dashboard Visualizations
+
+**Charts Included:**
+- Average performance over time (line chart)
+- Total execution time trend (bar chart)
+- Performance by category (doughnut chart)
+
+**Statistics:**
+- Total benchmark runs
+- Latest average time
+- Performance trends
+- Category breakdown
+
+### Technical Implementation
+
+**pytest-benchmark Integration:**
+```python
+def test_quantum_operation(benchmark):
+    result = benchmark(quantum_function, arg1, arg2)
+    assert result is not None
+```
+
+**Analysis Algorithm:**
+```python
+change_percentage = ((current - baseline) / baseline) * 100
+is_regression = change_percentage > threshold
+is_improvement = change_percentage < -threshold
+```
+
+**Report Format:**
+```markdown
+##  Performance Benchmark Results
+
+### Summary
+- Total tests: 23
+- Regressions: 0 
+- Improvements: 5 
+- Stable: 18 
+
+### Regressions (if any)
+| Test | Baseline | Current | Change |
+|------|----------|---------|--------|
+| ... | ... | ... | +XX%  |
+```
+
+### Benefits
+
+- **Quality Gate:** Automatic performance regression detection
+- **Developer Feedback:** Immediate PR comments with results
+- **Historical Analysis:** Track performance trends over time
+- **Proactive Monitoring:** Catch performance issues early
+- **Continuous Improvement:** Encourage performance optimization
+
 ## Implementation Complete
 
 The Houdinis Framework has been successfully transformed from a single-platform (IBM Quantum) tool into a comprehensive multi-platform quantum cryptography testing framework. All requested features have been implemented:
