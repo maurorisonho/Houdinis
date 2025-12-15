@@ -16,13 +16,29 @@ from abc import ABC, abstractmethod
 
 class BaseModule(ABC):
     """
-    Base class for all Houdinis modules.
-
-    All scanners, exploits, and payloads should inherit from this class.
+    Abstract base class for all Houdinis modules.
+    
+    Provides common functionality for scanners, exploits, and payloads including
+    option management, requirement validation, and module metadata.
+    
+    All custom modules (scanners, exploits, payloads) must inherit from this class
+    and implement the abstract run() method.
+    
+    Attributes:
+        options (Dict[str, Dict]): Module configuration options
+        info (Dict[str, str]): Module metadata (name, description, author, version)
+    
+    Example:
+        >>> class MyExploit(ExploitModule):
+        ...     def __init__(self):
+        ...         super().__init__()
+        ...         self.info['name'] = 'Custom RSA Attack'
+        ...     def run(self):
+        ...         return {'success': True}
     """
 
     def __init__(self) -> None:
-        """Initialize base module."""
+        """Initialize base module with default options and metadata."""
         self.options = {}
         self.info = {
             "name": "Base Module",
@@ -44,10 +60,19 @@ class BaseModule(ABC):
 
     def check_requirements(self) -> bool:
         """
-        Check if all required options are set.
+        Validate that all required module options have been configured.
+        
+        Iterates through module options and checks if required options have
+        non-empty values. Should be called before run() to ensure proper setup.
 
         Returns:
-            True if all requirements are met, False otherwise
+            bool: True if all required options are set with values, False otherwise
+        
+        Example:
+            >>> module = ScannerModule()
+            >>> module.set_option('TARGET', '192.168.1.1')
+            >>> if module.check_requirements():
+            ...     module.run()
         """
         for option, config in self.options.items():
             if config.get("required", False):
@@ -91,13 +116,33 @@ class BaseModule(ABC):
 
 class ScannerModule(BaseModule):
     """
-    Base class for scanner modules.
-
-    Scanners are used to identify vulnerabilities and gather information.
+    Base class for network and vulnerability scanner modules.
+    
+    Scanner modules perform reconnaissance, vulnerability detection, and
+    information gathering. They identify potential attack surfaces and
+    quantum-vulnerable cryptographic implementations.
+    
+    Attributes:
+        target (str): Target host or IP address
+        port (str): Target port number
+        timeout (str): Connection timeout in seconds
+    
+    Common Scanner Types:
+        - Network scanners (port scanning, service detection)
+        - SSL/TLS scanners (cipher suite analysis)
+        - Quantum vulnerability scanners (crypto algorithm detection)
+    
+    Example:
+        >>> class CustomScanner(ScannerModule):
+        ...     def run(self):
+        ...         return {'success': True, 'vulns': []}
+        >>> scanner = CustomScanner()
+        >>> scanner.set_option('TARGET', 'example.com')
+        >>> result = scanner.run()
     """
 
     def __init__(self) -> None:
-        """Initialize scanner module with common options."""
+        """Initialize scanner module with default network options."""
         super().__init__()
         self.info["category"] = "scanner"
 
@@ -130,13 +175,32 @@ class ScannerModule(BaseModule):
 
 class ExploitModule(BaseModule):
     """
-    Base class for exploit modules.
-
-    Exploits are used to attack identified vulnerabilities.
+    Base class for quantum cryptanalysis exploit modules.
+    
+    Exploit modules implement quantum algorithms to break cryptographic systems,
+    including Shor's algorithm for RSA/ECC, Grover's for symmetric keys, and
+    post-quantum attacks on lattice-based schemes.
+    
+    Attributes:
+        target (str): Target host, key, or cryptographic parameter
+    
+    Common Exploit Types:
+        - Shor's algorithm (RSA, ECDSA, DH key recovery)
+        - Grover's algorithm (symmetric key exhaustive search)
+        - Quantum annealing (optimization-based attacks)
+        - Side-channel attacks (timing, power, fault injection)
+    
+    Example:
+        >>> class ShorsRSA(ExploitModule):
+        ...     def run(self):
+        ...         return {'success': True, 'factors': [p, q]}
+        >>> exploit = ShorsRSA()
+        >>> exploit.set_option('TARGET', str(N))
+        >>> result = exploit.run()
     """
 
     def __init__(self) -> None:
-        """Initialize exploit module with common options."""
+        """Initialize exploit module with default attack options."""
         super().__init__()
         self.info["category"] = "exploit"
 

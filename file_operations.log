@@ -55,3 +55,9 @@
 2025-12-14 23:45:17,760 - houdinis_security - INFO - Security Event: path_traversal_attempt - {'attempted_path': '/tmp/tmp3qj56udd/valid.txt', 'base_path': '/home/test/Downloads/github/portifolio/Houdinis'}
 2025-12-14 23:45:17,760 - houdinis_security - INFO - Security Event: path_traversal_attempt - {'attempted_path': '/tmp/tmp3qj56udd/valid.txt', 'base_path': '/home/test/Downloads/github/portifolio/Houdinis'}
 2025-12-14 23:45:17,760 - houdinis_security - INFO - Security Event: path_traversal_attempt - {'attempted_path': '/tmp/tmp3qj56udd/valid.txt', 'base_path': '/home/test/Downloads/github/portifolio/Houdinis'}
+2025-12-15 11:04:04,382 - houdinis_security - WARNING - Path traversal attempt: /tmp/tmp5m8eiwr2/valid.txt
+2025-12-15 11:04:04,382 - houdinis_security - WARNING - Path traversal attempt: /tmp/tmp5m8eiwr2/valid.txt
+2025-12-15 11:04:04,382 - houdinis_security - WARNING - Path traversal attempt: /tmp/tmp5m8eiwr2/valid.txt
+2025-12-15 11:04:04,382 - houdinis_security - INFO - Security Event: path_traversal_attempt - {'attempted_path': '/tmp/tmp5m8eiwr2/valid.txt', 'base_path': '/home/test/Downloads/github/portifolio/Houdinis'}
+2025-12-15 11:04:04,382 - houdinis_security - INFO - Security Event: path_traversal_attempt - {'attempted_path': '/tmp/tmp5m8eiwr2/valid.txt', 'base_path': '/home/test/Downloads/github/portifolio/Houdinis'}
+2025-12-15 11:04:04,382 - houdinis_security - INFO - Security Event: path_traversal_attempt - {'attempted_path': '/tmp/tmp5m8eiwr2/valid.txt', 'base_path': '/home/test/Downloads/github/portifolio/Houdinis'}

@@ -65,39 +65,138 @@ except ImportError:
 
 
 class QuantumBackendBase(ABC):
-    """Abstract base class for quantum backends."""
+    """
+    Abstract base class for quantum computing backend integrations.
+    
+    Provides a unified interface for multiple quantum platforms including
+    IBM Quantum, AWS Braket, Azure Quantum, Google Cirq, and NVIDIA cuQuantum.
+    
+    Attributes:
+        name (str): Human-readable name of the quantum backend
+        is_connected (bool): Connection status to the backend
+        available_devices (Dict[str, Any]): Dictionary of available quantum devices
+    
+    Example:
+        >>> class MyBackend(QuantumBackendBase):
+        ...     def initialize(self, **kwargs):
+        ...         return {"success": True}
+        >>> backend = MyBackend("MyQuantum")
+    """
 
     def __init__(self, name: str) -> None:
         self.name = name
         self.is_connected = False
-        self.available_devices = {}
+        self.available_devices: Dict[str, Any] = {}
 
     @abstractmethod
-    def initialize(self, **kwargs) -> Dict[str, Any]:
-        """Initialize the backend connection."""
+    def initialize(self, **kwargs: Any) -> Dict[str, Any]:
+        """
+        Initialize connection to the quantum backend.
+        
+        Establishes authentication and retrieves available quantum devices.
+        Implementation depends on specific backend (IBM, AWS, Azure, etc.).
+        
+        Args:
+            **kwargs: Backend-specific initialization parameters
+                - token (str): API authentication token
+                - region (str): Cloud region for AWS/Azure
+                - workspace (str): Workspace identifier
+        
+        Returns:
+            Dict[str, Any]: Initialization result containing:
+                - success (bool): Whether initialization succeeded
+                - backend (str): Backend name
+                - devices (int): Number of available devices
+                - error (str): Error message if failed
+        
+        Example:
+            >>> backend.initialize(token="your_token")
+            {"success": True, "backend": "IBM Quantum", "devices": 15}
+        """
         pass
 
     @abstractmethod
     def list_devices(self) -> Dict[str, Any]:
-        """List available quantum devices."""
+        """
+        Retrieve list of available quantum devices from the backend.
+        
+        Returns device specifications including qubit count, topology,
+        error rates, and current availability status.
+        
+        Returns:
+            Dict[str, Any]: Device information containing:
+                - success (bool): Whether device listing succeeded
+                - count (int): Number of available devices
+                - devices (List[Dict]): List of device specifications:
+                    - name (str): Device identifier
+                    - qubits (int): Number of qubits
+                    - status (str): "online" or "offline"
+                    - queue (int): Pending jobs in queue
+                    - type (str): "simulator" or "hardware"
+        
+        Example:
+            >>> devices = backend.list_devices()
+            >>> print(f"Found {devices['count']} devices")
+        """
         pass
 
     @abstractmethod
-    @abstractmethod
     def execute_circuit(
-        self, circuit: Any, device: Optional[str] = None
+        self, circuit: Any, device: Optional[str] = None, shots: int = 1024
     ) -> Dict[str, Any]:
-        """Execute a quantum circuit."""
+        """
+        Execute a quantum circuit on the specified device.
+        
+        Submits the circuit for execution and returns measurement results.
+        For simulators, execution is immediate. For hardware, jobs are queued.
+        
+        Args:
+            circuit (Any): Quantum circuit object (format depends on backend)
+            device (Optional[str]): Target device name (None = auto-select)
+            shots (int): Number of circuit executions (default 1024)
+        
+        Returns:
+            Dict[str, Any]: Execution results containing:
+                - success (bool): Whether execution completed
+                - job_id (str): Unique job identifier
+                - counts (Dict[str, int]): Measurement histogram
+                - execution_time (float): Runtime in seconds
+                - device (str): Device used for execution
+                - error (str): Error message if failed
+        
+        Example:
+            >>> result = backend.execute_circuit(circuit, device="ibmq_qasm_simulator")
+            >>> print(result['counts'])
+            {'00': 523, '11': 501}
+        """
         pass
 
 
 class IBMQuantumBackend(QuantumBackendBase):
-    """IBM Quantum backend implementation."""
+    """
+    IBM Quantum Experience backend integration.
+    
+    Provides access to IBM's quantum computers and high-performance simulators
+    through the Qiskit framework. Supports both cloud quantum hardware and
+    local Aer simulators.
+    
+    Attributes:
+        provider: IBM Quantum provider instance
+        ibmq_token (str): IBM Quantum API token for authentication
+    
+    Environment Variables:
+        IBMQ_TOKEN: IBM Quantum API token (required for hardware access)
+    
+    Example:
+        >>> backend = IBMQuantumBackend()
+        >>> result = backend.initialize(token="your_token_here")
+        >>> devices = backend.list_devices()
+    """
 
     def __init__(self) -> None:
         super().__init__("IBM Quantum")
-        self.provider = None
-        self.ibmq_token = None
+        self.provider: Optional[Any] = None
+        self.ibmq_token: Optional[str] = None
 
     def initialize(self, token: Optional[str] = None) -> Dict[str, Any]:
         """Initialize IBM Quantum connection."""
