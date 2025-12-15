@@ -1,6 +1,7 @@
 """
-Security validation and penetration tests for Houdinis Framework.
-Author: GitHub Copilot
+Houdinis Framework - Security Validation and Penetration Tests
+Data de Criação: 15 de dezembro de 2025
+Author: Mauro Risonho de Paula Assumpção aka firebitsbr
 License: MIT
 
 Tests security controls, input validation, and attack surface.

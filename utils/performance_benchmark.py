@@ -1,6 +1,7 @@
 """
 Houdinis Framework - Performance Benchmarking Suite
-Author: GitHub Copilot
+Data de Criação: 15 de dezembro de 2025
+Author: Mauro Risonho de Paula Assumpção aka firebitsbr
 License: MIT
 
 Comprehensive benchmarking and performance profiling for quantum algorithms.

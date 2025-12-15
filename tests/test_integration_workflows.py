@@ -1,6 +1,7 @@
 """
-Integration tests for complete Houdinis workflows.
-Author: GitHub Copilot
+Houdinis Framework - Integration Workflow Tests
+Data de Criação: 15 de dezembro de 2025
+Author: Mauro Risonho de Paula Assumpção aka firebitsbr
 License: MIT
 
 Tests end-to-end scenarios combining multiple modules.

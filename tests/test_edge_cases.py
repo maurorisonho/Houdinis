@@ -1,6 +1,7 @@
 """
-Edge case and boundary tests for Houdinis Framework.
-Author: GitHub Copilot
+Houdinis Framework - Edge Case and Boundary Tests
+Data de Criação: 15 de dezembro de 2025
+Author: Mauro Risonho de Paula Assumpção aka firebitsbr
 License: MIT
 
 Tests edge cases, boundary conditions, and error scenarios.
