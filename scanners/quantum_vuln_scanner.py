@@ -25,7 +25,7 @@ class QuantumVulnScannerModule(ScannerModule):
     vulnerable to quantum attacks including RSA, ECC, and symmetric ciphers.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
 
         self.info = {
@@ -272,7 +272,7 @@ class QuantumVulnScannerModule(ScannerModule):
 
         return results
 
-    def _analyze_quantum_threats(self, scan_results: Dict[str, Any]):
+    def _analyze_quantum_threats(self, scan_results: Dict[str, Any]) -> None:
         """
         Analyze detected algorithms for quantum vulnerabilities.
 

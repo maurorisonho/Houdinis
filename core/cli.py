@@ -31,7 +31,7 @@ from .session import SessionManager
 class SimpleConsole:
     """Simple console fallback when Rich is not available."""
 
-    def print(self, text: str):
+    def print(self, text: str) -> None:
         """Simple print with basic color removal."""
         # Remove basic rich markup
         clean_text = text.replace("[red]", "").replace("[/red]", "")
@@ -49,7 +49,7 @@ class HoudinisConsole(cmd.Cmd):
     Provides a Metasploit-like interface for quantum cryptography exploitation.
     """
 
-    def __init__(self, debug: bool = False):
+    def __init__(self, debug: bool = False) -> None:
         """Initialize the Houdinis console."""
         super().__init__()
 
@@ -87,7 +87,7 @@ Type 'use <module>' to select a module
   For authorized penetration testing only 
 """
 
-    def _load_modules(self):
+    def _load_modules(self) -> None:
         """Load all available modules from the framework."""
         try:
             self.module_manager.load_all_modules()
@@ -98,7 +98,7 @@ Type 'use <module>' to select a module
             if self.debug:
                 traceback.print_exc()
 
-    def _update_prompt(self):
+    def _update_prompt(self) -> None:
         """Update command prompt based on current module."""
         if self.current_module:
             module_type = self.current_module_name.split("/")[0]
@@ -107,7 +107,7 @@ Type 'use <module>' to select a module
         else:
             self.prompt = "houdini > "
 
-    def do_help(self, arg):
+    def do_help(self, arg: str) -> None:
         """Show help information."""
         if arg:
             # Show help for specific command
@@ -115,7 +115,7 @@ Type 'use <module>' to select a module
         else:
             self._show_main_help()
 
-    def _show_main_help(self):
+    def _show_main_help(self) -> None:
         """Show main help menu."""
         if RICH_AVAILABLE:
             help_table = Table(title="Houdinis Commands", show_header=True)
@@ -283,7 +283,7 @@ Type 'use <module>' to select a module
                 )
             print()
 
-    def _show_sessions(self):
+    def _show_sessions(self) -> None:
         """Show active sessions."""
         sessions = self.session_manager.get_sessions()
 
@@ -391,7 +391,7 @@ Type 'use <module>' to select a module
         except Exception as e:
             self.console.print(f"Error setting option: {e}")
 
-    def do_unset(self, line):
+    def do_unset(self, line: str) -> None:
         """Unset module option."""
         if not self.current_module:
             self.console.print("No module selected. Use 'use <module>' first.")
@@ -412,7 +412,7 @@ Type 'use <module>' to select a module
         except Exception as e:
             self.console.print(f"Error unsetting option: {e}")
 
-    def do_run(self, line):
+    def do_run(self, line: str) -> None:
         """Execute current scanner or payload module."""
         if not self.current_module:
             self.console.print("No module selected. Use 'use <module>' first.")
@@ -436,7 +436,7 @@ Type 'use <module>' to select a module
             if self.debug:
                 traceback.print_exc()
 
-    def do_exploit(self, line):
+    def do_exploit(self, line: str) -> None:
         """Execute current exploit module."""
         if not self.current_module:
             self.console.print("No module selected. Use 'use <module>' first.")
@@ -494,14 +494,14 @@ Type 'use <module>' to select a module
         else:
             self.console.print("Module execution completed")
 
-    def do_back(self, line):
+    def do_back(self, line: str) -> None:
         """Return to main menu."""
         self.current_module = None
         self.current_module_name = ""
         self._update_prompt()
         self.console.print("Back to main menu")
 
-    def do_scan(self, line):
+    def do_scan(self, line: str) -> None:
         """Quick scan command similar to Metasploit."""
         args = line.split()
 
@@ -551,7 +551,7 @@ Type 'use <module>' to select a module
         print(f"[*] Scan complete. Found quantum-vulnerable services on ports 22, 443")
         print(f"[!] Recommendation: use exploit/rsa_shor")
 
-    def do_sessions(self, line):
+    def do_sessions(self, line: str) -> None:
         """Interact with sessions."""
         args = line.split()
 
@@ -585,7 +585,7 @@ Type 'use <module>' to select a module
         else:
             self.console.print("Usage: sessions [-l|-i <id>|-k <id>]")
 
-    def _interact_with_session(self, session_id: int):
+    def _interact_with_session(self, session_id: int) -> None:
         """Interact with a specific session."""
         session = self.session_manager.get_session(session_id)
         if not session:
@@ -599,7 +599,7 @@ Type 'use <module>' to select a module
         print(f"Target: {session.target}")
         print(f"Status: {session.status}")
 
-    def do_resource(self, line):
+    def do_resource(self, line: str) -> None:
         """Execute resource script."""
         if not line:
             self.console.print("Usage: resource <script_file>")
@@ -608,7 +608,7 @@ Type 'use <module>' to select a module
         script_path = line.strip()
         self.execute_resource_script(script_path)
 
-    def execute_resource_script(self, script_path: str):
+    def execute_resource_script(self, script_path: str) -> None:
         """Execute commands from a resource script file."""
         from pathlib import Path
         from security.security_config import SecurityConfig
@@ -653,20 +653,20 @@ Type 'use <module>' to select a module
 
                 traceback.print_exc()
 
-    def do_exit(self, line):
+    def do_exit(self, line: str) -> bool:
         """Exit Houdinis."""
         return self.do_quit(line)
 
-    def do_quit(self, line):
+    def do_quit(self, line: str) -> bool:
         """Exit Houdinis."""
         self.console.print("Goodbye!")
         return True
 
-    def emptyline(self):
+    def emptyline(self) -> bool:
         """Handle empty line input."""
         return False
 
-    def default(self, line):
+    def default(self, line: str) -> None:
         """Handle unknown commands."""
         self.console.print(f"Unknown command: {line}")
         self.console.print("Type 'help' for available commands")

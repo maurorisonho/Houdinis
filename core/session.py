@@ -23,7 +23,7 @@ class Session:
     created_at: datetime
     data: Dict[str, Any]
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Initialize session after creation."""
         if self.status == "":
             self.status = "active"
@@ -34,7 +34,7 @@ class SessionManager:
     Manages active sessions from successful exploits.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Initialize session manager."""
         self.sessions: Dict[int, Session] = {}
         self.next_id = 1

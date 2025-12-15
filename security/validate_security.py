@@ -26,11 +26,11 @@ from security.secure_file_ops import SecureFileOperations
 class SecurityValidator:
     """Security validation and testing for Houdinis framework"""
 
-    def __init__(self):
-        self.results = {"passed": 0, "failed": 0, "warnings": 0, "details": []}
-        self.project_root = project_root
+    def __init__(self) -> None:
+        self.results: Dict[str, any] = {"passed": 0, "failed": 0, "warnings": 0, "details": []}
+        self.project_root: Path = project_root
 
-    def log_result(self, test_name: str, status: str, message: str):
+    def log_result(self, test_name: str, status: str, message: str) -> None:
         """Log test result"""
         self.results["details"].append(
             {"test": test_name, "status": status, "message": message}
@@ -46,7 +46,7 @@ class SecurityValidator:
             self.results["warnings"] += 1
             print(f" {test_name}: {message}")
 
-    def test_file_permissions(self):
+    def test_file_permissions(self) -> None:
         """Test file permissions for security"""
         print("\n=== Testing File Permissions ===")
 
@@ -81,7 +81,7 @@ class SecurityValidator:
                     f"File Permissions: {file_path}", "WARN", "File not found"
                 )
 
-    def test_input_validation(self):
+    def test_input_validation(self) -> None:
         """Test input validation functions"""
         print("\n=== Testing Input Validation ===")
 
@@ -133,7 +133,7 @@ class SecurityValidator:
                     f"Port Validation: {port}", "FAIL", "Invalid port accepted"
                 )
 
-    def test_command_validation(self):
+    def test_command_validation(self) -> None:
         """Test command validation"""
         print("\n=== Testing Command Validation ===")
 
@@ -173,7 +173,7 @@ class SecurityValidator:
                     f"Command Validation: {cmd}", "FAIL", "Dangerous command accepted"
                 )
 
-    def test_secure_file_operations(self):
+    def test_secure_file_operations(self) -> None:
         """Test secure file operations"""
         print("\n=== Testing Secure File Operations ===")
 
@@ -238,7 +238,7 @@ class SecurityValidator:
 
         secure_files.cleanup_temp_files()
 
-    def test_quantum_vulnerability_assessment(self):
+    def test_quantum_vulnerability_assessment(self) -> None:
         """Test quantum vulnerability assessment"""
         print("\n=== Testing Quantum Vulnerability Assessment ===")
 
@@ -275,7 +275,7 @@ class SecurityValidator:
                     "May be incorrectly flagged as vulnerable",
                 )
 
-    def test_dependency_security(self):
+    def test_dependency_security(self) -> None:
         """Test for known vulnerable dependencies"""
         print("\n=== Testing Dependency Security ===")
 
@@ -311,7 +311,7 @@ class SecurityValidator:
                 "Dependency Security", "WARN", f"Could not check dependencies: {e}"
             )
 
-    def scan_for_hardcoded_secrets(self):
+    def scan_for_hardcoded_secrets(self) -> None:
         """Scan for potential hardcoded secrets"""
         print("\n=== Scanning for Hardcoded Secrets ===")
 
@@ -353,7 +353,7 @@ class SecurityValidator:
                 "Hardcoded Secrets", "PASS", "No hardcoded secrets detected"
             )
 
-    def run_all_tests(self):
+    def run_all_tests(self) -> bool:
         """Run all security validation tests"""
         print(" Houdinis Framework Security Validation")
         print("=" * 50)

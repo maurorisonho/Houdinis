@@ -68,7 +68,7 @@ class WorkerStatus:
     current_load: float = 0.0
     last_heartbeat: float = field(default_factory=time.time)
 
-    def update_heartbeat(self):
+    def update_heartbeat(self) -> None:
         """Update last heartbeat timestamp"""
         self.last_heartbeat = time.time()
 
@@ -125,7 +125,7 @@ class LoadBalancer:
         else:
             return 0
 
-    def update_load(self, worker_id: int, load: float):
+    def update_load(self, worker_id: int, load: float) -> None:
         """Update worker load"""
         if 0 <= worker_id < self.num_workers:
             self.worker_loads[worker_id] = load
@@ -171,7 +171,7 @@ class DistributedQuantumExecutor:
             f"Initialized distributed executor: {backend_type}, {num_workers} workers"
         )
 
-    def _initialize_backend(self):
+    def _initialize_backend(self) -> None:
         """Initialize the selected distributed backend"""
         if self.backend_type == DistributedBackend.RAY:
             if not RAY_AVAILABLE:
@@ -454,7 +454,7 @@ class DistributedQuantumExecutor:
 
         return stats
 
-    def shutdown(self):
+    def shutdown(self) -> None:
         """Shutdown the distributed executor"""
         logger.info("Shutting down distributed executor...")
 
@@ -470,11 +470,11 @@ class DistributedQuantumExecutor:
 
         logger.info("Distributed executor shut down successfully")
 
-    def __enter__(self):
+    def __enter__(self) -> "DistributedQuantumBackend":
         """Context manager entry"""
         return self
 
-    def __exit__(self, exc_type, exc_val, exc_tb):
+    def __exit__(self, exc_type, exc_val, exc_tb) -> None:
         """Context manager exit"""
         self.shutdown()
 

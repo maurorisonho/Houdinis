@@ -25,7 +25,7 @@ class SslScannerModule(ScannerModule):
     to quantum computing attacks using Shor's and Grover's algorithms.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
 
         self.info = {
@@ -187,7 +187,7 @@ class SslScannerModule(ScannerModule):
 
         return results
 
-    def _test_protocols(self, host: str, port: int, results: Dict[str, Any]):
+    def _test_protocols(self, host: str, port: int, results: Dict[str, Any]) -> None:
         """
         Test different SSL/TLS protocol versions.
 

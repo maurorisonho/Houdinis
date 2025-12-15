@@ -21,7 +21,7 @@ class BaseModule(ABC):
     All scanners, exploits, and payloads should inherit from this class.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Initialize base module."""
         self.options = {}
         self.info = {
@@ -96,7 +96,7 @@ class ScannerModule(BaseModule):
     Scanners are used to identify vulnerabilities and gather information.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         self.info["category"] = "scanner"
 
@@ -134,7 +134,7 @@ class ExploitModule(BaseModule):
     Exploits are used to attack identified vulnerabilities.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         self.info["category"] = "exploit"
 
@@ -175,7 +175,7 @@ class PayloadModule(BaseModule):
     Payloads are used to execute specific actions after successful exploitation.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         self.info["category"] = "payload"
 
@@ -205,7 +205,7 @@ class ModuleManager:
     Manages loading and registration of modules.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Initialize module manager."""
         self.modules: Dict[str, Type[BaseModule]] = {}
         self.module_paths = {
@@ -215,7 +215,7 @@ class ModuleManager:
             "auxiliary": "auxiliary",
         }
 
-    def load_all_modules(self):
+    def load_all_modules(self) -> None:
         """Load all modules from the framework directories."""
         base_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -225,7 +225,7 @@ class ModuleManager:
             if os.path.exists(module_path):
                 self._load_modules_from_directory(module_path, module_type)
 
-    def _load_modules_from_directory(self, directory: str, module_type: str):
+    def _load_modules_from_directory(self, directory: str, module_type: str) -> None:
         """
         Load modules from a specific directory.
 
@@ -296,7 +296,7 @@ class ModuleManager:
             if name.startswith(f"{module_type}/")
         }
 
-    def register_module(self, name: str, module_class: Type[BaseModule]):
+    def register_module(self, name: str, module_class: Type[BaseModule]) -> None:
         """
         Manually register a module.
 

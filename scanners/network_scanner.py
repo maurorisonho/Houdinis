@@ -33,10 +33,10 @@ class NetworkScannerModule(ScannerModule):
     that may be vulnerable to quantum attacks.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
 
-        self.info = {
+        self.info: Dict[str, str] = {
             "name": "Network Quantum Vulnerability Scanner",
             "description": "Discovers hosts and quantum-vulnerable cryptographic services",
             "author": "Mauro Risonho de Paula Assumpção aka firebitsbr",
@@ -191,7 +191,7 @@ class NetworkScannerModule(ScannerModule):
 
                     # Detect cryptographic details if enabled
                     if self.crypto_detect.lower() == "true":
-                        crypto_info = self._detect_crypto_service(host, port)
+                        crypto_info: Dict[str, Any] = self._detect_crypto_service(host, port)
                         service_info.update(crypto_info)
 
                         # Check for quantum vulnerabilities
@@ -317,7 +317,7 @@ class NetworkScannerModule(ScannerModule):
             "details": "SSH detection failed",
         }
 
-    def _print_scan_summary(self, results: Dict[str, Any]):
+    def _print_scan_summary(self, results: Dict[str, Any]) -> None:
         """Print scan summary."""
         print(f"\n[*] Scan completed")
         print(f"[*] {len(results['open_services'])} services found")

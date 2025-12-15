@@ -54,7 +54,7 @@ class Worker:
 class WorkerPool:
     """Manage pool of workers"""
 
-    def __init__(self, initial_size: int = 4, max_size: int = 16):
+    def __init__(self, initial_size: int = 4, max_size: int = 16) -> None:
         """
         Initialize worker pool.
 
@@ -72,7 +72,7 @@ class WorkerPool:
         self._initialize_workers(initial_size)
         logger.info(f"Worker pool initialized: {initial_size}/{max_size} workers")
 
-    def _initialize_workers(self, count: int):
+    def _initialize_workers(self, count: int) -> None:
         """Initialize workers"""
         for i in range(count):
             worker = Worker(
@@ -80,7 +80,7 @@ class WorkerPool:
             )
             self.workers.append(worker)
 
-    def scale_up(self, count: int = 1):
+    def scale_up(self, count: int = 1) -> None:
         """Add more workers"""
         current_size = len(self.workers)
         new_size = min(current_size + count, self.max_size)
@@ -97,7 +97,7 @@ class WorkerPool:
 
         return added
 
-    def scale_down(self, count: int = 1):
+    def scale_down(self, count: int = 1) -> None:
         """Remove idle workers"""
         idle_workers = [w for w in self.workers if w.is_idle()]
 
@@ -116,7 +116,7 @@ class WorkerPool:
 
         return to_remove
 
-    def submit_task(self, func: Callable, *args, **kwargs):
+    def submit_task(self, func: Callable, *args, **kwargs) -> None:
         """Submit task to queue"""
         self.task_queue.put((func, args, kwargs))
 
@@ -167,21 +167,21 @@ class AutoScaler:
         self.running = False
         self.monitor_thread: Optional[threading.Thread] = None
 
-    def start(self):
+    def start(self) -> None:
         """Start auto-scaling"""
         self.running = True
         self.monitor_thread = threading.Thread(target=self._monitor_loop, daemon=True)
         self.monitor_thread.start()
         logger.info("Auto-scaler started")
 
-    def stop(self):
+    def stop(self) -> None:
         """Stop auto-scaling"""
         self.running = False
         if self.monitor_thread:
             self.monitor_thread.join(timeout=5.0)
         logger.info("Auto-scaler stopped")
 
-    def _monitor_loop(self):
+    def _monitor_loop(self) -> None:
         """Monitoring loop for auto-scaling"""
         while self.running:
             try:
@@ -190,7 +190,7 @@ class AutoScaler:
             except Exception as e:
                 logger.error(f"Auto-scaler error: {e}")
 
-    def _check_and_scale(self):
+    def _check_and_scale(self) -> None:
         """Check load and scale if needed"""
         stats = self.worker_pool.get_stats()
 
@@ -211,7 +211,7 @@ class AutoScaler:
 class LoadBalancer:
     """Balance load across workers"""
 
-    def __init__(self, strategy: str = "round_robin"):
+    def __init__(self, strategy: str = "round_robin") -> None:
         """
         Initialize load balancer.
 

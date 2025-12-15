@@ -67,7 +67,7 @@ except ImportError:
 class QuantumBackendBase(ABC):
     """Abstract base class for quantum backends."""
 
-    def __init__(self, name: str):
+    def __init__(self, name: str) -> None:
         self.name = name
         self.is_connected = False
         self.available_devices = {}
@@ -94,7 +94,7 @@ class QuantumBackendBase(ABC):
 class IBMQuantumBackend(QuantumBackendBase):
     """IBM Quantum backend implementation."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__("IBM Quantum")
         self.provider = None
         self.ibmq_token = None
@@ -177,7 +177,7 @@ class IBMQuantumBackend(QuantumBackendBase):
 class NVIDIAQuantumBackend(QuantumBackendBase):
     """NVIDIA cuQuantum backend implementation."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__("NVIDIA cuQuantum")
         self.gpu_devices = []
 
@@ -245,7 +245,7 @@ class NVIDIAQuantumBackend(QuantumBackendBase):
 class BraketBackend(QuantumBackendBase):
     """Amazon Braket backend implementation."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__("Amazon Braket")
 
     def initialize(self, **kwargs) -> Dict[str, Any]:
@@ -348,7 +348,7 @@ class BraketBackend(QuantumBackendBase):
 class AzureQuantumBackend(QuantumBackendBase):
     """Microsoft Azure Quantum backend implementation."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__("Azure Quantum")
 
     def initialize(self, **kwargs) -> Dict[str, Any]:
@@ -411,7 +411,7 @@ class AzureQuantumBackend(QuantumBackendBase):
 class GoogleQuantumBackend(QuantumBackendBase):
     """Google Quantum AI backend implementation."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__("Google Quantum AI")
 
     def initialize(self, **kwargs) -> Dict[str, Any]:
@@ -470,7 +470,7 @@ class QuantumBackendManager:
     Supports IBM Quantum, NVIDIA cuQuantum, Amazon Braket, Azure Quantum, Google Cirq.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.backends = {
             "ibm": IBMQuantumBackend(),
             "nvidia": NVIDIAQuantumBackend(),
@@ -760,7 +760,7 @@ def setup_google_cirq() -> Dict[str, Any]:
     Supports both local simulators and IBM Q Experience backends.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.provider = None
         self.current_backend = None
         self.ibmq_token = None

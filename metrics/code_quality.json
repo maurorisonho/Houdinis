@@ -2,44 +2,36 @@
   "overall": {
     "total_files": 49,
     "total_functions": 470,
-    "typed_functions": 359,
+    "typed_functions": 423,
     "documented_functions": 426,
-    "type_coverage": 76.4,
+    "type_coverage": 90.0,
     "docstring_coverage": 90.6,
-    "quality_score": 8.7
+    "quality_score": 9.2
   },
   "files": [
     {
       "path": "core/cli.py",
       "total_functions": 19,
-      "typed_functions": 3,
+      "typed_functions": 18,
       "documented_functions": 19,
-      "type_coverage": 15.789473684210526,
+      "type_coverage": 94.73684210526315,
       "docstring_coverage": 100.0
     },
     {
       "path": "core/modules.py",
       "total_functions": 15,
-      "typed_functions": 9,
+      "typed_functions": 15,
       "documented_functions": 12,
-      "type_coverage": 60.0,
+      "type_coverage": 100.0,
       "docstring_coverage": 80.0
     },
     {
       "path": "core/session.py",
       "total_functions": 8,
-      "typed_functions": 6,
+      "typed_functions": 7,
       "documented_functions": 8,
-      "type_coverage": 75.0,
+      "type_coverage": 87.5,
       "docstring_coverage": 100.0
-    },
-    {
-      "path": "quantum/backend.py",
-      "total_functions": 48,
-      "typed_functions": 40,
-      "documented_functions": 40,
-      "type_coverage": 83.33333333333334,
-      "docstring_coverage": 83.33333333333334
     },
     {
       "path": "quantum/simulator.py",
@@ -48,14 +40,6 @@
       "documented_functions": 10,
       "type_coverage": 91.66666666666666,
       "docstring_coverage": 83.33333333333334
-    },
-    {
-      "path": "quantum/distributed.py",
-      "total_functions": 14,
-      "typed_functions": 11,
-      "documented_functions": 14,
-      "type_coverage": 78.57142857142857,
-      "docstring_coverage": 100.0
     },
     {
       "path": "quantum/gpu_optimizer.py",
@@ -74,124 +58,28 @@
       "docstring_coverage": 100.0
     },
     {
-      "path": "exploits/aes_assessment.py",
-      "total_functions": 11,
-      "typed_functions": 9,
-      "documented_functions": 10,
-      "type_coverage": 81.81818181818183,
-      "docstring_coverage": 90.9090909090909
-    },
-    {
-      "path": "exploits/bitcoin_key_recovery.py",
-      "total_functions": 9,
-      "typed_functions": 7,
-      "documented_functions": 8,
-      "type_coverage": 77.77777777777779,
-      "docstring_coverage": 88.88888888888889
-    },
-    {
-      "path": "exploits/dh_shor.py",
-      "total_functions": 7,
-      "typed_functions": 5,
-      "documented_functions": 6,
-      "type_coverage": 71.42857142857143,
-      "docstring_coverage": 85.71428571428571
-    },
-    {
-      "path": "exploits/ecdsa_vuln_scanner.py",
-      "total_functions": 9,
-      "typed_functions": 7,
-      "documented_functions": 8,
-      "type_coverage": 77.77777777777779,
-      "docstring_coverage": 88.88888888888889
-    },
-    {
-      "path": "exploits/grover_bruteforce.py",
-      "total_functions": 7,
-      "typed_functions": 5,
-      "documented_functions": 6,
-      "type_coverage": 71.42857142857143,
-      "docstring_coverage": 85.71428571428571
-    },
-    {
-      "path": "exploits/ike_quantum_attack.py",
-      "total_functions": 6,
-      "typed_functions": 4,
-      "documented_functions": 5,
-      "type_coverage": 66.66666666666666,
+      "path": "quantum/backend.py",
+      "total_functions": 48,
+      "typed_functions": 47,
+      "documented_functions": 40,
+      "type_coverage": 97.91666666666666,
       "docstring_coverage": 83.33333333333334
     },
     {
-      "path": "exploits/ipsec_quantum_vuln.py",
-      "total_functions": 8,
-      "typed_functions": 6,
-      "documented_functions": 7,
-      "type_coverage": 75.0,
-      "docstring_coverage": 87.5
-    },
-    {
-      "path": "exploits/multi_backend_benchmark.py",
-      "total_functions": 7,
-      "typed_functions": 5,
-      "documented_functions": 6,
-      "type_coverage": 71.42857142857143,
-      "docstring_coverage": 85.71428571428571
-    },
-    {
-      "path": "exploits/pgp_quantum_crack.py",
-      "total_functions": 9,
-      "typed_functions": 7,
-      "documented_functions": 8,
-      "type_coverage": 77.77777777777779,
-      "docstring_coverage": 88.88888888888889
-    },
-    {
-      "path": "exploits/pq_migration_tools.py",
-      "total_functions": 7,
-      "typed_functions": 5,
-      "documented_functions": 6,
-      "type_coverage": 71.42857142857143,
-      "docstring_coverage": 85.71428571428571
-    },
-    {
-      "path": "exploits/quantum_network_recon.py",
-      "total_functions": 8,
-      "typed_functions": 5,
-      "documented_functions": 6,
-      "type_coverage": 62.5,
-      "docstring_coverage": 75.0
-    },
-    {
-      "path": "exploits/quantum_rng.py",
-      "total_functions": 11,
-      "typed_functions": 9,
-      "documented_functions": 10,
-      "type_coverage": 81.81818181818183,
-      "docstring_coverage": 90.9090909090909
+      "path": "quantum/distributed.py",
+      "total_functions": 14,
+      "typed_functions": 13,
+      "documented_functions": 14,
+      "type_coverage": 92.85714285714286,
+      "docstring_coverage": 100.0
     },
     {
       "path": "exploits/rsa_shor.py",
       "total_functions": 4,
-      "typed_functions": 2,
+      "typed_functions": 3,
       "documented_functions": 2,
-      "type_coverage": 50.0,
+      "type_coverage": 75.0,
       "docstring_coverage": 50.0
-    },
-    {
-      "path": "exploits/ssh_quantum_attack.py",
-      "total_functions": 7,
-      "typed_functions": 5,
-      "documented_functions": 6,
-      "type_coverage": 71.42857142857143,
-      "docstring_coverage": 85.71428571428571
-    },
-    {
-      "path": "exploits/tls_sndl.py",
-      "total_functions": 10,
-      "typed_functions": 7,
-      "documented_functions": 9,
-      "type_coverage": 70.0,
-      "docstring_coverage": 90.0
     },
     {
       "path": "exploits/simon_algorithm.py",
@@ -199,14 +87,6 @@
       "typed_functions": 6,
       "documented_functions": 6,
       "type_coverage": 100.0,
-      "docstring_coverage": 100.0
-    },
-    {
-      "path": "exploits/hhl_linear_solver.py",
-      "total_functions": 5,
-      "typed_functions": 4,
-      "documented_functions": 5,
-      "type_coverage": 80.0,
       "docstring_coverage": 100.0
     },
     {
@@ -240,14 +120,6 @@
       "documented_functions": 6,
       "type_coverage": 85.71428571428571,
       "docstring_coverage": 85.71428571428571
-    },
-    {
-      "path": "exploits/zkp_attack.py",
-      "total_functions": 5,
-      "typed_functions": 4,
-      "documented_functions": 4,
-      "type_coverage": 80.0,
-      "docstring_coverage": 80.0
     },
     {
       "path": "exploits/adversarial_qml_attack.py",
@@ -314,12 +186,140 @@
       "docstring_coverage": 100.0
     },
     {
-      "path": "exploits/pqc_migration_analyzer.py",
+      "path": "exploits/dh_shor.py",
+      "total_functions": 7,
+      "typed_functions": 6,
+      "documented_functions": 6,
+      "type_coverage": 85.71428571428571,
+      "docstring_coverage": 85.71428571428571
+    },
+    {
+      "path": "exploits/ecdsa_vuln_scanner.py",
+      "total_functions": 9,
+      "typed_functions": 8,
+      "documented_functions": 8,
+      "type_coverage": 88.88888888888889,
+      "docstring_coverage": 88.88888888888889
+    },
+    {
+      "path": "exploits/grover_bruteforce.py",
+      "total_functions": 7,
+      "typed_functions": 6,
+      "documented_functions": 6,
+      "type_coverage": 85.71428571428571,
+      "docstring_coverage": 85.71428571428571
+    },
+    {
+      "path": "exploits/ipsec_quantum_vuln.py",
+      "total_functions": 8,
+      "typed_functions": 7,
+      "documented_functions": 7,
+      "type_coverage": 87.5,
+      "docstring_coverage": 87.5
+    },
+    {
+      "path": "exploits/multi_backend_benchmark.py",
+      "total_functions": 7,
+      "typed_functions": 6,
+      "documented_functions": 6,
+      "type_coverage": 85.71428571428571,
+      "docstring_coverage": 85.71428571428571
+    },
+    {
+      "path": "exploits/pq_migration_tools.py",
+      "total_functions": 7,
+      "typed_functions": 6,
+      "documented_functions": 6,
+      "type_coverage": 85.71428571428571,
+      "docstring_coverage": 85.71428571428571
+    },
+    {
+      "path": "exploits/quantum_network_recon.py",
+      "total_functions": 8,
+      "typed_functions": 6,
+      "documented_functions": 6,
+      "type_coverage": 75.0,
+      "docstring_coverage": 75.0
+    },
+    {
+      "path": "exploits/ssh_quantum_attack.py",
+      "total_functions": 7,
+      "typed_functions": 6,
+      "documented_functions": 6,
+      "type_coverage": 85.71428571428571,
+      "docstring_coverage": 85.71428571428571
+    },
+    {
+      "path": "exploits/tls_sndl.py",
       "total_functions": 10,
       "typed_functions": 8,
+      "documented_functions": 9,
+      "type_coverage": 80.0,
+      "docstring_coverage": 90.0
+    },
+    {
+      "path": "exploits/aes_assessment.py",
+      "total_functions": 11,
+      "typed_functions": 10,
       "documented_functions": 10,
+      "type_coverage": 90.9090909090909,
+      "docstring_coverage": 90.9090909090909
+    },
+    {
+      "path": "exploits/bitcoin_key_recovery.py",
+      "total_functions": 9,
+      "typed_functions": 8,
+      "documented_functions": 8,
+      "type_coverage": 88.88888888888889,
+      "docstring_coverage": 88.88888888888889
+    },
+    {
+      "path": "exploits/pgp_quantum_crack.py",
+      "total_functions": 9,
+      "typed_functions": 8,
+      "documented_functions": 8,
+      "type_coverage": 88.88888888888889,
+      "docstring_coverage": 88.88888888888889
+    },
+    {
+      "path": "exploits/quantum_rng.py",
+      "total_functions": 11,
+      "typed_functions": 10,
+      "documented_functions": 10,
+      "type_coverage": 90.9090909090909,
+      "docstring_coverage": 90.9090909090909
+    },
+    {
+      "path": "exploits/pqc_migration_analyzer.py",
+      "total_functions": 10,
+      "typed_functions": 9,
+      "documented_functions": 10,
+      "type_coverage": 90.0,
+      "docstring_coverage": 100.0
+    },
+    {
+      "path": "exploits/hhl_linear_solver.py",
+      "total_functions": 5,
+      "typed_functions": 4,
+      "documented_functions": 5,
       "type_coverage": 80.0,
       "docstring_coverage": 100.0
+    },
+    {
+      "path": "exploits/zkp_attack.py",
+      "total_functions": 5,
+      "typed_functions": 4,
+      "documented_functions": 4,
+      "type_coverage": 80.0,
+      "docstring_coverage": 80.0
+    },
+    {
+      "path": "exploits/ike_quantum_attack.py",
+      "total_functions": 6,
+      "typed_functions": 5,
+      "documented_functions": 5,
+      "type_coverage": 83.33333333333334,
+      "docstring_coverage": 83.33333333333334
     },
     {
       "path": "security/secure_file_ops.py",
@@ -340,9 +340,9 @@
     {
       "path": "security/validate_security.py",
       "total_functions": 10,
-      "typed_functions": 1,
+      "typed_functions": 10,
       "documented_functions": 9,
-      "type_coverage": 10.0,
+      "type_coverage": 100.0,
       "docstring_coverage": 90.0
     },
     {
@@ -356,25 +356,25 @@
     {
       "path": "scanners/network_scanner.py",
       "total_functions": 2,
-      "typed_functions": 1,
+      "typed_functions": 2,
       "documented_functions": 1,
-      "type_coverage": 50.0,
+      "type_coverage": 100.0,
       "docstring_coverage": 50.0
     },
     {
       "path": "scanners/quantum_vuln_scanner.py",
       "total_functions": 2,
-      "typed_functions": 1,
+      "typed_functions": 2,
       "documented_functions": 1,
-      "type_coverage": 50.0,
+      "type_coverage": 100.0,
       "docstring_coverage": 50.0
     },
     {
       "path": "scanners/ssl_scanner.py",
       "total_functions": 2,
-      "typed_functions": 1,
+      "typed_functions": 2,
       "documented_functions": 1,
-      "type_coverage": 50.0,
+      "type_coverage": 100.0,
       "docstring_coverage": 50.0
     },
     {
@@ -388,17 +388,17 @@
     {
       "path": "utils/memory_profiler.py",
       "total_functions": 9,
-      "typed_functions": 5,
+      "typed_functions": 8,
       "documented_functions": 9,
-      "type_coverage": 55.55555555555556,
+      "type_coverage": 88.88888888888889,
       "docstring_coverage": 100.0
     },
     {
       "path": "utils/scaling.py",
       "total_functions": 12,
-      "typed_functions": 10,
+      "typed_functions": 12,
       "documented_functions": 12,
-      "type_coverage": 83.33333333333334,
+      "type_coverage": 100.0,
       "docstring_coverage": 100.0
     }
   ]

@@ -48,7 +48,7 @@ class MemorySnapshot:
 class MemoryProfiler:
     """Track and optimize memory usage"""
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Initialize memory profiler"""
         if not PSUTIL_AVAILABLE:
             logger.warning("psutil not available - limited functionality")
@@ -83,7 +83,7 @@ class MemoryProfiler:
         self.snapshots.append(snapshot)
         return snapshot
 
-    def set_baseline(self):
+    def set_baseline(self) -> None:
         """Set current memory as baseline"""
         self.baseline = self.take_snapshot()
         logger.info(f"Baseline set: {self.baseline.rss_mb:.2f} MB RSS")
@@ -153,7 +153,7 @@ class DataCompressor:
     """Compress data to reduce memory usage"""
 
     @staticmethod
-    def compress_state_vector(state_vector, threshold: float = 1e-10):
+    def compress_state_vector(state_vector, threshold: float = 1e-10) -> Tuple[np.ndarray, np.ndarray]:
         """Compress quantum state vector by removing negligible amplitudes"""
         import numpy as np
 
@@ -178,7 +178,7 @@ class DataCompressor:
         return compressed
 
     @staticmethod
-    def decompress_state_vector(compressed):
+    def decompress_state_vector(compressed: Tuple[np.ndarray, np.ndarray]) -> np.ndarray:
         """Decompress state vector"""
         import numpy as np
 
