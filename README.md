@@ -2,6 +2,8 @@
 
 ![Houdinis Logo](https://img.shields.io/badge/Houdinis-Framework-blue?style=for-the-badge&logo=quantum)
 
+** Available in:** [English](README.md) | [Português](README.pt-BR.md) | [Español](README.es.md) | [](README.zh.md)
+
 Houdinis is a comprehensive quantum cryptography exploitation framework designed for security researchers, penetration testers, and quantum computing enthusiasts. The framework provides tools to test quantum algorithms, evaluate cryptographic vulnerabilities, and benchmark quantum computing backends.
 
 ## Documentation
