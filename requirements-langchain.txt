@@ -1,0 +1,38 @@
+# LangChain and MCP Integration Dependencies
+# Houdinis Framework - AI-Enhanced Quantum Cryptography Testing
+
+# LangChain Core
+langchain>=0.1.0
+langchain-core>=0.1.0
+langchain-community>=0.0.10
+langchain-openai>=0.0.5
+langchain-anthropic>=0.1.0
+langgraph>=0.0.20
+langsmith>=0.0.70
+
+# Model Context Protocol (MCP)
+mcp>=0.9.0
+httpx>=0.25.0
+pydantic>=2.5.0
+anyio>=4.0.0
+
+# AI/ML Models
+openai>=1.6.0
+anthropic>=0.8.0
+tiktoken>=0.5.0
+
+# Vector Stores and Embeddings
+chromadb>=0.4.20
+faiss-cpu>=1.7.4
+sentence-transformers>=2.2.0
+
+# API and Server
+uvicorn>=0.25.0
+fastapi>=0.108.0
+websockets>=12.0
+python-dotenv>=1.0.0
+
+# Additional Tools
+pyyaml>=6.0
+aiohttp>=3.9.0
+tenacity>=8.2.0

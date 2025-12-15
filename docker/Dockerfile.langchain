@@ -1,0 +1,109 @@
+FROM nvidia/cuda:12.4.1-devel-ubuntu22.04
+
+# Houdinis Framework with LangChain and MCP Integration
+# Author: Mauro Risonho de Paula Assumpção aka firebitsbr
+# Developed by: Human Logic & Coding with AI Assistance (Claude Sonnet 4.5)
+
+ENV DEBIAN_FRONTEND=noninteractive
+ENV PYTHONUNBUFFERED=1
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    python3.11 \
+    python3.11-dev \
+    python3-pip \
+    git \
+    wget \
+    curl \
+    build-essential \
+    libssl-dev \
+    libffi-dev \
+    cmake \
+    tshark \
+    libxml2-dev \
+    libxslt-dev \
+    nodejs \
+    npm \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install ttyd (Web Terminal)
+RUN wget https://github.com/tsl0922/ttyd/releases/download/1.7.4/ttyd.x86_64 -O /usr/bin/ttyd && \
+    chmod +x /usr/bin/ttyd
+
+WORKDIR /app
+
+# Copy project files
+COPY . /app
+
+# Upgrade pip
+RUN pip3 install --no-cache-dir --upgrade pip setuptools wheel
+
+# Install Houdinis core dependencies
+RUN pip3 install --no-cache-dir -r requirements.txt
+
+# Install LangChain ecosystem
+RUN pip3 install --no-cache-dir \
+    langchain>=0.1.0 \
+    langchain-core>=0.1.0 \
+    langchain-community>=0.0.10 \
+    langchain-openai>=0.0.5 \
+    langchain-anthropic>=0.1.0 \
+    langgraph>=0.0.20 \
+    langsmith>=0.0.70
+
+# Install MCP (Model Context Protocol) support
+RUN pip3 install --no-cache-dir \
+    mcp>=0.9.0 \
+    httpx>=0.25.0 \
+    pydantic>=2.5.0 \
+    anyio>=4.0.0
+
+# Install AI/ML libraries for quantum analysis
+RUN pip3 install --no-cache-dir \
+    openai>=1.6.0 \
+    anthropic>=0.8.0 \
+    tiktoken>=0.5.0 \
+    chromadb>=0.4.20 \
+    faiss-cpu>=1.7.4 \
+    sentence-transformers>=2.2.0
+
+# Install cuQuantum SDK (GPU quantum simulation)
+RUN pip3 install --no-cache-dir cuquantum-python-cu12
+
+# Install additional tools for MCP servers
+RUN pip3 install --no-cache-dir \
+    uvicorn>=0.25.0 \
+    fastapi>=0.108.0 \
+    websockets>=12.0 \
+    python-dotenv>=1.0.0 \
+    pyyaml>=6.0
+
+# Set CUDA environment
+ENV PATH=/usr/local/cuda/bin:${PATH}
+ENV LD_LIBRARY_PATH=/usr/local/cuda/lib64:${LD_LIBRARY_PATH}
+
+# Create directories for MCP servers and agents
+RUN mkdir -p /app/mcp_servers /app/langchain_agents /app/data/vectorstore
+
+# Expose ports
+EXPOSE 7681  # ttyd web terminal
+EXPOSE 8000  # MCP server
+EXPOSE 8001  # LangChain API
+EXPOSE 8765  # WebSocket for real-time communication
+
+# Create non-root user
+RUN useradd -m -s /bin/bash houdinis && \
+    chown -R houdinis:houdinis /app
+
+# Switch to non-root user
+USER houdinis
+
+# Set working directory
+WORKDIR /app
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:8000/health || exit 1
+
+# Default command runs MCP server + Houdinis
+CMD ["python3", "-m", "mcp_servers.quantum_mcp_server"]

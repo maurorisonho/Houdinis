@@ -1,0 +1,165 @@
+version: '3.8'
+
+# Houdinis Framework with LangChain and MCP Integration
+# Author: Mauro Risonho de Paula Assumpção aka firebitsbr
+# Developed by: Human Logic & Coding with AI Assistance (Claude Sonnet 4.5)
+
+services:
+  # Main Houdinis framework with LangChain + MCP
+  houdinis-langchain:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.langchain
+    container_name: houdinis_langchain
+    ports:
+      - "127.0.0.1:7681:7681"  # ttyd web terminal
+      - "127.0.0.1:8000:8000"  # MCP server
+      - "127.0.0.1:8001:8001"  # LangChain API
+      - "127.0.0.1:8765:8765"  # WebSocket
+    environment:
+      # Quantum backends
+      - TARGET_HOST=target
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+      
+      # AI/LLM API keys (set these in .env file)
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+      
+      # MCP Configuration
+      - MCP_SERVER_HOST=0.0.0.0
+      - MCP_SERVER_PORT=8000
+      
+      # LangChain Configuration
+      - LANGCHAIN_TRACING_V2=true
+      - LANGCHAIN_API_KEY=${LANGCHAIN_API_KEY:-}
+      - LANGCHAIN_PROJECT=houdinis-quantum-crypto
+      
+    volumes:
+      - ../mcp_servers:/app/mcp_servers
+      - ../langchain_agents:/app/langchain_agents
+      - ../exploits:/app/exploits
+      - ../data:/app/data
+      - houdinis_vectorstore:/app/data/vectorstore
+      
+    networks:
+      - houdinis_net
+      
+    depends_on:
+      - target
+      - mcp-gateway
+      
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    
+    command: >
+      sh -c "
+        echo '[*] Starting Houdinis with LangChain + MCP...';
+        python3 -m mcp_servers.quantum_mcp_server &
+        python3 -m langchain_agents.quantum_agent
+      "
+    
+    restart: unless-stopped
+    
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # MCP Gateway (optional - for multiple MCP servers)
+  mcp-gateway:
+    image: python:3.11-slim
+    container_name: mcp_gateway
+    ports:
+      - "127.0.0.1:9000:9000"
+    environment:
+      - GATEWAY_PORT=9000
+    volumes:
+      - ../mcp_servers:/app/mcp_servers
+    networks:
+      - houdinis_net
+    command: >
+      sh -c "
+        pip install mcp fastapi uvicorn && 
+        uvicorn mcp_gateway:app --host 0.0.0.0 --port 9000
+      "
+    restart: unless-stopped
+
+  # Vector Database for RAG (Retrieval-Augmented Generation)
+  chromadb:
+    image: chromadb/chroma:latest
+    container_name: houdinis_chromadb
+    ports:
+      - "127.0.0.1:8080:8000"
+    volumes:
+      - chroma_data:/chroma/chroma
+    environment:
+      - CHROMA_SERVER_AUTH_CREDENTIALS_PROVIDER=chromadb.auth.token.TokenAuthCredentialsProvider
+      - CHROMA_SERVER_AUTH_CREDENTIALS="houdinis_token"
+      - CHROMA_SERVER_AUTH_PROVIDER=chromadb.auth.token.TokenAuthProvider
+    networks:
+      - houdinis_net
+    restart: unless-stopped
+
+  # Original target system (vulnerable test environment)
+  target:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.vulnerable
+    container_name: houdinis_target
+    networks:
+      - houdinis_net
+    restart: unless-stopped
+
+  # Redis for caching and session management
+  redis:
+    image: redis:7-alpine
+    container_name: houdinis_redis
+    ports:
+      - "127.0.0.1:6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - houdinis_net
+    command: redis-server --appendonly yes
+    restart: unless-stopped
+
+  # Nginx reverse proxy (optional - for production)
+  nginx:
+    image: nginx:alpine
+    container_name: houdinis_nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ../docker/nginx.conf:/etc/nginx/nginx.conf:ro
+      - nginx_certs:/etc/nginx/certs
+    networks:
+      - houdinis_net
+    depends_on:
+      - houdinis-langchain
+      - mcp-gateway
+    restart: unless-stopped
+
+networks:
+  houdinis_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
+volumes:
+  houdinis_vectorstore:
+    driver: local
+  chroma_data:
+    driver: local
+  redis_data:
+    driver: local
+  nginx_certs:
+    driver: local
