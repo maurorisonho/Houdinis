@@ -37,7 +37,7 @@ cd playground
 vercel --prod
 ```
 
-### 4. Configure Custom Domain (Optional)
+### 4. Configure Costm Domain (Optional)
 
 ```bash
 vercel domains add playground.houdinis.dev
@@ -116,7 +116,7 @@ npm run start
 4. Select `playground` directory as root
 5. Deploy
 
-**Custom Domain:**
+**Costm Domain:**
 ```bash
 # Add domain
 vercel domains add playground.houdinis.dev
@@ -542,7 +542,7 @@ jobs:
 - **Bandwidth**: 100GB/month included
 - **Builds**: Unlimited
 - **Analytics**: Basic included
-- **Custom Domain**: Free
+- **Costm Domain**: Free
 - **SSL**: Free (automatic)
 - **Total**: **$0/month**
 
@@ -645,7 +645,7 @@ const Editor = dynamic(() => import('@monaco-editor/react'), {
 ##  Pre-Launch Checklist
 
 - [ ] Environment variables configured
-- [ ] Custom domain set up (optional)
+- [ ] Costm domain set up (optional)
 - [ ] SSL certificate active
 - [ ] Analytics integrated
 - [ ] Error tracking enabled

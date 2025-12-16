@@ -91,7 +91,7 @@ Successfully implemented comprehensive multilingual documentation system for the
 #### Language Badges
 - **Updated:** `README.md`
 - **Added:**  Language selector at top
-- **Format:** `[English](README.md) | [Português](README.pt-BR.md) | [Español](README.es.md) | [](README.zh.md)`
+- **Format:** `[English](README.md) | [Portuguese](README.pt-BR.md) | [Español](README.es.md) | [](README.zh.md)`
 - **Status:**  Live and functional
 
 ### 3. **Documentation Updates**

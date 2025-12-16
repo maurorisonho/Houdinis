@@ -255,7 +255,7 @@ Pre-configured dashboards available at `/monitoring/grafana/dashboards/`:
 Alert rules configured in `/monitoring/prometheus/alert_rules.yml`:
 - **Critical**: CPU > 95%, Memory > 95%, Service down
 - **Warning**: CPU > 80%, Memory > 80%, High error rate
-- **Custom**: Quantum backend failures, exploit execution failures
+- **Costm**: Quantum backend failures, exploit execution failures
 
 ### Log Management
 

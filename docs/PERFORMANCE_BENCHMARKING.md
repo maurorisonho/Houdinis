@@ -206,7 +206,7 @@ Example PR comment format:
 
 ## Configuration
 
-### Customizing Threshold
+### Costmizing Threshold
 
 Edit `.github/workflows/performance.yml`:
 

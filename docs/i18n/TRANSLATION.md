@@ -7,7 +7,7 @@ This document provides guidelines for translating Houdinis documentation into mu
 | Language | Code | Status | README | Maintainer |
 |----------|------|--------|--------|------------|
 | English | `en` |  Complete | [README.md](../../README.md) | @maurorisonho |
-| Português (Brasil) | `pt-BR` |  Complete | [README.pt-BR.md](../../README.pt-BR.md) | @maurorisonho |
+| Portuguese (Brasil) | `pt-BR` |  Complete | [README.pt-BR.md](../../README.pt-BR.md) | @maurorisonho |
 | Español | `es` |  Complete | [README.es.md](../../README.es.md) | @maurorisonho |
 |  () | `zh` |  Complete | [README.zh.md](../../README.zh.md) | @maurorisonho |
 | Français | `fr` |  Planned | - | - |

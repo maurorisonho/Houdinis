@@ -403,7 +403,7 @@ npm i -g vercel
 vercel --prod
 ```
 
-**Custom Domain:**
+**Costm Domain:**
 ```bash
 vercel domains add playground.houdinis.dev
 ```

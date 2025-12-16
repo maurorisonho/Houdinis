@@ -1,27 +1,27 @@
 #  Comparação: Houdinis Features - APIs Pagas vs Mistral Local
 
-##  Visão Geral
+##  Overview
 
 | Aspecto | OpenAI GPT-4 | Anthropic Claude | **Mistral Local** |
 |---------|--------------|------------------|-------------------|
-| ** Custo** | $0.03/1K tokens | $0.015/1K tokens | **$0 (grátis)** |
+| ** Cost** | $0.03/1K tokens | $0.015/1K tokens | **$0 (grátis)** |
 | ** Privacidade** |  Dados enviados |  Dados enviados | ** 100% local** |
-| ** Online/Offline** |  Requer internet |  Requer internet | ** Funciona offline** |
+| ** Online/Offline** |  Requires internet |  Requires internet | ** Funciona offline** |
 | ** Velocidade (GPU)** | ~40 tok/s | ~30 tok/s | **~50-120 tok/s** |
 | ** Limites de uso** |  Rate limits |  Rate limits | ** Ilimitado** |
 | ** Qualidade** | 10/10 | 9.5/10 | **8/10** |
 | ** Tamanho** | API (nuvem) | API (nuvem) | **4.1GB local** |
-| ** Customização** | Baixa | Média | **Alta** |
+| ** Costmização** | Baixa | Média | **Alta** |
 
 ---
 
 ##  Features Exclusivas do Mistral Local
 
-### 1. **Zero Custos Operacionais**
+### 1. **Zero Costs Operacionais**
 
 **APIs Pagas:**
 ```python
-# Custo mensal típico
+# Cost mensal típico
 queries_por_dia = 100
 tokens_por_query = 1500
 dias_mes = 30
@@ -35,7 +35,7 @@ custo_claude = (queries_por_dia * tokens_por_query * dias_mes * 0.015) / 1000
 
 **Mistral Local:**
 ```python
-# Custo mensal
+# Cost mensal
 custo_mistral = 0  # Totalmente grátis!
 queries_ilimitadas = True
 rate_limits = None
@@ -47,7 +47,7 @@ rate_limits = None
 
 ### 2. **Privacidade Total para Dados Sensíveis**
 
-**Cenários Críticos:**
+**Scenarios Críticos:**
 
 ####  Auditoria Financeira
 ```python
@@ -98,13 +98,13 @@ Análise de vulnerabilidades em:
 Tempo total: 3.2s
   - Latência rede: 1.8s
   - Processamento: 1.4s
-Custo: $0.045
+Cost: $0.045
 
 # Mistral Local (RTX 4090)
 Tempo total: 0.8s
   - Latência rede: 0s
   - Processamento: 0.8s
-Custo: $0
+Cost: $0
 
 Speedup: 4x mais rápido + grátis!
 ```
@@ -114,11 +114,11 @@ Speedup: 4x mais rápido + grátis!
 ```bash
 # Claude Sonnet (API)
 Tempo: 12.5s
-Custo: $0.15
+Cost: $0.15
 
 # Mistral Local + CodeLlama 13B (GPU)
 Tempo: 8.2s
-Custo: $0
+Cost: $0
 
 Speedup: 1.5x mais rápido + grátis!
 ```
@@ -128,11 +128,11 @@ Speedup: 1.5x mais rápido + grátis!
 ```bash
 # GPT-4 (com rate limits)
 Tempo: 8 minutos (delays forçados)
-Custo: $4.50
+Cost: $4.50
 
 # Mistral Local (paralelo)
 Tempo: 2 minutos (sem delays)
-Custo: $0
+Cost: $0
 
 Speedup: 4x mais rápido + economia de $4.50
 ```
@@ -174,7 +174,7 @@ APIs Pagas: IMPOSSÍVEL
 
 ---
 
-### 5. **Customização Avançada**
+### 5. **Costmização Avançada**
 
 #### Fine-Tuning para Casos Específicos
 
@@ -219,7 +219,7 @@ agent = MistralQuantumAgent(
 
 ### 6. **Desenvolvimento e Testes Intensivos**
 
-#### Cenário: Desenvolvimento de Novo Exploit
+#### Scenario: Desenvolvimento de Novo Exploit
 
 **Workflow típico:**
 ```python
@@ -293,7 +293,7 @@ response = agent.chat("Como explorar vulnerabilidade em Y?")
 
 ---
 
-##  Análise de Custos: Caso Real
+##  Análise de Costs: Caso Real
 
 ### Empresa de Pentest (10 consultores)
 
@@ -302,19 +302,19 @@ response = agent.chat("Como explorar vulnerabilidade em Y?")
 - Tokens médios por query: 1800
 - Dias úteis: 22
 
-**Custo com GPT-4:**
+**Cost com GPT-4:**
 ```
 Por consultor/mês: (50 * 1800 * 22 * 0.03) / 1000 = $59.40
 Total (10 consultores): $594/mês = $7,128/ano
 ```
 
-**Custo com Claude:**
+**Cost com Claude:**
 ```
 Por consultor/mês: (50 * 1800 * 22 * 0.015) / 1000 = $29.70
 Total (10 consultores): $297/mês = $3,564/ano
 ```
 
-**Custo com Mistral Local:**
+**Cost com Mistral Local:**
 ```
 Hardware: RTX 4090 = $1,600 (one-time)
 Energia: ~$20/mês = $240/ano
@@ -352,7 +352,7 @@ ROI: 3.8x em 3 anos
    - Laboratórios de pesquisa
 
 4. **Desenvolvimento intensivo**
-   - Testes automatizados
+   - Automated tests
    - Iterações rápidas
    - Experimentação
 
@@ -410,10 +410,10 @@ ROI: 3.8x em 3 anos
 | **Explicações Técnicas** | 9.5/10 | 8/10 | GPT-4 |
 | **Velocidade (GPU)** | 7/10 | 10/10 | **Mistral** |
 | **Privacidade** | 2/10 | 10/10 | **Mistral** |
-| **Custo** | 3/10 | 10/10 | **Mistral** |
+| **Cost** | 3/10 | 10/10 | **Mistral** |
 | **Offline** | 0/10 | 10/10 | **Mistral** |
 
-**Conclusão**: Mistral Local vence em custo, privacidade, velocidade e disponibilidade offline. GPT-4 vence em qualidade absoluta para tarefas complexas.
+**Conclusion**: Mistral Local vence em custo, privacidade, velocidade e disponibilidade offline. GPT-4 vence em qualidade absoluta para tarefas complexas.
 
 ---
 
@@ -487,7 +487,7 @@ agent.chat("Critical decision: Migrate to PQC now?", use_premium=True)
  100% privacidade e compliance  
  Offline/air-gapped support  
  Velocidade superior com GPU  
- Customização total  
+ Costmização total  
  RAG com dados sensíveis  
  Sem rate limits  
  Desenvolvimento intensivo sem custos  

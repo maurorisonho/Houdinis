@@ -200,9 +200,9 @@ Infraestrutura:
 
 Crie um roadmap de migração com:
 - Fases e timeline
-- Custo-benefício de cada abordagem
+- Cost-benefício de cada abordagem
 - Riscos e mitigações
-- Testes e validação
+- Testes e validation
 """)
 
 print(response)
@@ -316,16 +316,16 @@ environment:
 
 | Feature | Mistral Local | OpenAI GPT-4 | Anthropic Claude |
 |---------|---------------|--------------|------------------|
-| **Custo** | $0 | $0.03/1K tokens | $0.015/1K tokens |
+| **Cost** | $0 | $0.03/1K tokens | $0.015/1K tokens |
 | **Privacidade** | 100% local | Dados enviados | Dados enviados |
 | **Velocidade** | GPU: ~50 tok/s | ~40 tok/s | ~30 tok/s |
 | **Offline** |  Sim |  Não |  Não |
 | **Limites** | Sem limites | Rate limits | Rate limits |
 | **Qualidade** | 8/10 | 10/10 | 9.5/10 |
 | **Tamanho** | 4.1GB | N/A | N/A |
-| **Customização** | Alta | Baixa | Média |
+| **Costmização** | Alta | Baixa | Média |
 
-**Conclusão**: Mistral Local é ideal para:
+**Conclusion**: Mistral Local é ideal para:
 -  Ambientes air-gapped/isolados
 -  Uso intensivo (testes, desenvolvimento)
 -  Dados sensíveis
@@ -601,7 +601,7 @@ if __name__ == "__main__":
 
 ---
 
-##  Conclusão
+##  Conclusion
 
 **Mistral Local adiciona ao Houdinis:**
 

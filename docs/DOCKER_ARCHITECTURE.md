@@ -2,7 +2,7 @@
 
 ##  Índice
 
-1. [Visão Geral](#visão-geral)
+1. [Overview](#visão-geral)
 2. [Arquitetura](#arquitetura)
 3. [Componentes](#componentes)
 4. [Perfis de Deployment](#perfis-de-deployment)
@@ -13,7 +13,7 @@
 
 ---
 
-##  Visão Geral
+##  Overview
 
 **Houdinis Framework agora roda 100% em Docker containers.**
 

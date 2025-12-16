@@ -257,7 +257,7 @@ playground/
 
 ### Week 8: Launch
 - [ ] Vercel deployment
-- [ ] Custom domain setup
+- [ ] Costm domain setup
 - [ ] Analytics integration
 - [ ] Monitoring setup
 - [ ] Launch announcement
@@ -416,7 +416,7 @@ vercel
 # Deploy to production
 vercel --prod
 
-# Custom domain
+# Costm domain
 vercel domains add playground.houdinis.dev
 ```
 

@@ -34,7 +34,7 @@ def execute_distributed(
 
 #### 2.  Warnings no CI/CD (`ci.yml`)
 
-##### 2.1. Secret `PYPI_API_TOKEN` não configurado
+##### 2.1. Secret `PYPI_API_TOKEN` not configured
 **Problema:**
 - Job `publish-pypi` referenciava secret inexistente
 - Pipeline falharia se tentasse publicar no PyPI
@@ -56,12 +56,12 @@ if: github.event_name == 'push' &&
 **Problema:**
 - CI/CD assumia infraestrutura cloud existente (EKS/AKS/GKE)
 - Deploy jobs falhariam pois não há clusters configurados
-- Custos estimados: $100-300/mês não pagos
+- Estimated costs: $100-300/mês não pagos
 
 **Solução:**
 - Removido jobs de deploy cloud (por enquanto)
 - CI/CD funciona 100% sem infraestrutura externa
-- Apenas GitHub Actions (GRÁTIS)
+- Apenas GitHub Actions (FREE)
 
 **Status:**  CORRIGIDO
 
@@ -72,33 +72,33 @@ if: github.event_name == 'push' &&
 ### 1. `docs/INFRASTRUCTURE_GUIDE.md` (Novo - 500+ linhas)
 **Conteúdo:**
 -  Diferença entre ambiente local vs cloud
--  O que funciona AGORA (sem configuração)
--  O que requer configuração simples (PyPI - 5 min)
+-  O que funciona AGORA (sem configuration)
+-  O que requer configuration simples (PyPI - 5 min)
 -  O que requer infraestrutura paga (Cloud - $100-300/mês)
 -  Guia passo a passo para cada cenário
--  Custos detalhados por serviço
+-  Costs detalhados por serviço
 -  Troubleshooting completo
 
 **Destaques:**
 ```markdown
-Funciona sem configuração:
--  Desenvolvimento local completo
+Funciona sem configuration:
+-  Complete local development
 -  CI/CD automatizado (testes, lint, security)
 -  Docker builds
 -  Coverage reports
 -  Simuladores quânticos
 
-Custos:
+Costs:
 - Desenvolvimento: $0/mês 
 - PyPI: $0/mês 
-- Cloud: $100-300/mês  (opcional, não configurado)
-- Quantum hardware: $0-100K+/ano  (opcional, não configurado)
+- Cloud: $100-300/mês  (opcional, not configured)
+- Quantum hardware: $0-100K+/ano  (opcional, not configured)
 ```
 
 ### 2. `.github/README.md` (Novo - 400+ linhas)
 **Conteúdo:**
 -  Status detalhado de cada job do pipeline
--  O que funciona vs o que requer configuração
+-  O que funciona vs o que requer configuration
 -  Guia de uso para desenvolvedores
 -  Checklist de deploy
 -  Troubleshooting de problemas comuns
@@ -115,7 +115,7 @@ Custos:
  PyPI Publish (1 min - se configurado)
 
 Total: 15-20 minutos
-Custo: $0/mês 
+Cost: $0/mês 
 ```
 
 ### 3. `README.md` (Atualizado)
@@ -198,10 +198,10 @@ Custo: $0/mês
 
 ##  Secrets e Configurações
 
-### Status Atual
+### Current Status
 ```yaml
 #  Já Configurados (Automático):
-GITHUB_TOKEN: Fornecido pelo GitHub automaticamente
+GITHUB_TOKEN: Fornecido pelo GitHub automatically
 
 #  Não Configurados (Opcional):
 PYPI_API_TOKEN: Necessário apenas para publicação no PyPI
@@ -214,7 +214,7 @@ GCP_SA_KEY: Para deploy em Google Cloud
 IBM_QUANTUM_TOKEN: Para quantum hardware real
 ```
 
-### Como Configurar PyPI (5 minutos):
+### Como Configure PyPI (5 minutos):
 ```bash
 # 1. Criar conta
 https://pypi.org/account/register/
@@ -231,7 +231,7 @@ Valor: pypi-AgEIcHlwaS5vcmcC...
 git tag v1.0.0
 git push origin v1.0.0
 
-# 5. Pipeline publica automaticamente!
+# 5. Pipeline publica automatically!
 ```
 
 ---
@@ -247,10 +247,10 @@ git push origin v1.0.0
 - [x]  README principal atualizado
 
 ### Validações:
-- [x]  Pipeline funciona sem configuração externa
+- [x]  Pipeline funciona sem configuration externa
 - [x]  Nenhum custo adicional necessário para desenvolvimento
 - [x]  PyPI publish é opcional e condicional
-- [x]  Cloud deploy removido (não configurado)
+- [x]  Cloud deploy removido (not configured)
 - [x]  Documentação clara sobre o que funciona vs requer config
 
 ### Testes:
@@ -287,10 +287,10 @@ git push origin main
 ### Depois:
 ```
  Código type-safe (sem erros Pylance)
- CI/CD funciona 100% sem configuração
+ CI/CD funciona 100% sem configuration
  PyPI publish é opcional e condicional
  Documentação completa de infraestrutura
- Custos transparentes ($0 para dev, $500-2000 para prod)
+ Costs transparentes ($0 para dev, $500-2000 para prod)
  Guias passo a passo para cada cenário
  Developers podem começar imediatamente sem custo
 ```
@@ -304,7 +304,7 @@ git push origin main
    - Criar conta PyPI
    - Configurar PYPI_API_TOKEN
    - Criar release v1.0.0
-   - Instalar de qualquer lugar: `pip install houdinis`
+   - Install from anywhere: `pip install houdinis`
 
 ### Médio Prazo (Grátis):
 2. **Docker Registry** (10 minutos)
@@ -318,28 +318,28 @@ git push origin main
    - Quantum hardware access (IBM/AWS/Azure)
    - Monitoring e logging (Datadog/New Relic)
    - Auto-scaling e load balancing
-   - **Custo:** $500-2000/mês
+   - **Cost:** $500-2000/mês
 
 ---
 
-##  Conclusão
+##  Conclusion
 
 ### Status Final:
  **Todos os problemas identificados foram corrigidos**
- **CI/CD funciona 100% sem configuração adicional**
+ **CI/CD funciona 100% sem configuration adicional**
  **Documentação completa criada**
- **Custos transparentes documentados**
+ **Costs transparentes documentados**
  **Guias de uso criados**
 
 ### Recomendação:
-**Usar configuração atual (grátis) para desenvolvimento.**
+**Usar configuration atual (grátis) para desenvolvimento.**
 - CI/CD automatizado funciona perfeitamente
 - Nenhum custo mensal
-- Nenhuma configuração adicional necessária
-- Quando pronto para publicar: configurar PyPI (5 min, grátis)
+- No additional configuration needed
+- When ready to publish: configure PyPI (5 min, grátis)
 - Quando pronto para produção: seguir guia de infraestrutura
 
-### Custos:
+### Costs:
 - **Atual:** $0/mês 
 - **Com PyPI:** $0/mês 
 - **Com Cloud:** $500-2000/mês  (opcional, futuro)

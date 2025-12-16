@@ -300,7 +300,7 @@ docker system prune -a
 
 ---
 
-##  **Conclusão**
+##  **Conclusion**
 
 **Suas imagens Docker (26.4GB Mistral + 20.7GB Core + etc) estão SALVAS no disco permanentemente!**
 

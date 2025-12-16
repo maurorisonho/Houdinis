@@ -63,7 +63,7 @@ tests/
 - **Features:**
   - Coverage tracking with HTML/XML reports
   - 60% minimum coverage requirement
-  - Custom markers (unit, integration, e2e, security, quantum)
+  - Costm markers (unit, integration, e2e, security, quantum)
   - Proper exclusions (tests/, venv/, __pycache__)
 
 #### Unit Tests Created

@@ -5,7 +5,7 @@
 
 ---
 
-##  Status Atual (8.6/10)
+##  Current Status (8.6/10)
 
 ### Métricas Atuais
 ```
@@ -81,7 +81,7 @@ python scripts/check_quality.py
 - Score atual
 - Funções sem type hints
 - Funções sem docstrings
-- Recomendações
+- Recommendations
 
 ### 2. CI/CD Integration (Criado )
 ```yaml
@@ -159,15 +159,15 @@ async def fetch_data(url: str) -> Dict[str, Any]:
 
 ---
 
-##  Roadmap de Implementação
+##  Roadmap de Implementation
 
 ### Semana 1: Setup (Completo )
-- [x] Criar script de validação
+- [x] Criar script de validation
 - [x] Atualizar pyrightconfig.json
 - [x] Integrar no CI/CD
 - [x] Documentar plano
 
-### Semana 2-3: Implementação (98 funções)
+### Semana 2-3: Implementation (98 funções)
 - [ ] Fase 1: quantum/ + core/ + scanners/ (40 funções, 40%)
 - [ ] Fase 2: exploits/ principais (30 funções, 30%)
 - [ ] Fase 3: utils/ + security/ (28 funções, 28%)
@@ -200,7 +200,7 @@ Score:          9.5/10
 
 ### Benefícios
 1. **Melhor IDE Support:** Autocomplete mais preciso
-2. **Menos Bugs:** Type checking pega erros antes da execução
+2. **Menos Bugs:** Type checking pega erros antes da execution
 3. **Documentação Implícita:** Types servem como documentação
 4. **Refactoring Seguro:** IDE detecta incompatibilidades
 5. **Onboarding Rápido:** Novos devs entendem APIs mais rápido
@@ -300,7 +300,7 @@ black . && isort .
 
 ##  Resumo
 
-**Status Atual:** 8.6/10 (Bom)  
+**Current Status:** 8.6/10 (Bom)  
 **Meta:** 9.5/10 (Excelente)  
 **Gap:** 0.9 pontos  
 **Esforço:** ~2-3 semanas (98 funções)  

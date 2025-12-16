@@ -47,7 +47,7 @@ from exploits.grover_bruteforce import GroverBruteforceExploit  # type: ignore
 ```
 
 ### 3. Type stubs (`.pyi`)
-Fornecem assinaturas de tipo sem implementação real
+Fornecem assinaturas de tipo sem implementation real
 
 ### 4. Configuração do Pylance
 Desabilita warnings específicos via `pyrightconfig.json`
@@ -65,7 +65,7 @@ Ctrl+Shift+P → "Python: Restart Language Server"
 ```
 
 ### Opção 3: Ignorar warnings
-Os warnings não afetam a execução - o código funciona perfeitamente quando executado no notebook.
+Os warnings não afetam a execution - o código funciona perfeitamente quando executado no notebook.
 
 ##  Resultado Esperado
 

@@ -225,7 +225,7 @@ Integrate with Microsoft Azure Quantum platform.
 
 ---
 
-#### 13. Custom Exploit Development
+#### 13. Costm Exploit Development
 **Duration:** 25 minutes | **Difficulty:** Advanced
 
 Build your own quantum cryptanalysis exploits.
@@ -355,7 +355,7 @@ You understand quantum mechanics, want practical tools.
 1. Video #05: Multi-Backend Config (15 min)
 2. Video #09: IBM Quantum (15 min)
 3. Video #10: NVIDIA cuQuantum (18 min)
-4. Video #13: Custom Exploits (25 min)
+4. Video #13: Costm Exploits (25 min)
 5. Video #14: QML Attacks (30 min)
 6. Video #15: Benchmarking (20 min)
 

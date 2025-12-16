@@ -233,7 +233,7 @@ widgets.interact(run_shor_attack, key_size=key_size_slider)
 10.  NVIDIA cuQuantum GPU Acceleration (18 min)
 11.  Amazon Braket Setup (12 min)
 12.  Azure Quantum Configuration (12 min)
-13.  Custom Exploit Development (25 min)
+13.  Costm Exploit Development (25 min)
 14.  Quantum Machine Learning Attacks (30 min)
 15.  Performance Benchmarking (20 min)
 16.  Security Best Practices (15 min)
@@ -458,7 +458,7 @@ Houdinis/
     environment.yml          # Conda environment
     postBuild                # Post-installation script
     apt.txt                  # System packages (if needed)
-    start                    # Custom startup script
+    start                    # Costm startup script
  notebooks/
     01-*.ipynb               # Existing notebooks
     playground.ipynb         # Quick start notebook
@@ -831,9 +831,9 @@ async def run_shor(request: ShorRequest):
         raise HTTPException(408, "Request timeout")
 ```
 
-#### Swagger UI Customization
+#### Swagger UI Costmization
 ```python
-# Custom OpenAPI schema with examples
+# Costm OpenAPI schema with examples
 @app.get("/openapi.json", include_in_schema=False)
 def get_openapi():
     return {

@@ -384,7 +384,7 @@ print(f'Queue: {backend.status().pending_jobs} jobs')
 
 ### Advanced Topics
 
-- **Custom Exploits**: [Tutorial](tutorials/custom_exploits.md)
+- **Costm Exploits**: [Tutorial](tutorials/custom_exploits.md)
 - **Multi-Backend**: [Benchmark Guide](tutorials/multi_backend.md)
 - **Production Deployment**: [Infrastructure Guide](INFRASTRUCTURE_GUIDE.md)
 - **Security Hardening**: [Security Guide](guides/security_best_practices.md)
