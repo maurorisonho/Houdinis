@@ -57,7 +57,7 @@ print(response)
 #### 6. **Aceleração GPU com NVIDIA**
 - Inferência 5-10x mais rápida com cuQuantum
 - Suporte para até 40 qubits práticos
-- Execução paralela de modelos
+- Parallel model execution
 - Otimização CUDA 12.4.1
 
 ---
@@ -242,7 +242,7 @@ for q in questions:
 
 ---
 
-##  Configuração Avançada
+##  Advanced Configuration
 
 ### **Escolher Modelo Diferente**
 

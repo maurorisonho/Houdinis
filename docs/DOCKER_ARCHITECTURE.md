@@ -116,7 +116,7 @@
 -  Dashboard com status de containers
 -  Seleção de exploits
 -  Chat com AI assistant (Mistral)
--  Configuração de backends quânticos
+-  Quantum backends configuration
 -  Visualização de resultados
 -  Monitoramento em tempo real
 

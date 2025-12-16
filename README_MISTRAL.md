@@ -338,7 +338,7 @@ agent.chat("Executive decision: Migrate now?", use_premium=True)
 
 ---
 
-##  Configuração Avançada
+##  Advanced Configuration
 
 ### Ajustar Parâmetros do Modelo
 

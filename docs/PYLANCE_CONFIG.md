@@ -3,31 +3,31 @@
 ##  Configuration Files
 
 ### `pyrightconfig.json`
-Configura o Pylance/Pyright para o projeto Houdinis:
-- Desabilita warnings de imports ausentes
-- Adiciona caminhos extras para módulos
-- Configura para Python 3.10 no Linux
+Configures Pylance/Pyright for the Houdinis project:
+- Disables missing import warnings
+- Adds extra paths for modules
+- Configures for Python 3.10 on Linux
 
 ### Type Stubs (`.pyi` files)
-Fornecem informações de tipo para o Pylance:
+Provide type information for Pylance:
 - `quantum/backend.pyi` - QuantumBackendManager
 - `exploits/grover_bruteforce.pyi` - GroverBruteforceExploit
 
 ### `notebooks/.vscode/settings.json`
-Configuração específica para notebooks Jupyter:
-- Ignora warnings de imports
-- Adiciona caminhos do Houdinis ao Python path
+Specific configuration for Jupyter notebooks:
+- Ignores import warnings
+- Adds Houdinis paths to Python path
 
-##  Por que esses warnings aparecem?
+##  Why do these warnings appear?
 
-Os notebooks Houdinis executam código de duas formas:
+Houdinis notebooks execute code in two ways:
 
-1. **No host (VS Code)** - Para gerenciar Docker
-2. **No container Docker** - Para ataques quânticos (onde Qiskit e Houdinis estão instalados)
+1. **On host (VS Code)** - To manage Docker
+2. **In Docker container** - For quantum attacks (where Qiskit and Houdinis are installed)
 
-O Pylance analisa o código **no contexto do host**, onde:
--  `qiskit` não está instalado
--  Módulos `quantum.*` e `exploits.*` existem mas podem não estar no path
+Pylance analyzes code **in the host context**, where:
+-  `qiskit` is not installed
+-  `quantum.*` and `exploits.*` modules exist but may not be in path
 
 ##  Soluções Implementadas
 

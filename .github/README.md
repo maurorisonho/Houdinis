@@ -2,7 +2,7 @@
 
 ##  Status Atual
 
-###  O que funciona AGORA (sem configuração):
+###  What works NOW (without configuration):
 
 1. **Lint & Code Quality**
    - Black formatter check
@@ -31,7 +31,7 @@
    - Validação com twine
    - Artefatos disponíveis
 
-###  O que requer configuração (opcional):
+###  What requires configuration (optional):
 
 6. **Publish to PyPI**
    - **Status:** DESABILITADO (sem secret)
@@ -361,7 +361,7 @@ git push origin v1.0.1
 ##  Documentação Adicional
 
 - **Infraestrutura completa:** [INFRASTRUCTURE_GUIDE.md](../docs/INFRASTRUCTURE_GUIDE.md)
-- **Configuração de secrets:** [GitHub Secrets Docs](https://docs.github.com/en/actions/security-guides/encrypted-secrets)
+- **Secrets configuration:** [GitHub Secrets Docs](https://docs.github.com/en/actions/security-guides/encrypted-secrets)
 - **PyPI publishing:** [PyPI Help](https://pypi.org/help/)
 - **GitHub Actions:** [Actions Documentation](https://docs.github.com/en/actions)
 
