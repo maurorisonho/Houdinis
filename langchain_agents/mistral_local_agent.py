@@ -19,17 +19,11 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 try:
     from langchain_community.llms import Ollama
-    from langchain_community.embeddings import OllamaEmbeddings
-    from langchain.agents import AgentExecutor, create_react_agent
-    from langchain.tools import Tool
-    from langchain.prompts import PromptTemplate
-    from langchain.memory import ConversationBufferMemory
-    from langchain_community.vectorstores import Chroma
-    from langchain.chains import RetrievalQA
+    LANGCHAIN_AVAILABLE = True
 except ImportError as e:
-    print(f"[!] LangChain Community not installed: {e}")
-    print("[!] Install with: pip install langchain-community")
-    sys.exit(1)
+    print(f"[!] LangChain not available: {e}")
+    print("[!] Running in simple mode without LangChain features")
+    LANGCHAIN_AVAILABLE = False
 
 
 class MistralQuantumAgent:
