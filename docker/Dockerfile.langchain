@@ -86,10 +86,10 @@ ENV LD_LIBRARY_PATH=/usr/local/cuda/lib64:${LD_LIBRARY_PATH}
 RUN mkdir -p /app/mcp_servers /app/langchain_agents /app/data/vectorstore
 
 # Expose ports
-EXPOSE 7681  # ttyd web terminal
-EXPOSE 8000  # MCP server
-EXPOSE 8001  # LangChain API
-EXPOSE 8765  # WebSocket for real-time communication
+EXPOSE 7681
+EXPOSE 8000
+EXPOSE 8001
+EXPOSE 8765
 
 # Create non-root user
 RUN useradd -m -s /bin/bash houdinis && \

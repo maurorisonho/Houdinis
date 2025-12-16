@@ -1,5 +1,10 @@
+#!/usr/bin/env python3
 """
-Houdinis Framework - Unit Tests for Security Configuration
+# Houdinis Framework - Quantum Cryptography Testing Platform
+# Author: Mauro Risonho de Paula Assumpção aka firebitsbr
+# Developed by: Human Logic & Coding with AI Assistance (Claude Sonnet 4.5)
+# License: MIT
+
 Tests input validation, security patterns, and configuration
 """
 

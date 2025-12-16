@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-Houdinis Framework - Quantum Cryptography MCP Server
-Author: Mauro Risonho de Paula Assumpção aka firebitsbr
-Developed by: Human Logic & Coding with AI Assistance (Claude Sonnet 4.5)
-License: MIT
+# Houdinis Framework - Quantum Cryptography Testing Platform
+# Author: Mauro Risonho de Paula Assumpção aka firebitsbr
+# Developed by: Human Logic & Coding with AI Assistance (Claude Sonnet 4.5)
+# License: MIT
 
 Model Context Protocol server for quantum cryptography analysis.
 Provides tools and context for AI agents to interact with Houdinis exploits.

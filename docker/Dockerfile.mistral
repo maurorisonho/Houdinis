@@ -1,0 +1,141 @@
+# Houdinis Framework - Local Mistral AI Edition
+# 100% Offline AI-Powered Quantum Cryptography Testing
+# Author: Mauro Risonho de Paula Assumpção aka firebitsbr
+
+FROM nvidia/cuda:12.4.1-devel-ubuntu22.04
+
+LABEL maintainer="mauro.risonho@gmail.com"
+LABEL description="Houdinis with Local Mistral AI (Ollama)"
+LABEL version="2.0-mistral"
+
+# Prevent interactive prompts
+ENV DEBIAN_FRONTEND=noninteractive
+ENV PYTHONUNBUFFERED=1
+ENV CUDA_VISIBLE_DEVICES=0
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    python3.11 \
+    python3.11-dev \
+    python3-pip \
+    git \
+    wget \
+    curl \
+    build-essential \
+    cmake \
+    libssl-dev \
+    libffi-dev \
+    ttyd \
+    vim \
+    htop \
+    tmux \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Ollama
+RUN curl -fsSL https://ollama.ai/install.sh | sh
+
+# Set working directory
+WORKDIR /opt/houdinis
+
+# Copy requirements
+COPY requirements.txt requirements-langchain.txt ./
+
+# Install Python dependencies (lightweight versions only)
+RUN pip3 install --no-cache-dir --timeout=300 -r requirements.txt
+RUN pip3 install --no-cache-dir --timeout=300 langchain langchain-core langchain-community langchain-openai
+RUN pip3 install --no-cache-dir --timeout=300 \
+    chromadb \
+    faiss-cpu \
+    sentence-transformers || echo "Warning: Some AI packages failed to install"
+
+# Install NVIDIA cuQuantum (for GPU quantum simulation) - optional
+RUN pip3 install --no-cache-dir --timeout=300 cuquantum-python-cu12 || echo "Warning: cuQuantum not installed"
+
+# Copy Houdinis code
+COPY . .
+
+# Create data directories
+RUN mkdir -p /opt/houdinis/data/vectorstore_local \
+    /opt/houdinis/data/ollama_models \
+    /var/log/houdinis
+
+# Create non-root user
+RUN useradd -m -s /bin/bash houdinis && \
+    chown -R houdinis:houdinis /opt/houdinis /var/log/houdinis
+
+# Expose ports
+# 7681: ttyd (web terminal)
+# 8001: LangChain API
+# 8765: WebSocket
+# 11434: Ollama server
+EXPOSE 7681 8001 8765 11434
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+    CMD curl -f http://localhost:11434/api/tags || exit 1
+
+# Switch to non-root user
+USER houdinis
+
+# Start script
+COPY --chown=houdinis:houdinis <<'EOF' /opt/houdinis/start-mistral.sh
+#!/bin/bash
+set -e
+
+echo "🚀 Starting Houdinis with Local Mistral AI..."
+
+# Start Ollama server in background
+echo "[*] Starting Ollama server..."
+ollama serve &
+OLLAMA_PID=$!
+sleep 5
+
+# Pull Mistral model if not exists
+echo "[*] Checking Mistral model..."
+if ! ollama list | grep -q "mistral:7b-instruct"; then
+    echo "[*] Pulling Mistral 7B Instruct model (4.1GB)..."
+    ollama pull mistral:7b-instruct
+    echo "[+] Model downloaded successfully!"
+fi
+
+# Optional: Pull CodeLlama for better exploit generation
+if [ "$PULL_CODELLAMA" = "true" ]; then
+    echo "[*] Pulling CodeLlama 13B (7.3GB)..."
+    ollama pull codellama:13b-instruct
+fi
+
+# Start web terminal
+echo "[*] Starting web terminal on port 7681..."
+ttyd -p 7681 bash &
+
+# Display info
+echo ""
+echo "═════════════════════════════════════════════════════"
+echo "  ✅ Houdinis Local Mistral AI - Ready!"
+echo "═════════════════════════════════════════════════════"
+echo ""
+echo "🌐 Access Points:"
+echo "  • Web Terminal: http://localhost:7681"
+echo "  • Ollama API: http://localhost:11434"
+echo ""
+echo "🤖 Available Models:"
+ollama list
+echo ""
+echo "💡 Quick Start:"
+echo "  python3 -m langchain_agents.mistral_local_agent"
+echo ""
+echo "📚 Or try interactive chat:"
+echo "  cd /opt/houdinis"
+echo "  python3 langchain_agents/mistral_local_agent.py"
+echo ""
+echo "═════════════════════════════════════════════════════"
+echo ""
+
+# Keep container running
+wait $OLLAMA_PID
+EOF
+
+RUN chmod +x /opt/houdinis/start-mistral.sh
+
+# Default command
+CMD ["/opt/houdinis/start-mistral.sh"]

@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """
-Script para remover todos os emojis de todos os arquivos do projeto Houdinis.
+Script to remove all emojis from all files in Houdinis project.
 """
 
 import os
 import re
 from pathlib import Path
 
-# Padrão regex expandido para capturar todos os emojis Unicode
+# Expanded regex pattern to capture all Unicode emojis
 EMOJI_PATTERN = re.compile(
     "["
     "\U0001f1e0-\U0001f1ff"  # flags (iOS)
@@ -28,30 +28,30 @@ EMOJI_PATTERN = re.compile(
     flags=re.UNICODE,
 )
 
-# Extensões de arquivo para processar
+# File extensions to process
 EXTENSIONS = {".py", ".ipynb", ".md", ".txt", ".sh", ".yml", ".yaml", ".json", ".ini"}
 
-# Diretórios a ignorar
+# Directories to ignore
 IGNORE_DIRS = {"__pycache__", ".git", "node_modules", "venv", "env", ".venv"}
 
 
 def should_process_file(file_path):
-    """Verifica se o arquivo deve ser processado."""
-    # Ignora este script
+    """Check if file should be processed."""
+    # Ignore this script
     if file_path.name in ["remove_all_emojis.py", "remove_emojis.py"]:
         return False
 
-    # Verifica extensão
+    # Check extension
     return file_path.suffix in EXTENSIONS
 
 
 def remove_emojis_from_text(text):
-    """Remove todos os emojis de um texto."""
+    """Remove all emojis from text."""
     return EMOJI_PATTERN.sub("", text)
 
 
 def process_file(file_path):
-    """Processa um arquivo removendo todos os emojis."""
+    """Process file by removing all emojis."""
     try:
         with open(file_path, "r", encoding="utf-8") as f:
             original_content = f.read()
@@ -59,7 +59,7 @@ def process_file(file_path):
         # Remove emojis
         cleaned_content = remove_emojis_from_text(original_content)
 
-        # Se houve mudanças, salva o arquivo
+        # If changes occurred, save file
         if original_content != cleaned_content:
             with open(file_path, "w", encoding="utf-8") as f:
                 f.write(cleaned_content)
@@ -68,25 +68,25 @@ def process_file(file_path):
         return False, 0
 
     except Exception as e:
-        print(f"Erro ao processar {file_path}: {e}")
+        print(f"Error processing {file_path}: {e}")
         return False, 0
 
 
 def main():
-    """Função principal."""
+    """Main function."""
     project_root = Path("/home/test/Downloads/github/portifolio/Houdinis")
 
-    print(f"Removendo emojis de todos os arquivos em: {project_root}")
-    print(f"Extensões processadas: {', '.join(sorted(EXTENSIONS))}")
+    print(f"Removing emojis from all files in: {project_root}")
+    print(f"Extensions processed: {', '.join(sorted(EXTENSIONS))}")
     print("-" * 80)
 
     files_processed = 0
     files_modified = 0
     total_chars_removed = 0
 
-    # Percorre todos os arquivos do projeto
+    # Iterate through all project files
     for root, dirs, files in os.walk(project_root):
-        # Remove diretórios ignorados da busca
+        # Remove ignored directories from search
         dirs[:] = [d for d in dirs if d not in IGNORE_DIRS]
 
         for file in files:
@@ -100,15 +100,15 @@ def main():
                     files_modified += 1
                     total_chars_removed += chars_removed
                     print(
-                        f" {file_path.relative_to(project_root)} ({chars_removed} caracteres removidos)"
+                        f" {file_path.relative_to(project_root)} ({chars_removed} chars removed)"
                     )
 
     print("-" * 80)
-    print(f"\nResumo:")
-    print(f"  Arquivos processados: {files_processed}")
-    print(f"  Arquivos modificados: {files_modified}")
-    print(f"  Total de caracteres removidos: {total_chars_removed}")
-    print("\n Remoção de emojis concluída!")
+    print(f"\nSummary:")
+    print(f"  Files processed: {files_processed}")
+    print(f"  Files modified: {files_modified}")
+    print(f"  Total chars removed: {total_chars_removed}")
+    print("\n Emoji removal completed!")
 
 
 if __name__ == "__main__":

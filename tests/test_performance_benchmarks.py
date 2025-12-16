@@ -1,10 +1,11 @@
+#!/usr/bin/env python3
 """
-Performance Benchmark Tests for CI/CD
-Author: Mauro Risonho de Paula Assumpção aka firebitsbr
-Developed by: Human Logic & Coding with AI Assistance (Claude Sonnet 4.5)
-License: MIT
+# Houdinis Framework - Quantum Cryptography Testing Platform
+# Author: Mauro Risonho de Paula Assumpção aka firebitsbr
+# Developed by: Human Logic & Coding with AI Assistance (Claude Sonnet 4.5)
+# License: MIT
 
-Automated performance regression testing for Houdinis Framework.
+Performance Benchmark Tests for CI/CD
 """
 
 import pytest

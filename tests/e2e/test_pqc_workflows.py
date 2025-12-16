@@ -1,21 +1,20 @@
 #!/usr/bin/env python3
 """
+# Houdinis Framework - Quantum Cryptography Testing Platform
+# Author: Mauro Risonho de Paula Assumpção aka firebitsbr
+# Developed by: Human Logic & Coding with AI Assistance (Claude Sonnet 4.5)
+# License: MIT
+
 End-to-End Post-Quantum Cryptography Workflow Tests
 ====================================================
-
 Comprehensive E2E tests for complete PQC attack workflows.
 Tests the entire pipeline from PQC scheme setup to vulnerability assessment.
-
 Test Categories:
 - Complete CRYSTALS-Kyber KEM attack workflow
 - Full CRYSTALS-Dilithium signature analysis workflow
 - FALCON/SPHINCS+ alternative signature testing
 - Hybrid classical+PQC attack workflow
 - PQC migration analysis workflow
-
-Author: Houdinis Framework
-Developed by: Human Logic & Coding with AI Assistance (Claude Sonnet 4.5)
-License: MIT
 """
 
 import pytest

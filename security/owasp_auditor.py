@@ -1,11 +1,12 @@
+#!/usr/bin/env python3
 """
-Houdinis Framework - Security Audit and OWASP Compliance
-Data de Criação: 15 de dezembro de 2025
-Author: Mauro Risonho de Paula Assumpção aka firebitsbr
-Developed by: Human Logic & Coding with AI Assistance (Claude Sonnet 4.5)
-License: MIT
+# Houdinis Framework - Quantum Cryptography Testing Platform
+# Author: Mauro Risonho de Paula Assumpção aka firebitsbr
+# Developed by: Human Logic & Coding with AI Assistance (Claude Sonnet 4.5)
+# License: MIT
 
 Automated security auditing and OWASP Top 10 compliance checking.
+Data de Criação: 15 de dezembro de 2025
 """
 
 import re

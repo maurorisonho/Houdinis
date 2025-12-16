@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quantum Backends</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Courier New', monospace;
+            background: #1a1a2e;
+            color: #eee;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            text-align: center;
+        }
+        .header h1 { color: white; }
+        nav {
+            background: #16213e;
+            padding: 10px 20px;
+        }
+        nav a {
+            color: #667eea;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+        .backends-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .backend-card {
+            background: #16213e;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+        .backend-card h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        .backend-card p {
+            color: #aaa;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        .status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+        .status.active { background: #22c55e; color: white; }
+        .status.inactive { background: #ef4444; color: white; }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover { opacity: 0.8; }
+        .form-group {
+            margin-top: 10px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            background: #0f172a;
+            border: 1px solid #667eea;
+            border-radius: 5px;
+            color: #eee;
+            font-family: 'Courier New', monospace;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1> QUANTUM BACKENDS</h1>
+        <p>Configure quantum computing resources</p>
+    </div>
+    
+    <nav>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/exploits">Exploits</a>
+        <a href="/backends">Backends</a>
+        <a href="/ai-assistant">AI Assistant</a>
+        <a href="/settings">Settings</a>
+    </nav>
+    
+    <div class="container">
+        <div class="backends-grid">
+            <div class="backend-card">
+                <h3> NVIDIA cuQuantum</h3>
+                <span class="status active">ACTIVE</span>
+                <p>GPU-accelerated quantum circuit simulation using CUDA. Supports up to 30 qubits with state vector simulation.</p>
+                <p><strong>Backend:</strong> nvidia_custatevec</p>
+                <p><strong>Device:</strong> Local GPU</p>
+            </div>
+            
+            <div class="backend-card">
+                <h3> IBM Quantum Experience</h3>
+                <span class="status inactive">NOT CONFIGURED</span>
+                <p>Access IBM's cloud quantum computers and simulators. Requires API token from IBM Quantum dashboard.</p>
+                <div class="form-group">
+                    <input type="text" placeholder="IBM Quantum API Token" id="ibmToken">
+                    <button class="btn" style="margin-top: 10px;">Connect</button>
+                </div>
+            </div>
+            
+            <div class="backend-card">
+                <h3> AWS Braket</h3>
+                <span class="status inactive">NOT CONFIGURED</span>
+                <p>Amazon's quantum computing service. Access IonQ, Rigetti, and D-Wave quantum processors.</p>
+                <div class="form-group">
+                    <input type="text" placeholder="AWS Access Key ID" id="awsKey">
+                    <input type="text" placeholder="AWS Secret Access Key" id="awsSecret">
+                    <button class="btn" style="margin-top: 10px;">Connect</button>
+                </div>
+            </div>
+            
+            <div class="backend-card">
+                <h3> Azure Quantum</h3>
+                <span class="status inactive">NOT CONFIGURED</span>
+                <p>Microsoft's quantum computing platform. Includes IonQ, Honeywell, and QCI providers.</p>
+                <div class="form-group">
+                    <input type="text" placeholder="Subscription ID" id="azureSub">
+                    <input type="text" placeholder="Workspace Name" id="azureWs">
+                    <button class="btn" style="margin-top: 10px;">Connect</button>
+                </div>
+            </div>
+            
+            <div class="backend-card">
+                <h3> Qiskit Aer</h3>
+                <span class="status active">ACTIVE</span>
+                <p>High-performance quantum circuit simulator. Supports GPU acceleration and noise models.</p>
+                <p><strong>Backend:</strong> qasm_simulator</p>
+                <p><strong>Method:</strong> statevector</p>
+            </div>
+            
+            <div class="backend-card">
+                <h3> Configuration Tips</h3>
+                <p><strong>Performance:</strong><br>
+                • cuQuantum: Best for RSA/ECC attacks<br>
+                • IBM Quantum: Real hardware testing<br>
+                • AWS Braket: Production workloads<br>
+                • Aer: Quick prototyping
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

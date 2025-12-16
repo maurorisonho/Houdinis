@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """
+# Houdinis Framework - Quantum Cryptography Testing Platform
+# Author: Mauro Risonho de Paula Assumpção aka firebitsbr
+# Developed by: Human Logic & Coding with AI Assistance (Claude Sonnet 4.5)
+# License: MIT
+
 Integration Tests for Quantum Machine Learning Attacks
 ======================================================
-
 Integration tests for QML attack frameworks, testing interactions
 between QML attacks and other system components.
-
-Author: Houdinis Framework
-Developed by: Human Logic & Coding with AI Assistance (Claude Sonnet 4.5)
-License: MIT
 """
 
 import pytest

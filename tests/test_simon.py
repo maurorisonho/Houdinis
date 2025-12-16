@@ -1,6 +1,11 @@
+#!/usr/bin/env python3
 """
-Test suite for Simon's Algorithm implementation.
+# Houdinis Framework - Quantum Cryptography Testing Platform
+# Author: Mauro Risonho de Paula Assumpção aka firebitsbr
+# Developed by: Human Logic & Coding with AI Assistance (Claude Sonnet 4.5)
+# License: MIT
 
+Test suite for Simon's Algorithm implementation.
 Tests cover:
 - Oracle creation and correctness
 - Circuit construction and validation

@@ -1,8 +1,9 @@
+#!/usr/bin/env python3
 """
-Houdinis Framework - Quantum Simulator Module for Houdinis
-Author: Mauro Risonho de Paula Assumpção aka firebitsbr
-Developed by: Human Logic & Coding with AI Assistance (Claude Sonnet 4.5)
-License: MIT
+# Houdinis Framework - Quantum Cryptography Testing Platform
+# Author: Mauro Risonho de Paula Assumpção aka firebitsbr
+# Developed by: Human Logic & Coding with AI Assistance (Claude Sonnet 4.5)
+# License: MIT
 
 Supports: IBM Quantum, NVIDIA cuQuantum, CUDA-Q, Amazon Braket,
          Azure Quantum, Google Cirq, and other quantum platforms.

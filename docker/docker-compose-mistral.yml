@@ -1,0 +1,149 @@
+version: '3.8'
+
+services:
+  houdinis-mistral:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.mistral
+    image: houdinis-mistral:latest
+    container_name: houdinis_mistral
+    hostname: houdinis-mistral
+    
+    # GPU support
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu, compute, utility]
+    
+    environment:
+      # Ollama Configuration
+      - OLLAMA_HOST=0.0.0.0:11434
+      - OLLAMA_MODELS=/opt/houdinis/data/ollama_models
+      - OLLAMA_NUM_PARALLEL=2
+      - OLLAMA_MAX_LOADED_MODELS=2
+      
+      # Optional: Pull CodeLlama for better code generation
+      - PULL_CODELLAMA=false
+      
+      # Quantum Computing Backends
+      - IBM_QUANTUM_TOKEN=${IBM_QUANTUM_TOKEN:-}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID:-}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY:-}
+      - AZURE_QUANTUM_RESOURCE_ID=${AZURE_QUANTUM_RESOURCE_ID:-}
+      - GOOGLE_QUANTUM_PROJECT=${GOOGLE_QUANTUM_PROJECT:-}
+      
+      # NVIDIA GPU
+      - CUDA_VISIBLE_DEVICES=0
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+      
+      # Application Settings
+      - ENVIRONMENT=production
+      - DEBUG=false
+      - LOG_LEVEL=INFO
+    
+    volumes:
+      # Persistent Ollama models
+      - ollama_models:/opt/houdinis/data/ollama_models
+      
+      # Vector store for RAG
+      - vectorstore_local:/opt/houdinis/data/vectorstore_local
+      
+      # Houdinis code (for development)
+      - ../exploits:/opt/houdinis/exploits:ro
+      - ../scanners:/opt/houdinis/scanners:ro
+      - ../quantum:/opt/houdinis/quantum:ro
+      - ../langchain_agents:/opt/houdinis/langchain_agents:ro
+      - ../mcp_servers:/opt/houdinis/mcp_servers:ro
+      
+      # Logs
+      - ./logs:/var/log/houdinis
+    
+    ports:
+      - "7681:7681"   # ttyd web terminal
+      - "8001:8001"   # LangChain API (optional)
+      - "8765:8765"   # WebSocket (optional)
+      - "11434:11434" # Ollama API
+    
+    networks:
+      - houdinis_net
+    
+    restart: unless-stopped
+    
+    # Health check
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:11434/api/tags"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+  
+  # Optional: ChromaDB for RAG
+  chromadb-local:
+    image: chromadb/chroma:latest
+    container_name: chromadb_local
+    
+    environment:
+      - CHROMA_SERVER_AUTH_CREDENTIALS_PROVIDER=chromadb.auth.token.TokenConfigServerAuthCredentialsProvider
+      - CHROMA_SERVER_AUTH_CREDENTIALS=houdinis_local
+      - CHROMA_SERVER_AUTH_TOKEN_TRANSPORT_HEADER=X-Chroma-Token
+    
+    volumes:
+      - chroma_data_local:/chroma/chroma
+    
+    ports:
+      - "8000:8000"
+    
+    networks:
+      - houdinis_net
+    
+    restart: unless-stopped
+    
+    profiles:
+      - rag
+
+  # Optional: Target vulnerable system for testing
+  target-local:
+    image: ubuntu:22.04
+    container_name: target_local
+    hostname: target.local
+    
+    command: >
+      bash -c "
+        apt-get update &&
+        apt-get install -y openssh-server openssl &&
+        mkdir -p /run/sshd &&
+        echo 'root:vulnerable123' | chpasswd &&
+        sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config &&
+        /usr/sbin/sshd -D
+      "
+    
+    ports:
+      - "2222:22"
+    
+    networks:
+      houdinis_net:
+        ipv4_address: 172.20.0.10
+    
+    restart: unless-stopped
+    
+    profiles:
+      - testing
+
+volumes:
+  ollama_models:
+    driver: local
+  vectorstore_local:
+    driver: local
+  chroma_data_local:
+    driver: local
+
+networks:
+  houdinis_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16

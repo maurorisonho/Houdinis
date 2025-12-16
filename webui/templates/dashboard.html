@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Houdinis Dashboard</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Courier New', monospace;
+            background: #1a1a2e;
+            color: #eee;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+        .header h1 { color: white; }
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .card {
+            background: #16213e;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+        .card h3 { color: #667eea; margin-bottom: 15px; }
+        .container-item {
+            padding: 10px;
+            margin: 5px 0;
+            background: #0f172a;
+            border-radius: 5px;
+            border-left: 4px solid #667eea;
+        }
+        .status-running { border-left-color: #22c55e !important; }
+        .status-stopped { border-left-color: #ef4444 !important; }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 5px;
+        }
+        .btn:hover { opacity: 0.8; }
+        .logout { float: right; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1> HOUDINIS FRAMEWORK DASHBOARD</h1>
+        <p>Quantum Cryptography Testing Platform v2.0</p>
+        <a href="/logout" class="btn logout">Logout</a>
+    </div>
+    
+    <div class="container">
+        <div class="status-grid">
+            <div class="card">
+                <h3> Docker Containers</h3>
+                {% for container in containers %}
+                <div class="container-item status-{{ container.status }}">
+                    <strong>{{ container.name }}</strong><br>
+                    Status: {{ container.status }}<br>
+                    Image: {{ container.image }}
+                </div>
+                {% endfor %}
+            </div>
+            
+            <div class="card">
+                <h3> Quick Actions</h3>
+                <a href="/exploits" class="btn"> Quantum Exploits</a>
+                <a href="/backends" class="btn"> Quantum Backends</a>
+                <a href="/ai-assistant" class="btn"> AI Assistant</a>
+            </div>
+            
+            <div class="card">
+                <h3> System Info</h3>
+                <p> Docker: Active</p>
+                <p> Web UI: Port 8080</p>
+                <p> Redis: Connected</p>
+                <p> Mode: LITE</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

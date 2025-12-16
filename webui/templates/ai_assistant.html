@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Assistant</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Courier New', monospace;
+            background: #1a1a2e;
+            color: #eee;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            text-align: center;
+        }
+        .header h1 { color: white; }
+        nav {
+            background: #16213e;
+            padding: 10px 20px;
+        }
+        nav a {
+            color: #667eea;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+        .chat-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        #messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            background: #16213e;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .message {
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            max-width: 80%;
+        }
+        .message.user {
+            background: #667eea;
+            margin-left: auto;
+            text-align: right;
+        }
+        .message.assistant {
+            background: #0f172a;
+            border-left: 4px solid #764ba2;
+        }
+        .input-container {
+            display: flex;
+            gap: 10px;
+        }
+        #messageInput {
+            flex: 1;
+            padding: 15px;
+            background: #16213e;
+            border: 2px solid #667eea;
+            border-radius: 5px;
+            color: #eee;
+            font-family: 'Courier New', monospace;
+        }
+        .btn {
+            padding: 15px 30px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn:hover { opacity: 0.8; }
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1> AI ASSISTANT</h1>
+        <p>Quantum Security Advisor powered by Mistral</p>
+    </div>
+    
+    <nav>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/exploits">Exploits</a>
+        <a href="/backends">Backends</a>
+        <a href="/ai-assistant">AI Assistant</a>
+        <a href="/settings">Settings</a>
+    </nav>
+    
+    <div class="chat-container">
+        <div id="messages"></div>
+        
+        <div class="input-container">
+            <input 
+                type="text" 
+                id="messageInput" 
+                placeholder="Ask about quantum cryptography, exploits, or security..."
+                onkeypress="if(event.key==='Enter') sendMessage()"
+            >
+            <button class="btn" onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+    
+    <script>
+        const messagesDiv = document.getElementById('messages');
+        const input = document.getElementById('messageInput');
+        
+        function addMessage(content, isUser) {
+            const msg = document.createElement('div');
+            msg.className = 'message ' + (isUser ? 'user' : 'assistant');
+            msg.textContent = content;
+            messagesDiv.appendChild(msg);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+        
+        async function sendMessage() {
+            const message = input.value.trim();
+            if (!message) return;
+            
+            addMessage(message, true);
+            input.value = '';
+            input.disabled = true;
+            
+            addMessage('Thinking...', false);
+            
+            try {
+                const response = await fetch('/api/ai/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ query: message })
+                });
+                
+                const result = await response.json();
+                
+                // Remove "Thinking..." message
+                messagesDiv.removeChild(messagesDiv.lastChild);
+                
+                if (result.response) {
+                    addMessage(result.response, false);
+                } else {
+                    addMessage('Error: ' + (result.error || 'No response'), false);
+                }
+            } catch (err) {
+                messagesDiv.removeChild(messagesDiv.lastChild);
+                addMessage('Error: ' + err.message, false);
+            }
+            
+            input.disabled = false;
+            input.focus();
+        }
+        
+        // Add welcome message
+        addMessage('Hello! I\'m your quantum security assistant. Ask me about cryptographic vulnerabilities, quantum algorithms, or how to use Houdinis exploits.', false);
+    </script>
+</body>
+</html>

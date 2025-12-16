@@ -1,8 +1,9 @@
+#!/usr/bin/env python3
 """
-Houdinis Framework - Quantum Vulnerability Scanner for Houdinis
-Author: Mauro Risonho de Paula Assumpção aka firebitsbr
-Developed by: Human Logic & Coding with AI Assistance (Claude Sonnet 4.5)
-License: MIT
+# Houdinis Framework - Quantum Cryptography Testing Platform
+# Author: Mauro Risonho de Paula Assumpção aka firebitsbr
+# Developed by: Human Logic & Coding with AI Assistance (Claude Sonnet 4.5)
+# License: MIT
 
 General scanner for quantum-vulnerable cryptographic implementations.
 """

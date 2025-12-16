@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """
-Script para reescrever o histórico do Git removendo emojis de todos os commits.
-Usa git filter-repo para reescrever mensagens de commit e conteúdo de arquivos.
+Script to rewrite Git history by removing emojis from all commits.
+Uses git filter-repo to rewrite commit messages and file content.
 """
 
 import subprocess
 import sys
 import re
 
-# Padrão regex para capturar todos os emojis Unicode
+# Regex pattern to capture all Unicode emojis
 EMOJI_PATTERN = re.compile(
     "["
     "\U0001f1e0-\U0001f1ff"  # flags (iOS)
@@ -31,36 +31,36 @@ EMOJI_PATTERN = re.compile(
 
 
 def remove_emojis(text):
-    """Remove todos os emojis de um texto."""
+    """Remove all emojis from text."""
     if isinstance(text, bytes):
         text = text.decode("utf-8", errors="ignore")
     return EMOJI_PATTERN.sub("", text)
 
 
 print("=" * 80)
-print("REESCREVENDO HISTÓRICO DO GIT - REMOVENDO EMOJIS")
+print("REWRITING GIT HISTORY - REMOVING EMOJIS")
 print("=" * 80)
 print()
-print("ATENÇÃO: Esta operação irá reescrever TODO o histórico do repositório!")
-print("Será criado um backup da branch atual antes de prosseguir.")
+print("WARNING: This operation will rewrite ALL repository history!")
+print("A backup of the current branch will be created before proceeding.")
 print()
 
-# Pergunta ao usuário se deseja continuar
-response = input("Deseja continuar? (sim/não): ").strip().lower()
+# Ask user to continue
+response = input("Do you want to continue? (yes/no): ").strip().lower()
 if response not in ["sim", "s", "yes", "y"]:
-    print("Operação cancelada.")
+    print("Operation cancelled.")
     sys.exit(0)
 
 print()
-print("Criando backup da branch atual...")
+print("Creating backup of current branch...")
 subprocess.run(["git", "branch", "backup-before-emoji-removal"], check=False)
 
-print("Criando backup do remote...")
+print("Creating backup of remote...")
 subprocess.run(["git", "remote", "rename", "origin", "origin-backup"], check=False)
 
 print()
-print("Reescrevendo histórico do Git...")
-print("Isso pode levar alguns minutos dependendo do tamanho do repositório...")
+print("Rewriting Git history...")
+print("This may take a few minutes depending on repository size...")
 print()
 
 # Usa git filter-repo para reescrever o histórico
@@ -129,32 +129,32 @@ except:
 
     print()
     print("=" * 80)
-    print("HISTÓRICO REESCRITO COM SUCESSO!")
+    print("HISTORY REWRITTEN SUCCESSFULLY!")
     print("=" * 80)
     print()
-    print("PRÓXIMOS PASSOS:")
+    print("NEXT STEPS:")
     print()
-    print("1. Revise as mudanças:")
+    print("1. Review changes:")
     print("   git log")
     print()
-    print("2. Restaure o remote:")
+    print("2. Restore remote:")
     print("   git remote rename origin-backup origin")
     print()
-    print("3. Se estiver satisfeito, force push:")
+    print("3. If satisfied, force push:")
     print("   git push origin main --force")
     print()
-    print("4. Se algo deu errado, restaure o backup:")
+    print("4. If something went wrong, restore backup:")
     print("   git checkout backup-before-emoji-removal")
     print()
-    print("ATENÇÃO: Todos os colaboradores precisarão fazer:")
+    print("WARNING: All collaborators will need to:")
     print("   git fetch origin")
     print("   git reset --hard origin/main")
     print()
 
 except subprocess.CalledProcessError as e:
-    print(f"\nERRO ao reescrever histórico: {e}")
-    print("\nRestaurando remote...")
+    print(f"\nERROR rewriting history: {e}")
+    print("\nRestoring remote...")
     subprocess.run(["git", "remote", "rename", "origin-backup", "origin"], check=False)
-    print("Para restaurar o backup, execute:")
+    print("To restore backup, run:")
     print("   git checkout backup-before-emoji-removal")
     sys.exit(1)

@@ -1,5 +1,9 @@
+#!/usr/bin/env python3
 """
-End-to-End Docker Integration Tests for Houdinis Framework
+# Houdinis Framework - Quantum Cryptography Testing Platform
+# Author: Mauro Risonho de Paula Assumpção aka firebitsbr
+# Developed by: Human Logic & Coding with AI Assistance (Claude Sonnet 4.5)
+# License: MIT
 
 Tests Docker container execution, networking, and security isolation.
 Requires Docker installed and running.

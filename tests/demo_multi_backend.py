@@ -1,22 +1,18 @@
 #!/usr/bin/env python3
 """
-Houdinis Framework - Houdinis Framework Multi-Backend Demo
-Author: Mauro Risonho de Paula Assumpção aka firebitsbr
-Developed by: Human Logic & Coding with AI Assistance (Claude Sonnet 4.5)
-License: MIT
+# Houdinis Framework - Quantum Cryptography Testing Platform
+# Author: Mauro Risonho de Paula Assumpção aka firebitsbr
+# Developed by: Human Logic & Coding with AI Assistance (Claude Sonnet 4.5)
+# License: MIT
 
-This demo shows how to use the Houdinis Framework with multiple quantum backends.
 It demonstrates:
 1. Setting up different quantum backends
 2. Running quantum algorithms on multiple platforms
 3. Comparing performance across backends
 4. Best practices for quantum computing with Houdinis
-
 Usage:
     python demo_multi_backend.py
-
 MIT License
-
 Copyright (c) 2025 Mauro Risonho de Paula Assumpção aka firebitsbr
 """
 

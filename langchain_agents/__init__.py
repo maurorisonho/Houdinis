@@ -7,5 +7,6 @@ __version__ = "1.0.0"
 __author__ = "Mauro Risonho de Paula Assumpção aka firebitsbr"
 
 from .quantum_agent import QuantumCryptoAgent
+from .mistral_local_agent import MistralQuantumAgent
 
-__all__ = ["QuantumCryptoAgent"]
+__all__ = ["QuantumCryptoAgent", "MistralQuantumAgent"]

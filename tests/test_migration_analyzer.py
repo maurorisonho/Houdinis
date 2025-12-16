@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """
+# Houdinis Framework - Quantum Cryptography Testing Platform
+# Author: Mauro Risonho de Paula Assumpção aka firebitsbr
+# Developed by: Human Logic & Coding with AI Assistance (Claude Sonnet 4.5)
+# License: MIT
+
 Unit Tests for PQC Migration Analyzer
 =====================================
-
 Comprehensive unit tests for the PQC migration analysis framework.
-
-Author: Houdinis Framework
-Developed by: Human Logic & Coding with AI Assistance (Claude Sonnet 4.5)
-License: MIT
 """
 
 import pytest

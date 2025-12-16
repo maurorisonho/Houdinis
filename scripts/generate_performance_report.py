@@ -1,8 +1,11 @@
+#!/usr/bin/env python3
 """
-Performance Report Generator
-Author: Mauro Risonho de Paula Assumpção aka firebitsbr
-License: MIT
+# Houdinis Framework - Quantum Cryptography Testing Platform
+# Author: Mauro Risonho de Paula Assumpção aka firebitsbr
+# Developed by: Human Logic & Coding with AI Assistance (Claude Sonnet 4.5)
+# License: MIT
 
+Performance Report Generator
 Generates markdown performance reports for CI/CD.
 """
 

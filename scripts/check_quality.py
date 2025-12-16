@@ -1,20 +1,20 @@
 #!/usr/bin/env python3
 """
+# Houdinis Framework - Quantum Cryptography Testing Platform
+# Author: Mauro Risonho de Paula Assumpção aka firebitsbr
+# Developed by: Human Logic & Coding with AI Assistance (Claude Sonnet 4.5)
+# License: MIT
+
 Code Quality Validation Script
 ================================
-
 Valida e melhora a qualidade do código do projeto Houdinis.
 Atingir 9.5/10 no Pylance.
-
 Features:
 - Type hints validation
 - Import cleanup
 - Docstring validation
 - Code style checking
 - Security scanning
-
-Author: Houdinis Framework
-License: MIT
 """
 
 import ast

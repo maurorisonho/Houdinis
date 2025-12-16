@@ -1,0 +1,145 @@
+version: '3.8'
+
+# ============================================================================
+# HOUDINIS FRAMEWORK - AI-POWERED DEPLOYMENT
+# Core + Web UI + Local Mistral AI (no cloud APIs)
+# Perfect for: Offline environments, privacy-focused, air-gapped networks
+# ============================================================================
+
+services:
+
+  # Web UI
+  webui:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.webui
+    image: houdinis-webui:latest
+    container_name: houdinis_webui
+    
+    environment:
+      - SECRET_KEY=${SECRET_KEY:-houdinis-secret-key}
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    
+    ports:
+      - "8080:8080"
+    
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    
+    networks:
+      - houdinis_net
+    
+    depends_on:
+      - redis
+      - houdinis-core
+      - houdinis-mistral
+    
+    restart: unless-stopped
+
+  # Houdinis Core
+  houdinis-core:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: houdinis-core:latest
+    container_name: houdinis_core
+    
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    
+    environment:
+      - CUDA_VISIBLE_DEVICES=0
+      - REDIS_HOST=redis
+    
+    volumes:
+      - ../exploits:/opt/houdinis/exploits:ro
+      - ../scanners:/opt/houdinis/scanners:ro
+      - ../quantum:/opt/houdinis/quantum:ro
+      - houdinis_results:/opt/houdinis/results
+    
+    networks:
+      - houdinis_net
+    
+    command: tail -f /dev/null
+    restart: unless-stopped
+
+  # Mistral AI - 100% Local & Free
+  houdinis-mistral:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.mistral
+    image: houdinis-mistral:latest
+    container_name: houdinis_mistral
+    
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    
+    environment:
+      - OLLAMA_HOST=0.0.0.0:11434
+      - OLLAMA_MODELS=/opt/houdinis/data/ollama_models
+      - CUDA_VISIBLE_DEVICES=0
+      - REDIS_HOST=redis
+    
+    volumes:
+      - ollama_models:/opt/houdinis/data/ollama_models
+      - ../langchain_agents:/opt/houdinis/langchain_agents:ro
+      - ../mcp_servers:/opt/houdinis/mcp_servers:ro
+      - vectorstore_local:/opt/houdinis/data/vectorstore_local
+    
+    networks:
+      - houdinis_net
+    
+    restart: unless-stopped
+
+  # ChromaDB - Local vector store
+  chromadb:
+    image: chromadb/chroma:latest
+    container_name: houdinis_chromadb
+    
+    environment:
+      - ALLOW_RESET=true
+    
+    volumes:
+      - chroma_data:/chroma/chroma
+    
+    networks:
+      - houdinis_net
+    
+    restart: unless-stopped
+
+  # Redis
+  redis:
+    image: redis:7-alpine
+    container_name: houdinis_redis
+    
+    command: redis-server --appendonly yes
+    
+    volumes:
+      - redis_data:/data
+    
+    networks:
+      - houdinis_net
+    
+    restart: unless-stopped
+
+volumes:
+  ollama_models:
+  vectorstore_local:
+  chroma_data:
+  redis_data:
+  houdinis_results:
+
+networks:
+  houdinis_net:
+    driver: bridge

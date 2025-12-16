@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 """
+# Houdinis Framework - Quantum Cryptography Testing Platform
+# Author: Mauro Risonho de Paula Assumpção aka firebitsbr
+# Developed by: Human Logic & Coding with AI Assistance (Claude Sonnet 4.5)
+# License: MIT
+
 Automatic Type Hint Addition Script
 ====================================
-
-Adiciona type hints automaticamente às funções que não possuem.
-
-Author: Houdinis Framework
-License: MIT
+Automatically adds type hints to functions that don't have them.
 """
 
 import ast

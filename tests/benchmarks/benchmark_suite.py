@@ -1,21 +1,20 @@
 #!/usr/bin/env python3
 """
+# Houdinis Framework - Quantum Cryptography Testing Platform
+# Author: Mauro Risonho de Paula Assumpção aka firebitsbr
+# Developed by: Human Logic & Coding with AI Assistance (Claude Sonnet 4.5)
+# License: MIT
+
 Continuous Benchmarking System
 ===============================
-
 Automated performance benchmarking and regression detection for Houdinis.
 Tracks performance metrics across all attack frameworks and quantum operations.
-
 Features:
 - Quantum operation benchmarks
 - Attack framework performance tracking
 - Performance regression detection
 - Automated reporting and visualization
 - Historical performance database
-
-Author: Houdinis Framework
-Developed by: Human Logic & Coding with AI Assistance (Claude Sonnet 4.5)
-License: MIT
 """
 
 import pytest

@@ -1,0 +1,140 @@
+version: '3.8'
+
+# ============================================================================
+# HOUDINIS FRAMEWORK - LITE DEPLOYMENT
+# Minimal setup: Web UI + Core + Redis
+# Perfect for: Resource-constrained environments, testing, development
+# ============================================================================
+
+services:
+
+  # Web UI - User interface
+  webui:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.webui
+    image: houdinis-webui:latest
+    container_name: houdinis_webui
+    
+    environment:
+      - SECRET_KEY=${SECRET_KEY:-houdinis-secret-key}
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - DEBUG=${DEBUG:-false}
+    
+    ports:
+      - "8080:8080"
+    
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    
+    networks:
+      - houdinis_net
+    
+    depends_on:
+      - redis
+      - houdinis-core
+    
+    restart: unless-stopped
+
+  # Houdinis Core - Quantum exploits
+  houdinis-core:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: houdinis-core:latest
+    container_name: houdinis_core
+    
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    
+    environment:
+      - CUDA_VISIBLE_DEVICES=0
+      - REDIS_HOST=redis
+    
+    volumes:
+      - ../exploits:/opt/houdinis/exploits:ro
+      - ../scanners:/opt/houdinis/scanners:ro
+      - ../quantum:/opt/houdinis/quantum:ro
+      - houdinis_results:/opt/houdinis/results
+    
+    networks:
+      - houdinis_net
+    
+    command: tail -f /dev/null
+    restart: unless-stopped
+
+  # Redis - Essential for job queue
+  redis:
+    image: redis:7-alpine
+    container_name: houdinis_redis
+    
+    command: redis-server --appendonly yes
+    
+    volumes:
+      - redis_data:/data
+    
+    networks:
+      - houdinis_net
+    
+    restart: unless-stopped
+
+  # Mistral AI - AI Assistant with Ollama
+  mistral:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.mistral
+    image: houdinis-mistral:latest
+    container_name: houdinis_mistral
+    
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu, compute, utility]
+    
+    environment:
+      - OLLAMA_HOST=0.0.0.0:11434
+      - OLLAMA_MODELS=/opt/houdinis/data/ollama_models
+      - CUDA_VISIBLE_DEVICES=0
+      - NVIDIA_VISIBLE_DEVICES=all
+      - REDIS_HOST=redis
+    
+    volumes:
+      - ollama_models:/opt/houdinis/data/ollama_models
+      - vectorstore_local:/opt/houdinis/data/vectorstore_local
+      - ../exploits:/opt/houdinis/exploits:ro
+      - ../scanners:/opt/houdinis/scanners:ro
+      - ../quantum:/opt/houdinis/quantum:ro
+      - ../langchain_agents:/opt/houdinis/langchain_agents:ro
+    
+    ports:
+      - "11434:11434"  # Ollama API
+    
+    networks:
+      - houdinis_net
+    
+    restart: unless-stopped
+    
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:11434/api/tags"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  houdinis_results:
+  redis_data:
+  ollama_models:
+  vectorstore_local:
+
+networks:
+  houdinis_net:
+    driver: bridge

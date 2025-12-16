@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Settings</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Courier New', monospace;
+            background: #1a1a2e;
+            color: #eee;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            text-align: center;
+        }
+        .header h1 { color: white; }
+        nav {
+            background: #16213e;
+            padding: 10px 20px;
+        }
+        nav a {
+            color: #667eea;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+        .card {
+            background: #16213e;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            margin-bottom: 20px;
+        }
+        .card h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            color: #aaa;
+            margin-bottom: 8px;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            background: #0f172a;
+            border: 1px solid #667eea;
+            border-radius: 5px;
+            color: #eee;
+            font-family: 'Courier New', monospace;
+        }
+        .btn {
+            padding: 12px 30px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn:hover { opacity: 0.8; }
+        .btn-danger {
+            background: #ef4444;
+        }
+        .info-box {
+            background: #0f172a;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #667eea;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1> SETTINGS</h1>
+    </div>
+    
+    <nav>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/exploits">Exploits</a>
+        <a href="/backends">Backends</a>
+        <a href="/ai-assistant">AI Assistant</a>
+        <a href="/settings">Settings</a>
+    </nav>
+    
+    <div class="container">
+        <div class="card">
+            <h3> Security</h3>
+            <form onsubmit="changePassword(event)">
+                <div class="form-group">
+                    <label>Current Password</label>
+                    <input type="password" name="current_password" required>
+                </div>
+                <div class="form-group">
+                    <label>New Password</label>
+                    <input type="password" name="new_password" required>
+                </div>
+                <div class="form-group">
+                    <label>Confirm New Password</label>
+                    <input type="password" name="confirm_password" required>
+                </div>
+                <button type="submit" class="btn">Update Password</button>
+            </form>
+        </div>
+        
+        <div class="card">
+            <h3> Appearance</h3>
+            <div class="form-group">
+                <label>Theme</label>
+                <select>
+                    <option>Dark Purple (Default)</option>
+                    <option>Matrix Green</option>
+                    <option>Cyber Blue</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Terminal Font Size</label>
+                <input type="number" value="14" min="10" max="24">
+            </div>
+            <button class="btn">Save Preferences</button>
+        </div>
+        
+        <div class="card">
+            <h3> Notifications</h3>
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" checked> Email notifications for exploit completions
+                </label>
+            </div>
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" checked> Container status alerts
+                </label>
+            </div>
+            <div class="form-group">
+                <label>
+                    <input type="checkbox"> AI assistant suggestions
+                </label>
+            </div>
+            <button class="btn">Save Notifications</button>
+        </div>
+        
+        <div class="card">
+            <h3> System Information</h3>
+            <div class="info-box">
+                <strong>Version:</strong> Houdinis Framework 2.0<br>
+                <strong>Docker:</strong> Enabled (LITE Mode)<br>
+                <strong>Containers:</strong> 3 running<br>
+                <strong>Redis:</strong> Connected<br>
+                <strong>Web UI Port:</strong> 8080<br>
+                <strong>API Endpoint:</strong> /api/*
+            </div>
+        </div>
+        
+        <div class="card">
+            <h3> Danger Zone</h3>
+            <button class="btn btn-danger" onclick="if(confirm('Are you sure? This will remove all containers and data.')) alert('Feature not implemented')">
+                Reset All Containers
+            </button>
+            <button class="btn btn-danger" onclick="if(confirm('Clear all exploit logs?')) alert('Feature not implemented')" style="margin-left: 10px;">
+                Clear Logs
+            </button>
+        </div>
+    </div>
+    
+    <script>
+        function changePassword(e) {
+            e.preventDefault();
+            const form = e.target;
+            const data = new FormData(form);
+            
+            if (data.get('new_password') !== data.get('confirm_password')) {
+                alert('Passwords do not match!');
+                return;
+            }
+            
+            alert('Password change feature not yet implemented');
+        }
+    </script>
+</body>
+</html>

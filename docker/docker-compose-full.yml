@@ -1,0 +1,403 @@
+version: '3.8'
+
+# ============================================================================
+# HOUDINIS FRAMEWORK - FULL STACK DEPLOYMENT
+# 100% Docker - ZERO local dependencies
+# Author: Mauro Risonho de Paula Assumpção aka firebitsbr
+# ============================================================================
+#
+# Architecture:
+#   User (Browser) → Web UI (Port 8080) → Backend Containers
+#
+# All services run in isolated Docker containers.
+# User interacts ONLY with Web UI on port 8080.
+# ============================================================================
+
+services:
+
+  # ==========================================================================
+  # WEB UI - ONLY USER-FACING COMPONENT
+  # ==========================================================================
+  
+  webui:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.webui
+    image: houdinis-webui:latest
+    container_name: houdinis_webui
+    hostname: webui
+    
+    environment:
+      - SECRET_KEY=${SECRET_KEY:-houdinis-secret-key-change-me}
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - DEBUG=${DEBUG:-false}
+      - FLASK_ENV=production
+    
+    ports:
+      - "8080:8080"  # ONLY exposed port to user
+    
+    volumes:
+      - ../webui:/app:ro  # Read-only for security
+      - /var/run/docker.sock:/var/run/docker.sock:ro  # Docker control (read-only)
+    
+    networks:
+      - houdinis_net
+    
+    depends_on:
+      - redis
+      - houdinis-core
+    
+    restart: unless-stopped
+    
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/api/status"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # ==========================================================================
+  # HOUDINIS CORE - Quantum Crypto Testing Engine
+  # ==========================================================================
+  
+  houdinis-core:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: houdinis-core:latest
+    container_name: houdinis_core
+    hostname: houdinis-core
+    
+    # GPU support for quantum simulations
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu, compute, utility]
+    
+    environment:
+      # Quantum Backend Tokens
+      - IBM_QUANTUM_TOKEN=${IBM_QUANTUM_TOKEN:-}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID:-}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY:-}
+      - AZURE_QUANTUM_RESOURCE_ID=${AZURE_QUANTUM_RESOURCE_ID:-}
+      - GOOGLE_QUANTUM_PROJECT=${GOOGLE_QUANTUM_PROJECT:-}
+      
+      # NVIDIA GPU
+      - CUDA_VISIBLE_DEVICES=0
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+      
+      # Redis connection
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    
+    volumes:
+      # Code volumes (read-only for security)
+      - ../exploits:/opt/houdinis/exploits:ro
+      - ../scanners:/opt/houdinis/scanners:ro
+      - ../quantum:/opt/houdinis/quantum:ro
+      - ../payloads:/opt/houdinis/payloads:ro
+      
+      # Results output (read-write)
+      - houdinis_results:/opt/houdinis/results
+      - houdinis_logs:/var/log/houdinis
+    
+    networks:
+      - houdinis_net
+    
+    depends_on:
+      - redis
+    
+    restart: unless-stopped
+    
+    # Keep container running
+    command: tail -f /dev/null
+    
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import sys; sys.exit(0)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ==========================================================================
+  # MISTRAL AI - Local AI Assistant (NO cloud APIs)
+  # ==========================================================================
+  
+  houdinis-mistral:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.mistral
+    image: houdinis-mistral:latest
+    container_name: houdinis_mistral
+    hostname: mistral-ai
+    
+    # GPU for fast AI inference
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu, compute, utility]
+    
+    environment:
+      # Ollama Configuration
+      - OLLAMA_HOST=0.0.0.0:11434
+      - OLLAMA_MODELS=/opt/houdinis/data/ollama_models
+      - OLLAMA_NUM_PARALLEL=2
+      - OLLAMA_MAX_LOADED_MODELS=2
+      
+      # NVIDIA GPU
+      - CUDA_VISIBLE_DEVICES=0
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+      
+      # Redis connection
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    
+    volumes:
+      # Persistent AI models
+      - ollama_models:/opt/houdinis/data/ollama_models
+      
+      # Code (read-only)
+      - ../langchain_agents:/opt/houdinis/langchain_agents:ro
+      - ../mcp_servers:/opt/houdinis/mcp_servers:ro
+      
+      # Vector store for RAG
+      - vectorstore_local:/opt/houdinis/data/vectorstore_local
+    
+    networks:
+      - houdinis_net
+    
+    # Not exposed to user directly - only via Web UI
+    expose:
+      - "11434"
+    
+    restart: unless-stopped
+    
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:11434/api/tags"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  # ==========================================================================
+  # LANGCHAIN GATEWAY - AI Orchestration
+  # ==========================================================================
+  
+  langchain-gateway:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.langchain
+    image: houdinis-langchain:latest
+    container_name: houdinis_langchain
+    hostname: langchain-gateway
+    
+    environment:
+      # API Keys (optional - Mistral works offline)
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+      - LANGCHAIN_API_KEY=${LANGCHAIN_API_KEY:-}
+      
+      # Internal services
+      - OLLAMA_HOST=houdinis-mistral:11434
+      - CHROMA_HOST=chromadb:8000
+      - REDIS_HOST=redis:6379
+    
+    volumes:
+      - ../langchain_agents:/opt/houdinis/langchain_agents:ro
+      - ../mcp_servers:/opt/houdinis/mcp_servers:ro
+    
+    networks:
+      - houdinis_net
+    
+    depends_on:
+      - houdinis-mistral
+      - chromadb
+      - redis
+    
+    expose:
+      - "8001"
+    
+    restart: unless-stopped
+
+  # ==========================================================================
+  # CHROMADB - Vector Database for RAG
+  # ==========================================================================
+  
+  chromadb:
+    image: chromadb/chroma:latest
+    container_name: houdinis_chromadb
+    hostname: chromadb
+    
+    environment:
+      - CHROMA_SERVER_AUTH_CREDENTIALS_PROVIDER=chromadb.auth.token.TokenConfigServerAuthCredentialsProvider
+      - CHROMA_SERVER_AUTH_CREDENTIALS=${CHROMA_TOKEN:-houdinis_chroma_token}
+      - CHROMA_SERVER_AUTH_TOKEN_TRANSPORT_HEADER=X-Chroma-Token
+      - ALLOW_RESET=true
+    
+    volumes:
+      - chroma_data:/chroma/chroma
+    
+    networks:
+      - houdinis_net
+    
+    expose:
+      - "8000"
+    
+    restart: unless-stopped
+    
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/heartbeat"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ==========================================================================
+  # REDIS - Cache, Sessions, Job Queue
+  # ==========================================================================
+  
+  redis:
+    image: redis:7-alpine
+    container_name: houdinis_redis
+    hostname: redis
+    
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-houdinis_redis_pass}
+    
+    volumes:
+      - redis_data:/data
+    
+    networks:
+      - houdinis_net
+    
+    expose:
+      - "6379"
+    
+    restart: unless-stopped
+    
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ==========================================================================
+  # MCP GATEWAY - Model Context Protocol Server
+  # ==========================================================================
+  
+  mcp-gateway:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.langchain
+    image: houdinis-mcp:latest
+    container_name: houdinis_mcp
+    hostname: mcp-gateway
+    
+    environment:
+      - MCP_SERVER_HOST=0.0.0.0
+      - MCP_SERVER_PORT=8000
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    
+    volumes:
+      - ../mcp_servers:/opt/houdinis/mcp_servers:ro
+    
+    networks:
+      - houdinis_net
+    
+    expose:
+      - "8000"
+    
+    restart: unless-stopped
+    
+    command: python3 -m mcp_servers.quantum_mcp_server
+
+  # ==========================================================================
+  # TARGET - Vulnerable System for Testing
+  # ==========================================================================
+  
+  target-vulnerable:
+    image: ubuntu:22.04
+    container_name: houdinis_target
+    hostname: target.houdinis.local
+    
+    command: >
+      bash -c "
+        apt-get update &&
+        apt-get install -y openssh-server openssl nginx &&
+        mkdir -p /run/sshd &&
+        echo 'root:vulnerable123' | chpasswd &&
+        sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config &&
+        /usr/sbin/sshd -D
+      "
+    
+    networks:
+      houdinis_net:
+        ipv4_address: 172.20.0.100
+    
+    restart: unless-stopped
+
+  # ==========================================================================
+  # NGINX - Reverse Proxy (optional - for production)
+  # ==========================================================================
+  
+  nginx:
+    image: nginx:alpine
+    container_name: houdinis_nginx
+    hostname: nginx
+    
+    volumes:
+      - ../docker/nginx.conf:/etc/nginx/nginx.conf:ro
+      - nginx_certs:/etc/nginx/certs
+    
+    ports:
+      - "443:443"  # HTTPS (optional)
+    
+    networks:
+      - houdinis_net
+    
+    depends_on:
+      - webui
+    
+    restart: unless-stopped
+    
+    profiles:
+      - production
+
+# ============================================================================
+# VOLUMES - Persistent Data
+# ============================================================================
+
+volumes:
+  ollama_models:
+    driver: local
+  vectorstore_local:
+    driver: local
+  chroma_data:
+    driver: local
+  redis_data:
+    driver: local
+  houdinis_results:
+    driver: local
+  houdinis_logs:
+    driver: local
+  nginx_certs:
+    driver: local
+
+# ============================================================================
+# NETWORKS
+# ============================================================================
+
+networks:
+  houdinis_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+          gateway: 172.20.0.1

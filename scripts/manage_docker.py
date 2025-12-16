@@ -1,26 +1,24 @@
 #!/usr/bin/env python3
 """
+# Houdinis Framework - Quantum Cryptography Testing Platform
+# Author: Mauro Risonho de Paula Assumpção aka firebitsbr
+# Developed by: Human Logic & Coding with AI Assistance (Claude Sonnet 4.5)
+# License: MIT
+
 Docker Service and Container Manager
 ====================================
-
 This script helps manage the lifecycle of Docker and Containerd services,
 as well as bulk management of Docker containers.
-
 Usage:
     sudo python3 manage_docker.py [OPTIONS]
-
 Options:
     --start-all       Start Docker/Containerd services and resume all containers
     --stop-all        Stop all containers and then stop Docker/Containerd services
     --status          Check the status of services and running containers
-    
     --start-services  Only start system services
     --stop-services   Only stop system services
-    
     --start-containers Start all stopped containers
     --stop-containers  Stop all running containers
-    
-Author: Houdinis Framework
 """
 
 import subprocess

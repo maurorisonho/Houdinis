@@ -1,9 +1,11 @@
+#!/usr/bin/env python3
 """
-Houdinis - Advanced Quantum Cryptography Exploitation Framework        console_scripts=[
-            "houdini=quantum_exploit:main",
-        ],     console_scripts=[
-            "houdini=quantum_exploit:main",
-        ], comprehensive penetration testing framework for assessing quantum vulnerabilities
+# Houdinis Framework - Quantum Cryptography Testing Platform
+# Author: Mauro Risonho de Paula Assumpção aka firebitsbr
+# Developed by: Human Logic & Coding with AI Assistance (Claude Sonnet 4.5)
+# License: MIT
+
+Advanced Quantum Cryptography Exploitation Framework - A comprehensive penetration testing framework for assessing quantum vulnerabilities
 in cryptographic implementations. This tool simulates quantum attacks and provides
 detailed security assessments for red team operations.
 
