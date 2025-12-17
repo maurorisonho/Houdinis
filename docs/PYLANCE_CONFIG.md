@@ -47,33 +47,33 @@ from exploits.grover_bruteforce import GroverBruteforceExploit  # type: ignore
 ```
 
 ### 3. Type stubs (`.pyi`)
-Fornecem assinaturas de tipo sem implementation real
+Provide type signatures without real implementation
 
-### 4. Configuração do Pylance
-Desabilita warnings específicos via `pyrightconfig.json`
+### 4. Pylance Configuration
+Disables specific warnings via `pyrightconfig.json`
 
-##  Como usar
+##  How to use
 
-### Opção 1: Recarregar VS Code
+### Option 1: Reload VS Code
 ```
 Ctrl+Shift+P → "Developer: Reload Window"
 ```
 
-### Opção 2: Recarregar Pylance
+### Option 2: Reload Pylance
 ```
 Ctrl+Shift+P → "Python: Restart Language Server"
 ```
 
-### Opção 3: Ignorar warnings
-Os warnings não afetam a execution - o código funciona perfeitamente quando executado no notebook.
+### Option 3: Ignore warnings
+Warnings do not affect execution - code works perfectly when run in notebook.
 
-##  Resultado Esperado
+##  Expected Result
 
-Após aplicar essas configurações:
--  Menos warnings do Pylance
--  Type hints funcionando onde apropriado
--  Código ainda funciona 100% nos containers Docker
--  Melhor experiência no VS Code
+After applying these configurations:
+-  Fewer Pylance warnings
+-  Type hints working where appropriate
+-  Code still works 100% in Docker containers
+-  Better VS Code experience
 
 ##  Referências
 
