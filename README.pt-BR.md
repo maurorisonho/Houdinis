@@ -1,33 +1,95 @@
-#  Houdinis - Framework de Criptoanálise Quântica
+# Houdinis Framework - Plataforma de Testes de Criptografia Quântica
 
+> **Desenvolvido por:** Human Logic & Coding with AI Assistance (Claude Sonnet 4.5)
+
+![Houdinis Logo](https://img.shields.io/badge/Houdinis-Framework-blue?style=for-the-badge&logo=quantum)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/maurorisonho/Houdinis/main?labpath=notebooks%2Fplayground.ipynb)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![Pontuação: 135/100](https://img.shields.io/badge/score-135%2F100-brightgreen.svg)](docs/GAP_ANALYSIS.md)
-[![Status: Production Ready](https://img.shields.io/badge/status-production%20ready-success.svg)](docs/IMPLEMENTATION_SUMMARY.md)
+[![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 
-> *"A criptografia moderna irá desaparecer quando os computadores quânticos chegarem. O Houdinis demonstra como."*
+###  Tecnologias & Frameworks
 
-[English](README.md) | **Português** | [Español](README.es.md) | [](README.zh.md)
+**Tecnologias Principais:**
+
+![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=flat-square&logo=python&logoColor=white)
+![Qiskit](https://img.shields.io/badge/Qiskit-Latest-6929C4?style=flat-square&logo=qiskit&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-Latest-2496ED?style=flat-square&logo=docker&logoColor=white)
+![Rocky Linux](https://img.shields.io/badge/Rocky_Linux-9-10B981?style=flat-square&logo=rockylinux&logoColor=white)
+
+**Backends Quânticos:**
+
+![IBM Quantum](https://img.shields.io/badge/IBM_Quantum-Supported-052FAD?style=flat-square&logo=ibm&logoColor=white)
+![NVIDIA cuQuantum](https://img.shields.io/badge/NVIDIA_cuQuantum-GPU-76B900?style=flat-square&logo=nvidia&logoColor=white)
+![Amazon Braket](https://img.shields.io/badge/Amazon_Braket-AWS-FF9900?style=flat-square&logo=amazon-aws&logoColor=white)
+![Azure Quantum](https://img.shields.io/badge/Azure_Quantum-Cloud-0078D4?style=flat-square&logo=microsoft-azure&logoColor=white)
+![Google Cirq](https://img.shields.io/badge/Google_Cirq-Research-4285F4?style=flat-square&logo=google&logoColor=white)
+![PennyLane](https://img.shields.io/badge/PennyLane-ML-00C7B7?style=flat-square)
+
+**Desenvolvimento & Testes:**
+
+![pytest](https://img.shields.io/badge/pytest-Testing-0A9EDC?style=flat-square&logo=pytest&logoColor=white)
+![NumPy](https://img.shields.io/badge/NumPy-Scientific-013243?style=flat-square&logo=numpy&logoColor=white)
+![Jupyter](https://img.shields.io/badge/Jupyter-Notebooks-F37626?style=flat-square&logo=jupyter&logoColor=white)
+![Git](https://img.shields.io/badge/Git-Version_Control-F05032?style=flat-square&logo=git&logoColor=white)
+
+** Disponível em:** [English](README.md) | [Português](README.pt-BR.md) | [Español](README.es.md) | [](README.zh.md)
+
+Houdinis é um framework abrangente de exploração de criptografia quântica projetado para pesquisadores de segurança, testadores de penetração e entusiastas de computação quântica. O framework fornece ferramentas para testar algoritmos quânticos, avaliar vulnerabilidades criptográficas e fazer benchmarks de backends de computação quântica.
 
 ---
 
-##  Visão Geral
+##  Experimente Agora - Sem Instalação!
 
-**Houdinis** é o framework de criptoanálise quântica mais completo do mundo, projetado para demonstrar vulnerabilidades de algoritmos criptográficos clássicos contra ataques quânticos. Nomeado em homenagem ao lendário mágico Harry Houdini, este framework "escapa" das proteções criptográficas usando o poder da computação quântica.
+**Experimente o Houdinis no seu navegador sem instalar nada:**
 
-###  Principais Características
+[![Launch Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/maurorisonho/Houdinis/main?labpath=notebooks%2Fplayground.ipynb)
 
-- ** 12 Algoritmos Quânticos**: Shor, Grover, Simon, HHL, QAOA, QPE, Amplitude Amplification e mais
-- ** 31+ Exploits Implementados**: RSA, ECDSA, AES, TLS, SSH, PGP, Bitcoin e outros
-- ** Ataques de ML Quântico**: Roubo de modelo, inferência de associação, ataques adversariais
-- ** Análise de PQC**: Kyber, Dilithium, FALCON, SPHINCS+ (NIST)
-- ** Multi-Cloud**: Suporte para IBM Quantum, AWS Braket, Azure Quantum, Google Cirq
-- ** 85%+ Cobertura de Testes**: 7,182+ linhas de testes, CI/CD completo
-- ** Documentação Abrangente**: 8,425+ linhas, API docs Sphinx, 9 notebooks Jupyter
+ Clique para iniciar um tutorial interativo de 5 minutos com:
+-  Execução de circuitos quânticos ao vivo
+-  Demo do algoritmo de Grover
+-  Análise de segurança RSA
+-  Visualizações interativas
 
----
+*Executa completamente no seu navegador com [MyBinder.org](https://mybinder.org/)*
 
-##  Início Rápido
+## Documentação
+
+** [Documentação Oficial](https://maurorisonho.github.io/Houdinis/)** - Documentação completa da API e guias de usuário  
+** [Guia de Início Rápido](docs/quickstart.md)** - Comece em 10 minutos  
+** [Guia de Instalação](docs/installation.md)** - Instruções de instalação multiplataforma  
+** [Introdução](docs/introduction.md)** - Visão geral e conceitos do framework
+
+**Documentação Adicional:**
+- [Índice Completo da Documentação](docs/README.md) - Índice abrangente da documentação  
+- [Guia Docker](docs/DOCKER_README.md)- Containerização com Rocky Linux 9  
+- [Detalhes de Implementação](docs/IMPLEMENTATION_SUMMARY.md) - Guia técnico de implementação  
+- [Suporte de Backends](docs/BACKENDS.md) - Plataformas de computação quântica suportadas  
+- [Guia de Documentação](docs/README_DOCS.md) - Para contribuidores da documentação
+
+## Principais Recursos
+
+### Suporte Multi-Backend de Computação Quântica
+- **IBM Quantum Experience** - Acesso a hardware quântico real e simuladores em nuvem
+- **NVIDIA cuQuantum** - Simulação de circuitos quânticos acelerada por GPU
+- **Amazon Braket** - Serviço de computação quântica AWS com múltiplos provedores de hardware
+- **Microsoft Azure Quantum** - Plataforma de nuvem quântica empresarial
+- **Google Cirq** - Framework de computação quântica orientado a pesquisa
+- **PennyLane** - Aprendizado de máquina e otimização quântica
+
+### Exploits de Criptografia Quântica
+- **Algoritmo de Shor** - Fatoração de chaves RSA e ECC
+- **Algoritmo de Grover** - Aceleração de força bruta de chaves simétricas
+- **Escaneamento de Rede Quântica** - Identificar sistemas vulneráveis a quântica
+- **Ferramentas de Migração Pós-Quântica** - Avaliar necessidades de transição criptográfica
+- **Avaliação Quântica TLS/SSL** - Avaliar segurança da camada de transporte
+
+### Capacidades Avançadas
+- **Benchmarking multiplataforma** - Comparar desempenho entre backends
+- **Otimização de algoritmos NISQ** - Suporte para dispositivos quânticos de escala intermediária com ruído
+- **Aprendizado de máquina quântico** - Criptoanálise usando técnicas QML
+- **Harvest Now, Decrypt Later** - Avaliação de ameaças quânticas futuras
+
+##  Instalação
 
 ### Instalação
 
