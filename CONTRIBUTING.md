@@ -320,7 +320,7 @@ We follow [Conventional Commits](https://www.conventionalcommits.org/):
 **DO NOT** open public issues for security vulnerabilities!
 
 Instead:
-1. Use GitHub Security Advisories (private reporting)
+1. Use [GitHub Security Advisories](https://github.com/maurorisonho/Houdinis/security/advisories/new) (private reporting)
 2. Provide detailed description
 3. Include proof of concept if possible
 4. Wait for response before public disclosure

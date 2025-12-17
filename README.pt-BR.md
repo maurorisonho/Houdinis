@@ -431,7 +431,7 @@ helm upgrade houdinis deploy/helm/houdinis/
 
 ### Relatar Vulnerabilidade
 
-Por favor, reporte vulnerabilidades de segurança criando uma issue privada no GitHub (Security Advisories).
+Por favor, reporte vulnerabilidades de segurança criando uma [issue privada no GitHub (Security Advisories)](https://github.com/maurorisonho/Houdinis/security/advisories/new).
 
 ---
 
