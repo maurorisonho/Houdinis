@@ -398,15 +398,6 @@ Este proyecto está licenciado bajo la **Licencia MIT** - consulta el archivo [L
 
 ---
 
-##  Contacto
-
-- **Autor:** Mauro Risonho de Paula Assumpção (firebitsbr)
-- **Email:** maurorisonho@gmail.com
-- **GitHub:** [@maurorisonho](https://github.com/maurorisonho)
-- **Proyecto:** [github.com/maurorisonho/Houdinis](https://github.com/maurorisonho/Houdinis)
-
----
-
 ##  ¡Dale Estrella a Este Proyecto!
 
 Si encuentras útil Houdinis, ¡por favor considera darle una  en GitHub!

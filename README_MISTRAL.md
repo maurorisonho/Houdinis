@@ -427,16 +427,6 @@ MIT License - veja [LICENSE](LICENSE) para detalhes.
 
 ---
 
-##  Contato
-
-**Mauro Risonho de Paula Assumpção** aka firebitsbr
-
-- Email: mauro.risonho@gmail.com
-- GitHub: [@maurorisonho](https://github.com/maurorisonho)
-- Project: [Houdinis Framework](https://github.com/maurorisonho/Houdinis)
-
----
-
 ##  Agradecimentos
 
 - **Mistral AI** - Modelo open-source de alta qualidade

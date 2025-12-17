@@ -556,15 +556,6 @@ mesclar, publicar, distribuir, sublicenciar e/ou vender cópias do Software.
 
 ---
 
-##  Contato
-
-- **Autor:** Mauro Risonho de Paula Assumpção (firebitsbr)
-- **Email:** maurorisonho@gmail.com
-- **GitHub:** [@maurorisonho](https://github.com/maurorisonho)
-- **Projeto:** [github.com/maurorisonho/Houdinis](https://github.com/maurorisonho/Houdinis)
-
----
-
 ##  Estrele Este Projeto!
 
 Se você acha o Houdinis útil, por favor considere dar uma  no GitHub!
