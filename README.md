@@ -473,9 +473,10 @@ black . && isort .
 
 ##  Support
 
-- **GitHub Issues**: [Report bugs and feature requests](https://github.com/maurorisonho/Houdinis/issues)
-- **Discussions**: [Community discussions and Q&A](https://github.com/maurorisonho/Houdinis/discussions)
-- **Security**: [Report vulnerabilities privately](https://github.com/maurorisonho/Houdinis/security/advisories/new)
+- **GitHub Issues**: [Report bugs and feature requests](https://github.com/firebitsbr/Houdinis/issues)
+- **Discussions**: [Community discussions and Q&A](https://github.com/firebitsbr/Houdinis/discussions)
+- **Email**: mauro.risonho@gmail.com
+- **Twitter**: [@firebitsbr](https://twitter.com/firebitsbr)
 
 ---
 

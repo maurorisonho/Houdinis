@@ -636,14 +636,4 @@ MIT License - see [../LICENSE](../LICENSE) for details.
 
 ---
 
-##  Contact
-
-- **Website**: https://playground.houdinis.dev
-- **Documentation**: https://docs.houdinis.dev
-- **Repository**: https://github.com/maurorisonho/Houdinis
-- **Issues**: https://github.com/maurorisonho/Houdinis/issues
-- **Discussions**: https://github.com/maurorisonho/Houdinis/discussions
-
----
-
 **Built with  for the quantum cryptanalysis community**
