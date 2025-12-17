@@ -208,3 +208,30 @@ videos/*.mkv
 !.docker-files/README.md
 !.gitignore
 !.gitattributes
+
+# Temporary files
+*.tmp
+*.bak
+*~
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Cache directories
+.pytest_cache/
+.benchmarks/
+__pycache__/
+*.pyc
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Environment
+.env
+.venv/
