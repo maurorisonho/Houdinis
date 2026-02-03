@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  houdinis:
+    build:
+      context: ..
+      dockerfile: docker_env/Dockerfile.houdinis
+    container_name: houdinis_framework
+    ports:
+      - "127.0.0.1:8080:8080"  # WebUI
+      - "127.0.0.1:8888:8888"  # Jupyter
+    volumes:
+      - ../:/app
+    environment:
+      - REDIS_HOST=redis
+    depends_on:
+      - redis
+    networks:
+      - quantum_lab
+    tty: true
+
+  target:
+    build:
+      context: ..
+      dockerfile: docker_env/Dockerfile.target
+    container_name: vulnerable_target
+    networks:
+      - quantum_lab
+
+  redis:
+    image: redis:alpine
+    container_name: houdinis_redis
+    networks:
+      - quantum_lab
+
+networks:
+  quantum_lab:
+    driver: bridge

@@ -1,0 +1,40 @@
+FROM rockylinux:9
+
+# Install dependencies
+RUN dnf install -y python3 python3-pip openssh-server openssl nginx \
+    && dnf clean all
+
+# --- VULNERABILITY CONFIGURATION ---
+
+# 1. Set System Crypto Policy to LEGACY (Weakest) - Allows SHA1, small RSA
+RUN update-crypto-policies --set LEGACY
+
+# 2. Configure SSHD to accept weak algorithms
+RUN sed -i 's/#PermitRootLogin yes/PermitRootLogin yes/' /etc/ssh/sshd_config \
+    # Enable weak host keys (SSH-1/Legacy) support if possible, or just weak RSA
+    && echo "HostKeyAlgorithms +ssh-rsa" >> /etc/ssh/sshd_config \
+    && echo "PubkeyAcceptedKeyTypes +ssh-rsa" >> /etc/ssh/sshd_config \
+    && ssh-keygen -A
+
+# 3. Generate WEAK Self-Signed Certificate (2048-bit RSA, SHA1)
+RUN openssl req -x509 -nodes -days 365 \
+    -newkey rsa:2048 \
+    -sha256 \
+    -keyout /etc/pki/tls/private/vulnerable.key \
+    -out /etc/pki/tls/certs/vulnerable.crt \
+    -subj "/C=US/ST=Vulnerable/L=Target/O=Corp/CN=vulnerable.target"
+
+# 4. Setup Vulnerable Web App
+WORKDIR /app
+COPY docker_env/target/vulnerable_app.py /app/app.py
+RUN pip3 install flask pyopenssl
+
+# Create startup script
+RUN echo '#!/bin/bash' > /start.sh \
+    && echo '/usr/sbin/sshd' >> /start.sh \
+    && echo 'python3 app.py' >> /start.sh \
+    && chmod +x /start.sh
+
+EXPOSE 22 443
+
+CMD ["/start.sh"]

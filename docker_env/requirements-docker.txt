@@ -1,0 +1,33 @@
+# Houdinis Framework Dependencies - Docker Minimal
+
+# Core Security
+cryptography>=41.0.0
+pycryptodome>=3.19.0
+validators>=0.22.0
+bleach>=6.0.0
+
+# Core Quantum (Simulation only)
+qiskit>=0.45.0
+qiskit-aer>=0.13.0
+# qiskit-ibm-runtime  # Removed to avoid IBM Cloud SDK conflicts
+# qiskit-algorithms
+
+# Network
+scapy>=2.5.0
+requests>=2.31.0
+paramiko>=3.3.1
+python-nmap>=0.7.1
+urllib3<1.27
+
+# Utils
+rich>=13.5.0
+click>=8.1.0
+prompt-toolkit>=3.0.0
+numpy>=1.24.0
+scipy>=1.11.0
+pandas>=2.0.0
+flask
+flask-socketio
+jupyterlab
+docker
+redis
